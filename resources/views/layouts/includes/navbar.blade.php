@@ -501,16 +501,20 @@
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
                             <a class="btn btn-sm btn-danger d-flex waves-effect waves-light"
-                                href="auth-login-cover.html" target="_blank">
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
                                 <small class="align-middle">Logout</small>
                                 <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
             </li>
-            <!--/ User -->
-
         </ul>
     </div>
 </nav>
