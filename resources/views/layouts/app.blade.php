@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/flag-icons.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/pages/cards-advance.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.css">
     <script src="{{ asset('assets') }}/vendor/js/helpers.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/template-customizer.js"></script>
     <script src="{{ asset('assets') }}/js/config.js"></script>
@@ -53,7 +54,9 @@
     <script src="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/i18n/i18n.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.js"></script>
     <script src="{{ asset('assets') }}/js/main.js"></script>
+    @include('layouts.includes.toast')
     @stack('scripts')
 </body>
 
