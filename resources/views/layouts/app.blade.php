@@ -21,6 +21,13 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/flag-icons.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/pages/cards-advance.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-bs5/datatables.bootstrap5.css">
+    <link rel="stylesheet"
+        href="{{ asset('assets') }}/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/select2/select2.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/@form-validation/form-validation.css" />
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/flatpickr/flatpickr.css" />
     <script src="{{ asset('assets') }}/vendor/js/helpers.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/template-customizer.js"></script>
     <script src="{{ asset('assets') }}/js/config.js"></script>
@@ -34,10 +41,8 @@
             <div class="layout-page">
                 @include('layouts.includes.navbar')
                 <div class="content-wrapper">
-                    <div class="container-fluid flex-grow-1 container-p-y">
-                        <div class="row g-6">
+                    <div class="container-xxl flex-grow-1 container-p-y">
                             @yield('content')
-                        </div>
                     </div>
                     @include('layouts.includes.footer')
                 </div>
@@ -52,10 +57,17 @@
     <script src="{{ asset('assets') }}/vendor/libs/@algolia/autocomplete-js.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/pickr/pickr.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/i18n/i18n.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/moment/moment.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/select2/select2.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/@form-validation/popular.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/@form-validation/bootstrap5.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/@form-validation/auto-focus.js"></script>
     <script src="{{ asset('assets') }}/js/main.js"></script>
+    @include('layouts.includes.scripts')
     @include('layouts.includes.toast')
     @stack('scripts')
 </body>
