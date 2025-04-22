@@ -29,12 +29,12 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1 ps ps--active-y">
         <li class="menu-header small">
-            <span class="menu-header-text" data-i18n="Apps &amp; Pages">Apps &amp; Pages</span>
+            <span class="menu-header-text">{{ trans('Home') }}</span>
         </li>
         <li class="menu-item">
             <a href="{{ url('/') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
-                <div data-i18n="Dashboard">Dashboard</div>
+                <div>{{ trans('Dashboard') }}</div>
             </a>
         </li>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

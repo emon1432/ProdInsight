@@ -30,24 +30,6 @@
                             <span>English</span>
                         </a>
                     </li>
-                    <li>
-                        <a class="dropdown-item waves-effect" href="javascript:void(0);" data-language="fr"
-                            data-text-direction="ltr">
-                            <span>French</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item waves-effect" href="javascript:void(0);" data-language="ar"
-                            data-text-direction="rtl">
-                            <span>Arabic</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item waves-effect" href="javascript:void(0);" data-language="de"
-                            data-text-direction="ltr">
-                            <span>German</span>
-                        </a>
-                    </li>
                 </ul>
             </li>
 
@@ -63,21 +45,22 @@
                     <li>
                         <button type="button" class="dropdown-item align-items-center waves-effect active"
                             data-bs-theme-value="light" aria-pressed="true">
-                            <span><i class="icon-base ti tabler-sun icon-22px me-3" data-icon="sun"></i>Light</span>
+                            <span><i class="icon-base ti tabler-sun icon-22px me-3"
+                                    data-icon="sun"></i>{{ trans('Light') }}</span>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item align-items-center waves-effect"
                             data-bs-theme-value="dark" aria-pressed="false">
                             <span><i class="icon-base ti tabler-moon-stars icon-22px me-3"
-                                    data-icon="moon-stars"></i>Dark</span>
+                                    data-icon="moon-stars"></i>{{ trans('Dark') }}</span>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item align-items-center waves-effect"
                             data-bs-theme-value="system" aria-pressed="false">
                             <span><i class="icon-base ti tabler-device-desktop-analytics icon-22px me-3"
-                                    data-icon="device-desktop-analytics"></i>System</span>
+                                    data-icon="device-desktop-analytics"></i>{{ trans('System') }}</span>
                         </button>
                     </li>
                 </ul>
@@ -95,7 +78,7 @@
                 <div class="dropdown-menu dropdown-menu-end p-0">
                     <div class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
-                            <h6 class="mb-0 me-auto">Shortcuts</h6>
+                            <h6 class="mb-0 me-auto">{{ trans('Shortcuts') }}</h6>
                             <a href="javascript:void(0)"
                                 class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon waves-effect"
                                 data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Add shortcuts"
@@ -504,7 +487,7 @@
                                 href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                <small class="align-middle">Logout</small>
+                                <small class="align-middle">{{ trans('Logout') }}</small>
                                 <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
