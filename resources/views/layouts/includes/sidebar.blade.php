@@ -32,10 +32,26 @@
             <span class="menu-header-text">{{ trans('Home') }}</span>
         </li>
         <li class="menu-item">
-            <a href="{{ url('/') }}" class="menu-link">
+            <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
                 <div>{{ trans('Dashboard') }}</div>
             </a>
+        </li>
+        <li class="menu-header small">
+            <span class="menu-header-text">{{ trans('System') }}</span>
+        </li>
+        <li class="menu-item">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon icon-base ti tabler-user"></i>
+                <div>{{ trans('User Management') }}</div>
+            </a>
+            <ul class="menu-sub">
+                <li class="menu-item">
+                    <a href="{{ route('users.index') }}" class="menu-link">
+                        <div>{{ trans('User List') }}</div>
+                    </a>
+                </li>
+            </ul>
         </li>
         <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
             <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div>
