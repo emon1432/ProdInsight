@@ -35,7 +35,7 @@ class OthersController extends Controller
     public function iseed()
     {
         $tables = DB::select('SHOW TABLES');
-        $prevent_tables = ['failed_jobs', 'migrations', 'password_reset_tokens', 'personal_access_tokens', 'sessions'];
+        $prevent_tables = ['failed_jobs', 'migrations', 'password_reset_tokens', 'personal_access_tokens', 'sessions','cache','cache_locks','failed_jobs','job_batches','jobs'];
         foreach ($tables as $table) {
             $table_name = 'Tables_in_' . env('DB_DATABASE');
             $table_name = $table->$table_name;

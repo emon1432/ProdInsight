@@ -1,12 +1,10 @@
-<nav class="layout-navbar container-fluid navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme"
+<nav class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme"
     id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0   d-xl-none ">
         <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
             <i class="icon-base ti tabler-menu-2 icon-md"></i>
         </a>
     </div>
-
-
     <div class="navbar-nav-right d-flex align-items-center justify-content-end" id="navbar-collapse">
         <div class="navbar-nav align-items-center">
             <div class="nav-item navbar-search-wrapper px-md-0 px-2 mb-0">
@@ -19,15 +17,33 @@
         <ul class="navbar-nav flex-row align-items-center ms-md-auto">
 
             <li class="nav-item dropdown-language dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill waves-effect"
+                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
                     href="javascript:void(0);" data-bs-toggle="dropdown">
                     <i class="icon-base ti tabler-language icon-22px text-heading"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item waves-effect active" href="javascript:void(0);" data-language="en"
+                        <a class="dropdown-item" href="javascript:void(0);" data-language="en"
                             data-text-direction="ltr">
                             <span>English</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-language="fr"
+                            data-text-direction="ltr">
+                            <span>French</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-language="ar"
+                            data-text-direction="rtl">
+                            <span>Arabic</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-language="de"
+                            data-text-direction="ltr">
+                            <span>German</span>
                         </a>
                     </li>
                 </ul>
@@ -35,30 +51,29 @@
 
             <!-- Style Switcher -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill waves-effect"
-                    id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown"
-                    aria-label="Toggle theme (light)">
-                    <i class="tabler-sun icon-base ti icon-22px theme-icon-active text-heading"></i>
+                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
+                    id="nav-theme" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="icon-base ti tabler-sun icon-22px theme-icon-active text-heading"></i>
                     <span class="d-none ms-2" id="nav-theme-text">Toggle theme</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-theme-text">
                     <li>
-                        <button type="button" class="dropdown-item align-items-center waves-effect active"
-                            data-bs-theme-value="light" aria-pressed="true">
+                        <button type="button" class="dropdown-item align-items-center active"
+                            data-bs-theme-value="light" aria-pressed="false">
                             <span><i class="icon-base ti tabler-sun icon-22px me-3"
                                     data-icon="sun"></i>{{ trans('Light') }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" class="dropdown-item align-items-center waves-effect"
-                            data-bs-theme-value="dark" aria-pressed="false">
+                        <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="dark"
+                            aria-pressed="true">
                             <span><i class="icon-base ti tabler-moon-stars icon-22px me-3"
                                     data-icon="moon-stars"></i>{{ trans('Dark') }}</span>
                         </button>
                     </li>
                     <li>
-                        <button type="button" class="dropdown-item align-items-center waves-effect"
-                            data-bs-theme-value="system" aria-pressed="false">
+                        <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="system"
+                            aria-pressed="false">
                             <span><i class="icon-base ti tabler-device-desktop-analytics icon-22px me-3"
                                     data-icon="device-desktop-analytics"></i>{{ trans('System') }}</span>
                         </button>
@@ -70,7 +85,7 @@
 
             <!-- Quick links  -->
             <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill waves-effect"
+                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
                     href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                     aria-expanded="false">
                     <i class="icon-base ti tabler-layout-grid-add icon-22px text-heading"></i>
@@ -80,13 +95,12 @@
                         <div class="dropdown-header d-flex align-items-center py-3">
                             <h6 class="mb-0 me-auto">{{ trans('Shortcuts') }}</h6>
                             <a href="javascript:void(0)"
-                                class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon waves-effect"
-                                data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Add shortcuts"
-                                data-bs-original-title="Add shortcuts"><i
+                                class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon"
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i
                                     class="icon-base ti tabler-plus icon-20px text-heading"></i></a>
                         </div>
                     </div>
-                    <div class="dropdown-shortcuts-list scrollable-container ps">
+                    <div class="dropdown-shortcuts-list scrollable-container">
                         <div class="row row-bordered overflow-visible g-0">
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
@@ -143,7 +157,7 @@
                                     <i class="icon-base ti tabler-help-circle icon-26px text-heading"></i>
                                 </span>
                                 <a href="pages-faq.html" class="stretched-link">FAQs</a>
-                                <small>FAQs &amp; Articles</small>
+                                <small>FAQs & Articles</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
@@ -153,14 +167,6 @@
                                 <small>Useful Popups</small>
                             </div>
                         </div>
-                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
-                            </div>
-                        </div>
-                        <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </li>
@@ -168,7 +174,7 @@
 
             <!-- Notification -->
             <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-2">
-                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill waves-effect"
+                <a class="nav-link dropdown-toggle hide-arrow btn btn-icon btn-text-secondary rounded-pill"
                     href="javascript:void(0);" data-bs-toggle="dropdown" data-bs-auto-close="outside"
                     aria-expanded="false">
                     <span class="position-relative">
@@ -182,23 +188,20 @@
                             <h6 class="mb-0 me-auto">Notification</h6>
                             <div class="d-flex align-items-center h6 mb-0">
                                 <span class="badge bg-label-primary me-2">8 New</span>
-                                <a href="javascript:void(0)"
-                                    class="dropdown-notifications-all p-2 btn btn-icon waves-effect waves-light"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Mark all as read"
-                                    data-bs-original-title="Mark all as read"><i
+                                <a href="javascript:void(0)" class="dropdown-notifications-all p-2 btn btn-icon"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
                                         class="icon-base ti tabler-mail-opened text-heading"></i></a>
                             </div>
                         </div>
                     </li>
-                    <li class="dropdown-notifications-list scrollable-container ps">
+                    <li class="dropdown-notifications-list scrollable-container">
                         <ul class="list-group list-group-flush">
-                            <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item waves-effect">
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="{{ asset('assets') }}/img/avatars/1.png" alt=""
-                                                class="rounded-circle">
+                                            <img src="{{ asset('assets') }}/img/avatars/1.png" alt
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -215,8 +218,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item waves-effect">
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
@@ -238,12 +240,12 @@
                                 </div>
                             </li>
                             <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read waves-effect">
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="{{ asset('assets') }}/img/avatars/2.png" alt=""
-                                                class="rounded-circle">
+                                            <img src="{{ asset('assets') }}/img/avatars/2.png" alt
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -260,8 +262,7 @@
                                     </div>
                                 </div>
                             </li>
-                            <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item waves-effect">
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
@@ -284,12 +285,12 @@
                                 </div>
                             </li>
                             <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read waves-effect">
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="{{ asset('assets') }}/img/avatars/9.png" alt=""
-                                                class="rounded-circle">
+                                            <img src="{{ asset('assets') }}/img/avatars/9.png" alt
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -307,7 +308,7 @@
                                 </div>
                             </li>
                             <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read waves-effect">
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
@@ -330,12 +331,12 @@
                                 </div>
                             </li>
                             <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read waves-effect">
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="{{ asset('assets') }}/img/avatars/5.png" alt=""
-                                                class="rounded-circle">
+                                            <img src="{{ asset('assets') }}/img/avatars/5.png" alt
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -352,13 +353,12 @@
                                     </div>
                                 </div>
                             </li>
-                            <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item waves-effect">
+                            <li class="list-group-item list-group-item-action dropdown-notifications-item">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
-                                            <img src="{{ asset('assets') }}/img/avatars/6.png" alt=""
-                                                class="rounded-circle">
+                                            <img src="{{ asset('assets') }}/img/avatars/6.png" alt
+                                                class="rounded-circle" />
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
@@ -376,7 +376,7 @@
                                 </div>
                             </li>
                             <li
-                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read waves-effect">
+                                class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
                                 <div class="d-flex">
                                     <div class="flex-shrink-0 me-3">
                                         <div class="avatar">
@@ -399,19 +399,10 @@
                                 </div>
                             </li>
                         </ul>
-                        <div class="ps__rail-x" style="left: 0px; bottom: 0px;">
-                            <div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;">
-                            </div>
-                        </div>
-                        <div class="ps__rail-y" style="top: 0px; right: 0px;">
-                            <div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;">
-                            </div>
-                        </div>
                     </li>
                     <li class="border-top">
                         <div class="d-grid p-4">
-                            <a class="btn btn-primary btn-sm d-flex waves-effect waves-light"
-                                href="javascript:void(0);">
+                            <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
                                 <small class="align-middle">View all notifications</small>
                             </a>
                         </div>
@@ -425,17 +416,17 @@
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt="" class="rounded-circle">
+                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt class="rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item mt-0 waves-effect" href="pages-account-settings-account.html">
+                        <a class="dropdown-item mt-0" href="pages-account-settings-account.html">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-2">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt=""
-                                            class="rounded-circle">
+                                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt
+                                            class="rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
@@ -449,17 +440,17 @@
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item waves-effect" href="pages-profile-user.html"> <i
+                        <a class="dropdown-item" href="pages-profile-user.html"> <i
                                 class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">My
                                 Profile</span> </a>
                     </li>
                     <li>
-                        <a class="dropdown-item waves-effect" href="pages-account-settings-account.html"> <i
+                        <a class="dropdown-item" href="pages-account-settings-account.html"> <i
                                 class="icon-base ti tabler-settings me-3 icon-md"></i><span
                                 class="align-middle">Settings</span> </a>
                     </li>
                     <li>
-                        <a class="dropdown-item waves-effect" href="pages-account-settings-billing.html">
+                        <a class="dropdown-item" href="pages-account-settings-billing.html">
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i><span
                                     class="flex-grow-1 align-middle">Billing</span>
@@ -472,19 +463,18 @@
                         <div class="dropdown-divider my-1 mx-n2"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item waves-effect" href="pages-pricing.html"> <i
+                        <a class="dropdown-item" href="pages-pricing.html"> <i
                                 class="icon-base ti tabler-currency-dollar me-3 icon-md"></i><span
                                 class="align-middle">Pricing</span> </a>
                     </li>
                     <li>
-                        <a class="dropdown-item waves-effect" href="pages-faq.html"> <i
+                        <a class="dropdown-item" href="pages-faq.html"> <i
                                 class="icon-base ti tabler-question-mark me-3 icon-md"></i><span
                                 class="align-middle">FAQ</span> </a>
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">
-                            <a class="btn btn-sm btn-danger d-flex waves-effect waves-light"
-                                href="{{ route('logout') }}"
+                            <a class="btn btn-sm btn-danger d-flex" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                                 <small class="align-middle">{{ trans('Logout') }}</small>
