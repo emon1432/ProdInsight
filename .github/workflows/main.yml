@@ -22,9 +22,6 @@ jobs:
     - name: Install NPM dependencies
       run: npm install && npm run build
 
-    - name: Run migrations
-      run: php artisan migrate:fresh --seed --force
-
     - name: Clear cache
       run: php artisan optimize:clear
 
