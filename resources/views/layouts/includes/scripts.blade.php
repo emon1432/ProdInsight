@@ -163,11 +163,11 @@
             }, {
                 selector: ".dt-layout-start",
                 classToRemove: "justify-content-between",
-                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto"
+                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto pe-0"
             }, {
                 selector: ".dt-layout-end",
                 classToRemove: "justify-content-between",
-                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto"
+                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto ps-0"
             }, {
                 selector: ".dt-buttons",
                 classToRemove: "mb-4",

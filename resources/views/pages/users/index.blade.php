@@ -14,7 +14,7 @@
             </button>
         </div>
         <div class="card-datatable">
-            <table class="common-datatable table">
+            <table class="common-datatable table d-table">
                 <thead class="border-top">
                     <tr>
                         <th>User</th>
