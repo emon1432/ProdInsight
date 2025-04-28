@@ -22,7 +22,7 @@
                 <div class="mb-6 form-control-validation fv-plugins-icon-container">
                     <label for="email" class="form-label">Email or Username</label>
                     <input type="text" class="form-control" id="email" name="email"
-                        placeholder="Enter your email or username" autofocus="">
+                        placeholder="Enter your email or username" autofocus="" value="admin@verticasoft.com">
                     <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <label class="form-label" for="password">Password</label>
                     <div class="input-group input-group-merge has-validation">
                         <input type="password" id="password" class="form-control" name="password"
-                            placeholder="············" aria-describedby="password">
+                            placeholder="············" aria-describedby="password" value="12345678">
                         <span class="input-group-text cursor-pointer"><i class="icon-base ti tabler-eye-off"></i></span>
                     </div>
                     <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
