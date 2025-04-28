@@ -37,6 +37,7 @@
 
     $(document).ready(function() {
         const currentPath = window.location.pathname;
+        let t = document.querySelector(".common-datatable");
         $('.menu-inner .menu-link').each(function() {
             const link = $(this);
             const href = link.attr('href');
@@ -58,6 +59,136 @@
                     $(this).closest('.menu-item').addClass('active open');
                 });
             }
+        });
+
+        if (t) {
+            let a = new DataTable(t, {
+                processing: true,
+                layout: {
+                    topStart: {
+                        rowClass: "row m-1 my-0 justify-content-center",
+                        features: [{
+                            buttons: [{
+                                extend: "collection",
+                                className: "btn btn-label-secondary dropdown-toggle",
+                                text: '<span class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-upload icon-xs"></i> <span class="d-none d-sm-inline-block">Export</span></span>',
+                                buttons: [{
+                                    extend: "print",
+                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-printer me-1"></i>Print</span>',
+                                    className: "dropdown-item",
+
+                                }, {
+                                    extend: "csv",
+                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-text me-1"></i>Csv</span>',
+                                    className: "dropdown-item",
+
+                                }, {
+                                    extend: "excel",
+                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-spreadsheet me-1"></i>Excel</span>',
+                                    className: "dropdown-item",
+
+                                }, {
+                                    extend: "pdf",
+                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-description me-1"></i>Pdf</span>',
+                                    className: "dropdown-item",
+
+                                }, {
+                                    extend: "copy",
+                                    text: '<i class="icon-base ti tabler-copy me-1"></i>Copy',
+                                    className: "dropdown-item",
+
+                                }]
+                            }]
+                        }]
+                    },
+                    topEnd: {
+                        rowClass: "row m-1 my-0 justify-content-center",
+
+                        features: [{
+                            search: {
+                                placeholder: "Search",
+                                text: "_INPUT_"
+                            }
+                        }]
+                    },
+                    bottomStart: {
+                        rowClass: "row mx-3 justify-content-between",
+                        features: ["info"]
+                    },
+                    bottomEnd: "paging"
+                },
+                responsive: {
+                    details: {
+                        display: DataTable.Responsive.display.modal({
+                            header: function(e) {
+                                return "Details"
+                            }
+                        }),
+                        type: "column",
+                        renderer: function(e, t, a) {
+                            var n, r, o, a = a.map(function(e) {
+                                return "" !== e.title ? `<tr data-dt-row="${e.rowIndex}" data-dt-column="${e.columnIndex}">
+                                            <td>${e.title}:</td>
+                                            <td>${e.data}</td>
+                                            </tr>` : ""
+                            }).join("");
+                            return !!a && ((n = document.createElement("div")).classList.add(
+                                    "table-responsive"),
+                                r = document.createElement("table"),
+                                n.appendChild(r),
+                                r.classList.add("table"),
+                                (o = document.createElement("tbody")).innerHTML = a,
+                                r.appendChild(o),
+                                n)
+                        }
+                    }
+                }
+            });
+        }
+
+        setTimeout(() => {
+            [{
+                selector: ".dt-buttons .btn",
+                classToRemove: "btn-secondary"
+            }, {
+                selector: ".dt-search .form-control",
+                classToRemove: "form-control-sm"
+            }, {
+                selector: ".dt-length .form-select",
+                classToRemove: "form-select-sm",
+                classToAdd: "ms-0"
+            }, {
+                selector: ".dt-length",
+                classToAdd: "mb-md-6 mb-0"
+            }, {
+                selector: ".dt-layout-start",
+                classToRemove: "justify-content-between",
+                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto"
+            }, {
+                selector: ".dt-layout-end",
+                classToRemove: "justify-content-between",
+                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto"
+            }, {
+                selector: ".dt-buttons",
+                classToRemove: "mb-4",
+                classToAdd: "d-flex gap-4 mb-md-0 mb-0"
+            }, {
+                selector: ".dt-layout-table",
+                classToRemove: "row mt-2"
+            }, {
+                selector: ".dt-layout-full",
+                classToRemove: "col-md col-12",
+                classToAdd: "table-responsive"
+            }].forEach(({
+                selector: e,
+                classToRemove: a,
+                classToAdd: n
+            }) => {
+                document.querySelectorAll(e).forEach(t => {
+                    a && a.split(" ").forEach(e => t.classList.remove(e)),
+                        n && n.split(" ").forEach(e => t.classList.add(e))
+                })
+            })
         });
     });
 </script>
