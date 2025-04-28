@@ -1,15 +1,22 @@
 @extends('layouts.app')
 @section('content')
     <div class="card">
-        <div class="card-header border-bottom">
+        <div class="card-header border-bottom d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">Users</h5>
+            <button class="btn add-new btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasAddUser">
+                <span>
+                    <span class="d-flex align-items-center gap-2">
+                        <i class="icon-base ti tabler-plus icon-xs"></i>
+                            Add New Record
+                    </span>
+                </span>
+            </button>
         </div>
         <div class="card-datatable">
-            <table class="datatables-users table">
+            <table class="common-datatable table">
                 <thead class="border-top">
                     <tr>
-                        <th></th>
-                        <th></th>
                         <th>User</th>
                         <th>Role</th>
                         <th>Plan</th>
@@ -18,8 +25,104 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="d-flex justify-content-start align-items-center user-name">
+                                <div class="avatar-wrapper">
+                                    <div class="avatar avatar-sm me-4">
+                                        <span class="avatar-initial rounded-circle bg-label-success">JD</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <a href="app-user-view-account.html" class="text-heading text-truncate">
+                                        <span class="fw-medium">John Doe</span>
+                                    </a>
+                                    <small>john.doe@example.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text-truncate d-flex align-items-center text-heading">
+                                <i class="icon-base ti tabler-crown icon-md text-primary me-2"></i>Admin
+                            </span>
+                        </td>
+                        <td><span class="text-heading">Enterprise</span></td>
+                        <td>$120/month</td>
+                        <td><span class="badge bg-label-success text-capitalized">Active</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <a href="javascript:;"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon delete-record">
+                                    <i class="icon-base ti tabler-trash icon-22px"></i>
+                                </a>
+                                <a href="app-user-view-account.html"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon">
+                                    <i class="icon-base ti tabler-eye icon-22px"></i>
+                                </a>
+                                <a href="javascript:;"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown">
+                                    <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end m-0">
+                                    <a href="javascript:;" class="dropdown-item">Edit</a>
+                                    <a href="javascript:;" class="dropdown-item">Suspend</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="d-flex justify-content-start align-items-center user-name">
+                                <div class="avatar-wrapper">
+                                    <div class="avatar avatar-sm me-4">
+                                        <span class="avatar-initial rounded-circle bg-label-info">AS</span>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <a href="app-user-view-account.html" class="text-heading text-truncate">
+                                        <span class="fw-medium">Alice Smith</span>
+                                    </a>
+                                    <small>alice.smith@example.com</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text-truncate d-flex align-items-center text-heading">
+                                <i class="icon-base ti tabler-edit icon-md text-warning me-2"></i>Editor
+                            </span>
+                        </td>
+                        <td><span class="text-heading">Basic</span></td>
+                        <td>$50/month</td>
+                        <td><span class="badge bg-label-warning text-capitalized">Pending</span></td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <a href="javascript:;"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon delete-record">
+                                    <i class="icon-base ti tabler-trash icon-22px"></i>
+                                </a>
+                                <a href="app-user-view-account.html"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon">
+                                    <i class="icon-base ti tabler-eye icon-22px"></i>
+                                </a>
+                                <a href="javascript:;"
+                                    class="btn btn-text-secondary rounded-pill waves-effect btn-icon dropdown-toggle hide-arrow"
+                                    data-bs-toggle="dropdown">
+                                    <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-end m-0">
+                                    <a href="javascript:;" class="dropdown-item">Edit</a>
+                                    <a href="javascript:;" class="dropdown-item">Suspend</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
             </table>
         </div>
+
         <!-- Offcanvas to add new user -->
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
             <div class="offcanvas-header border-bottom">
@@ -38,65 +141,7 @@
                         <input type="text" id="add-user-email" class="form-control" placeholder="john.doe@example.com"
                             aria-label="john.doe@example.com" name="userEmail" />
                     </div>
-                    <div class="mb-6">
-                        <label class="form-label" for="add-user-contact">Contact</label>
-                        <input type="text" id="add-user-contact" class="form-control phone-mask"
-                            placeholder="+1 (609) 988-44-11" aria-label="john.doe@example.com" name="userContact" />
-                    </div>
-                    <div class="mb-6">
-                        <label class="form-label" for="add-user-company">Company</label>
-                        <input type="text" id="add-user-company" class="form-control" placeholder="Web Developer"
-                            aria-label="jdoe1" name="companyName" />
-                    </div>
-                    <div class="mb-6">
-                        <label class="form-label" for="country">Country</label>
-                        <select id="country" class="select2 form-select">
-                            <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
-                            <option value="Belarus">Belarus</option>
-                            <option value="Brazil">Brazil</option>
-                            <option value="Canada">Canada</option>
-                            <option value="China">China</option>
-                            <option value="France">France</option>
-                            <option value="Germany">Germany</option>
-                            <option value="India">India</option>
-                            <option value="Indonesia">Indonesia</option>
-                            <option value="Israel">Israel</option>
-                            <option value="Italy">Italy</option>
-                            <option value="Japan">Japan</option>
-                            <option value="Korea">Korea, Republic of</option>
-                            <option value="Mexico">Mexico</option>
-                            <option value="Philippines">Philippines</option>
-                            <option value="Russia">Russian Federation</option>
-                            <option value="South Africa">South Africa</option>
-                            <option value="Thailand">Thailand</option>
-                            <option value="Turkey">Turkey</option>
-                            <option value="Ukraine">Ukraine</option>
-                            <option value="United Arab Emirates">United Arab Emirates</option>
-                            <option value="United Kingdom">United Kingdom</option>
-                            <option value="United States">United States</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label class="form-label" for="user-role">User Role</label>
-                        <select id="user-role" class="form-select">
-                            <option value="subscriber">Subscriber</option>
-                            <option value="editor">Editor</option>
-                            <option value="maintainer">Maintainer</option>
-                            <option value="author">Author</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                    <div class="mb-6">
-                        <label class="form-label" for="user-plan">Select Plan</label>
-                        <select id="user-plan" class="form-select">
-                            <option value="basic">Basic</option>
-                            <option value="enterprise">Enterprise</option>
-                            <option value="company">Company</option>
-                            <option value="team">Team</option>
-                        </select>
-                    </div>
+                    {{-- add more fields as needed --}}
                     <button type="submit" class="btn btn-primary me-3 data-submit">Submit</button>
                     <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Cancel</button>
                 </form>
@@ -104,556 +149,3 @@
         </div>
     </div>
 @endsection
-@push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function(e) {
-            config.colors.borderColor,
-                config.colors.bodyBg,
-                config.colors.headingColor;
-            let t = document.querySelector(".datatables-users"),
-                s = "app-user-view-account.html",
-                r = {
-                    1: {
-                        title: "Pending",
-                        class: "bg-label-warning"
-                    },
-                    2: {
-                        title: "Active",
-                        class: "bg-label-success"
-                    },
-                    3: {
-                        title: "Inactive",
-                        class: "bg-label-secondary"
-                    }
-                },
-                a = $(".select2"),
-                n;
-            if (a.length && (n = a).wrap('<div class="position-relative"></div>').select2({
-                    placeholder: "Select Country",
-                    dropdownParent: n.parent()
-                }),
-                t) {
-                let a = new DataTable(t, {
-                    ajax: assetsPath + "json/user-list.json",
-                    columns: [{
-                        data: "id"
-                    }, {
-                        data: "id",
-                        orderable: !1,
-                        render: DataTable.render.select()
-                    }, {
-                        data: "full_name"
-                    }, {
-                        data: "role"
-                    }, {
-                        data: "current_plan"
-                    }, {
-                        data: "billing"
-                    }, {
-                        data: "status"
-                    }, {
-                        data: "action"
-                    }],
-                    columnDefs: [{
-                        className: "control",
-                        searchable: !1,
-                        orderable: !1,
-                        responsivePriority: 2,
-                        targets: 0,
-                        render: function(e, t, a, n) {
-                            return ""
-                        }
-                    }, {
-                        targets: 1,
-                        orderable: !1,
-                        searchable: !1,
-                        responsivePriority: 4,
-                        checkboxes: !0,
-                        checkboxes: {
-                            selectAllRender: '<input type="checkbox" class="form-check-input">'
-                        },
-                        render: function() {
-                            return '<input type="checkbox" class="dt-checkboxes form-check-input">'
-                        }
-                    }, {
-                        targets: 2,
-                        responsivePriority: 3,
-                        render: function(e, t, a, n) {
-                            var r = a.full_name,
-                                o = a.email,
-                                a = a.avatar;
-                            return '<div class="d-flex justify-content-start align-items-center user-name"><div class="avatar-wrapper"><div class="avatar avatar-sm me-4">' +
-                                (a ? '<img src="' + assetsPath + "img/avatars/" + a +
-                                    '" alt="Avatar" class="rounded-circle">' :
-                                    '<span class="avatar-initial rounded-circle bg-label-' + [
-                                        "success", "danger", "warning", "info", "dark",
-                                        "primary", "secondary"
-                                    ][Math.floor(6 * Math.random())] + '">' + (a = (((a = (r
-                                        .match(/\b\w/g) || []).map(e => e
-                                        .toUpperCase())).shift() || "") + (a.pop() ||
-                                        "")).toUpperCase()) + "</span>") +
-                                '</div></div><div class="d-flex flex-column"><a href="' + s +
-                                '" class="text-heading text-truncate"><span class="fw-medium">' +
-                                r + "</span></a><small>" + o + "</small></div></div>"
-                        }
-                    }, {
-                        targets: 3,
-                        render: function(e, t, a, n) {
-                            a = a.role;
-                            return "<span class='text-truncate d-flex align-items-center text-heading'>" +
-                                ({
-                                    Subscriber: '<i class="icon-base ti tabler-crown icon-md text-primary me-2"></i>',
-                                    Author: '<i class="icon-base ti tabler-edit icon-md text-warning me-2"></i>',
-                                    Maintainer: '<i class="icon-base ti tabler-user icon-md text-success me-2"></i>',
-                                    Editor: '<i class="icon-base ti tabler-chart-pie icon-md text-info me-2"></i>',
-                                    Admin: '<i class="icon-base ti tabler-device-desktop icon-md text-danger me-2"></i>'
-                                } [a] || "") + a + "</span>"
-                        }
-                    }, {
-                        targets: 4,
-                        render: function(e, t, a, n) {
-                            return '<span class="text-heading">' + a.current_plan + "</span>"
-                        }
-                    }, {
-                        targets: 6,
-                        render: function(e, t, a, n) {
-                            a = a.status;
-                            return '<span class="badge ' + r[a].class + '" text-capitalized>' +
-                                r[a].title + "</span>"
-                        }
-                    }, {
-                        targets: -1,
-                        title: "Actions",
-                        searchable: !1,
-                        orderable: !1,
-                        render: (e, t, a, n) => `
-                            <div class="d-flex align-items-center">
-                                <a href="javascript:;" class="btn btn-text-secondary rounded-pill waves-effect btn-icon delete-record">
-                                <i class="icon-base ti tabler-trash icon-22px"></i>
-                                </a>
-                                <a href="${s}" class="btn btn-text-secondary rounded-pill waves-effect btn-icon">
-                                <i class="icon-base ti tabler-eye icon-22px"></i>
-                                </a>
-                                <a href="javascript:;" class="btn btn-text-secondary rounded-pill waves-effect btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                <i class="icon-base ti tabler-dots-vertical icon-22px"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end m-0">
-                                <a href="javascript:;" class="dropdown-item">Edit</a>
-                                <a href="javascript:;" class="dropdown-item">Suspend</a>
-                                </div>
-                            </div>
-                        `
-                    }],
-                    select: {
-                        style: "multi",
-                        selector: "td:nth-child(2)"
-                    },
-                    order: [
-                        [2, "desc"]
-                    ],
-                    layout: {
-                        topStart: {
-                            rowClass: "row m-3 my-0 justify-content-between",
-                            features: [{
-                                pageLength: {
-                                    menu: [10, 25, 50, 100],
-                                    text: "_MENU_"
-                                }
-                            }]
-                        },
-                        topEnd: {
-                            features: [{
-                                search: {
-                                    placeholder: "Search User",
-                                    text: "_INPUT_"
-                                }
-                            }, {
-                                buttons: [{
-                                    extend: "collection",
-                                    className: "btn btn-label-secondary dropdown-toggle",
-                                    text: '<span class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-upload icon-xs"></i> <span class="d-none d-sm-inline-block">Export</span></span>',
-                                    buttons: [{
-                                        extend: "print",
-                                        text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-printer me-1"></i>Print</span>',
-                                        className: "dropdown-item",
-                                        exportOptions: {
-                                            columns: [3, 4, 5, 6, 7],
-                                            format: {
-                                                body: function(e, t, a) {
-                                                    if (e.length <= 0 || !(-1 <
-                                                            e.indexOf("<")))
-                                                        return e;
-                                                    {
-                                                        e = (new DOMParser)
-                                                            .parseFromString(e,
-                                                                "text/html");
-                                                        let t = "";
-                                                        var n = e
-                                                            .querySelectorAll(
-                                                                ".user-name");
-                                                        return 0 < n.length ? n
-                                                            .forEach(e => {
-                                                                e = e
-                                                                    .querySelector(
-                                                                        ".fw-medium"
-                                                                    )
-                                                                    ?.textContent ||
-                                                                    e
-                                                                    .querySelector(
-                                                                        ".d-block"
-                                                                    )
-                                                                    ?.textContent ||
-                                                                    e
-                                                                    .textContent;
-                                                                t += e
-                                                                    .trim() +
-                                                                    " "
-                                                            }) : t = e.body
-                                                            .textContent || e
-                                                            .body.innerText,
-                                                            t.trim()
-                                                    }
-                                                }
-                                            }
-                                        },
-                                        customize: function(e) {
-                                            e.document.body.style.color = config
-                                                .colors.headingColor,
-                                                e.document.body.style
-                                                .borderColor = config.colors
-                                                .borderColor,
-                                                e.document.body.style
-                                                .backgroundColor = config.colors
-                                                .bodyBg;
-                                            e = e.document.body.querySelector(
-                                                "table");
-                                            e.classList.add("compact"),
-                                                e.style.color = "inherit",
-                                                e.style.borderColor = "inherit",
-                                                e.style.backgroundColor =
-                                                "inherit"
-                                        }
-                                    }, {
-                                        extend: "csv",
-                                        text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-text me-1"></i>Csv</span>',
-                                        className: "dropdown-item",
-                                        exportOptions: {
-                                            columns: [3, 4, 5, 6, 7],
-                                            format: {
-                                                body: function(e, t, a) {
-                                                    if (e.length <= 0)
-                                                        return e;
-                                                    e = (new DOMParser)
-                                                        .parseFromString(e,
-                                                            "text/html");
-                                                    let n = "";
-                                                    var r = e.querySelectorAll(
-                                                        ".user-name");
-                                                    return 0 < r.length ? r
-                                                        .forEach(e => {
-                                                            e = e
-                                                                .querySelector(
-                                                                    ".fw-medium"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .querySelector(
-                                                                    ".d-block"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .textContent;
-                                                            n += e.trim() +
-                                                                " "
-                                                        }) : n = e.body
-                                                        .textContent || e.body
-                                                        .innerText,
-                                                        n.trim()
-                                                }
-                                            }
-                                        }
-                                    }, {
-                                        extend: "excel",
-                                        text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-spreadsheet me-1"></i>Excel</span>',
-                                        className: "dropdown-item",
-                                        exportOptions: {
-                                            columns: [3, 4, 5, 6, 7],
-                                            format: {
-                                                body: function(e, t, a) {
-                                                    if (e.length <= 0)
-                                                        return e;
-                                                    e = (new DOMParser)
-                                                        .parseFromString(e,
-                                                            "text/html");
-                                                    let n = "";
-                                                    var r = e.querySelectorAll(
-                                                        ".user-name");
-                                                    return 0 < r.length ? r
-                                                        .forEach(e => {
-                                                            e = e
-                                                                .querySelector(
-                                                                    ".fw-medium"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .querySelector(
-                                                                    ".d-block"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .textContent;
-                                                            n += e.trim() +
-                                                                " "
-                                                        }) : n = e.body
-                                                        .textContent || e.body
-                                                        .innerText,
-                                                        n.trim()
-                                                }
-                                            }
-                                        }
-                                    }, {
-                                        extend: "pdf",
-                                        text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-description me-1"></i>Pdf</span>',
-                                        className: "dropdown-item",
-                                        exportOptions: {
-                                            columns: [3, 4, 5, 6, 7],
-                                            format: {
-                                                body: function(e, t, a) {
-                                                    if (e.length <= 0)
-                                                        return e;
-                                                    e = (new DOMParser)
-                                                        .parseFromString(e,
-                                                            "text/html");
-                                                    let n = "";
-                                                    var r = e.querySelectorAll(
-                                                        ".user-name");
-                                                    return 0 < r.length ? r
-                                                        .forEach(e => {
-                                                            e = e
-                                                                .querySelector(
-                                                                    ".fw-medium"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .querySelector(
-                                                                    ".d-block"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .textContent;
-                                                            n += e.trim() +
-                                                                " "
-                                                        }) : n = e.body
-                                                        .textContent || e.body
-                                                        .innerText,
-                                                        n.trim()
-                                                }
-                                            }
-                                        }
-                                    }, {
-                                        extend: "copy",
-                                        text: '<i class="icon-base ti tabler-copy me-1"></i>Copy',
-                                        className: "dropdown-item",
-                                        exportOptions: {
-                                            columns: [3, 4, 5, 6, 7],
-                                            format: {
-                                                body: function(e, t, a) {
-                                                    if (e.length <= 0)
-                                                        return e;
-                                                    e = (new DOMParser)
-                                                        .parseFromString(e,
-                                                            "text/html");
-                                                    let n = "";
-                                                    var r = e.querySelectorAll(
-                                                        ".user-name");
-                                                    return 0 < r.length ? r
-                                                        .forEach(e => {
-                                                            e = e
-                                                                .querySelector(
-                                                                    ".fw-medium"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .querySelector(
-                                                                    ".d-block"
-                                                                )
-                                                                ?.textContent ||
-                                                                e
-                                                                .textContent;
-                                                            n += e.trim() +
-                                                                " "
-                                                        }) : n = e.body
-                                                        .textContent || e.body
-                                                        .innerText,
-                                                        n.trim()
-                                                }
-                                            }
-                                        }
-                                    }]
-                                }, {
-                                    text: '<span class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-plus icon-xs"></i> <span class="d-none d-sm-inline-block">Add New Record</span></span>',
-                                    className: "add-new btn btn-primary",
-                                    attr: {
-                                        "data-bs-toggle": "offcanvas",
-                                        "data-bs-target": "#offcanvasAddUser"
-                                    }
-                                }]
-                            }]
-                        },
-                        bottomStart: {
-                            rowClass: "row mx-3 justify-content-between",
-                            features: ["info"]
-                        },
-                        bottomEnd: "paging"
-                    },
-                    language: {
-                        sLengthMenu: "_MENU_",
-                        search: "",
-                        searchPlaceholder: "Search User",
-                        paginate: {
-                            next: '<i class="icon-base ti tabler-chevron-right scaleX-n1-rtl icon-18px"></i>',
-                            previous: '<i class="icon-base ti tabler-chevron-left scaleX-n1-rtl icon-18px"></i>',
-                            first: '<i class="icon-base ti tabler-chevrons-left scaleX-n1-rtl icon-18px"></i>',
-                            last: '<i class="icon-base ti tabler-chevrons-right scaleX-n1-rtl icon-18px"></i>'
-                        }
-                    },
-                    responsive: {
-                        details: {
-                            display: DataTable.Responsive.display.modal({
-                                header: function(e) {
-                                    return "Details of " + e.data().full_name
-                                }
-                            }),
-                            type: "column",
-                            renderer: function(e, t, a) {
-                                var n, r, o, a = a.map(function(e) {
-                                    return "" !== e.title ? `<tr data-dt-row="${e.rowIndex}" data-dt-column="${e.columnIndex}">
-                      <td>${e.title}:</td>
-                      <td>${e.data}</td>
-                    </tr>` : ""
-                                }).join("");
-                                return !!a && ((n = document.createElement("div")).classList.add(
-                                        "table-responsive"),
-                                    r = document.createElement("table"),
-                                    n.appendChild(r),
-                                    r.classList.add("table"),
-                                    (o = document.createElement("tbody")).innerHTML = a,
-                                    r.appendChild(o),
-                                    n)
-                            }
-                        }
-                    }
-                });
-
-                function o(e) {
-                    let t = document.querySelector(".dtr-expanded");
-                    (t = e ? e.target.parentElement.closest("tr") : t) && a.row(t).remove().draw()
-                }
-
-                function l() {
-                    var e = document.querySelector(".datatables-users");
-                    let t = document.querySelector(".dtr-bs-modal");
-                    e && e.classList.contains("collapsed") ? t && t.addEventListener("click", function(e) {
-                        e.target.parentElement.classList.contains("delete-record") && (o(),
-                            e = t.querySelector(".btn-close")) && e.click()
-                    }) : (e = e?.querySelector("tbody")) && e.addEventListener("click", function(e) {
-                        e.target.parentElement.classList.contains("delete-record") && o(e)
-                    })
-                }
-                l(),
-                    document.addEventListener("show.bs.modal", function(e) {
-                        e.target.classList.contains("dtr-bs-modal") && l()
-                    }),
-                    document.addEventListener("hide.bs.modal", function(e) {
-                        e.target.classList.contains("dtr-bs-modal") && l()
-                    })
-            }
-            setTimeout(() => {
-                [{
-                    selector: ".dt-buttons .btn",
-                    classToRemove: "btn-secondary"
-                }, {
-                    selector: ".dt-search .form-control",
-                    classToRemove: "form-control-sm"
-                }, {
-                    selector: ".dt-length .form-select",
-                    classToRemove: "form-select-sm",
-                    classToAdd: "ms-0"
-                }, {
-                    selector: ".dt-length",
-                    classToAdd: "mb-md-6 mb-0"
-                }, {
-                    selector: ".dt-layout-end",
-                    classToRemove: "justify-content-between",
-                    classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap"
-                }, {
-                    selector: ".dt-buttons",
-                    classToAdd: "d-flex gap-4 mb-md-0 mb-4"
-                }, {
-                    selector: ".dt-layout-table",
-                    classToRemove: "row mt-2"
-                }, {
-                    selector: ".dt-layout-full",
-                    classToRemove: "col-md col-12",
-                    classToAdd: "table-responsive"
-                }].forEach(({
-                    selector: e,
-                    classToRemove: a,
-                    classToAdd: n
-                }) => {
-                    document.querySelectorAll(e).forEach(t => {
-                        a && a.split(" ").forEach(e => t.classList.remove(e)),
-                            n && n.split(" ").forEach(e => t.classList.add(e))
-                    })
-                })
-            }, 100);
-            var i = document.querySelectorAll(".phone-mask"),
-                c = document.getElementById("addNewUserForm");
-            i && i.forEach(function(t) {
-                    t.addEventListener("input", e => {
-                            e = e.target.value.replace(/\D/g, "");
-                            t.value = formatGeneral(e, {
-                                blocks: [3, 3, 4],
-                                delimiters: [" ", " "]
-                            })
-                        }),
-                        registerCursorTracker({
-                            input: t,
-                            delimiter: " "
-                        })
-                }),
-                FormValidation.formValidation(c, {
-                    fields: {
-                        userFullname: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Please enter fullname "
-                                }
-                            }
-                        },
-                        userEmail: {
-                            validators: {
-                                notEmpty: {
-                                    message: "Please enter your email"
-                                },
-                                emailAddress: {
-                                    message: "The value is not a valid email address"
-                                }
-                            }
-                        }
-                    },
-                    plugins: {
-                        trigger: new FormValidation.plugins.Trigger,
-                        bootstrap5: new FormValidation.plugins.Bootstrap5({
-                            eleValidClass: "",
-                            rowSelector: function(e, t) {
-                                return ".form-control-validation"
-                            }
-                        }),
-                        submitButton: new FormValidation.plugins.SubmitButton,
-                        autoFocus: new FormValidation.plugins.AutoFocus
-                    }
-                })
-        });
-    </script>
-@endpush
