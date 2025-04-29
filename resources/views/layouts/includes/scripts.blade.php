@@ -190,5 +190,117 @@
                 })
             })
         });
+
+        const form = document.querySelector("#validation-form");
+        if (!form) return;
+
+        // Build validation rules based on `required` and `type`
+        const fields = {};
+        form.querySelectorAll("[name]").forEach((input) => {
+            const name = input.name;
+            const type = input.getAttribute("type");
+            const fieldConfig = {
+                validators: {}
+            };
+
+            if (input.required) {
+                fieldConfig.validators.notEmpty = {
+                    message: "This field is required",
+                };
+            }
+
+            // Add type-specific validators
+            if (type === "email") {
+                fieldConfig.validators.emailAddress = {
+                    message: "Please include an '@' in the email address. 'email' is missing an '@'.",
+                };
+            }
+
+            if (type === "url") {
+                fieldConfig.validators.uri = {
+                    message: "Please enter a valid URL",
+                };
+            }
+
+            if (type === "number") {
+                fieldConfig.validators.numeric = {
+                    message: "Please enter a valid number",
+                };
+            }
+
+            if (type === "tel") {
+                fieldConfig.validators.regexp = {
+                    regexp: /^[0-9+\-\s()]*$/,
+                    message: "Please enter a valid phone number",
+                };
+            }
+
+            if (Object.keys(fieldConfig.validators).length > 0) {
+                fields[name] = fieldConfig;
+            }
+        });
+
+        // Initialize FormValidation
+        const fv = FormValidation.formValidation(form, {
+            fields,
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap5: new FormValidation.plugins.Bootstrap5({
+                    eleValidClass: "",
+                    rowSelector: ".form-control-validation",
+                }),
+                submitButton: new FormValidation.plugins.SubmitButton(),
+                autoFocus: new FormValidation.plugins.AutoFocus(),
+            },
+            init: (instance) => {
+                instance.on("plugins.message.placed", function(e) {
+                    const parent = e.element.parentElement;
+                    if (parent.classList.contains("input-group")) {
+                        parent.insertAdjacentElement("afterend", e.messageElement);
+                    } else if (parent.parentElement.classList.contains("custom-option")) {
+                        e.element.closest(".row").insertAdjacentElement("afterend", e
+                            .messageElement);
+                    }
+                });
+            },
+        });
+
+        // Handle form submit after validation
+        fv.on("core.form.valid", function() {
+            const submitBtn = $(form).find('button[type=submit]');
+            const formData = new FormData(form);
+
+            submitBtn.prop("disabled", true).text("Submitting...");
+
+            $.ajax({
+                url: form.action,
+                method: form.method,
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    iziToast.success({
+                        message: response.message || "Form submitted successfully",
+                        position: "topRight"
+                    });
+                },
+                error: function(xhr) {
+                    iziToast.error({
+                        message: xhr.responseJSON?.message ||
+                            "Something went wrong",
+                        position: "topRight"
+                    });
+                },
+                complete: function() {
+                    submitBtn.prop("disabled", false).text("Submit");
+                }
+            });
+        });
+
+        // Always prevent default submission
+        $('#validation-form').on('submit', function(e) {
+            e.preventDefault();
+        });
+
     });
 </script>
