@@ -3,15 +3,12 @@
     <div class="card">
         <div class="card-header border-bottom d-flex justify-content-between align-items-center">
             <h5 class="card-title mb-0">Users</h5>
-            <button class="btn add-new btn-primary" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasAddUser">
-                <span>
-                    <span class="d-flex align-items-center gap-2">
-                        <i class="icon-base ti tabler-plus icon-xs"></i>
-                            Add New Record
-                    </span>
+            <a class="btn add-new btn-primary" href="{{ route('users.create') }}">
+                <span class="d-flex align-items-center gap-2 text-white">
+                    <i class="icon-base ti tabler-plus icon-xs"></i>
+                    Add New Record
                 </span>
-            </button>
+            </a>
         </div>
         <div class="card-datatable">
             <table class="common-datatable table d-table">
@@ -119,33 +116,7 @@
                         </td>
                     </tr>
                 </tbody>
-
             </table>
-        </div>
-
-        <!-- Offcanvas to add new user -->
-        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasAddUser" aria-labelledby="offcanvasAddUserLabel">
-            <div class="offcanvas-header border-bottom">
-                <h5 id="offcanvasAddUserLabel" class="offcanvas-title">Add User</h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body mx-0 flex-grow-0 p-6 h-100">
-                <form class="add-new-user pt-0" id="addNewUserForm" onsubmit="return false">
-                    <div class="mb-6 form-control-validation">
-                        <label class="form-label" for="add-user-fullname">Full Name</label>
-                        <input type="text" class="form-control" id="add-user-fullname" placeholder="John Doe"
-                            name="userFullname" aria-label="John Doe" />
-                    </div>
-                    <div class="mb-6 form-control-validation">
-                        <label class="form-label" for="add-user-email">Email</label>
-                        <input type="text" id="add-user-email" class="form-control" placeholder="john.doe@example.com"
-                            aria-label="john.doe@example.com" name="userEmail" />
-                    </div>
-                    {{-- add more fields as needed --}}
-                    <button type="submit" class="btn btn-primary me-3 data-submit">Submit</button>
-                    <button type="reset" class="btn btn-label-danger" data-bs-dismiss="offcanvas">Cancel</button>
-                </form>
-            </div>
         </div>
     </div>
 @endsection
