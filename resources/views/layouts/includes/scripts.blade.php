@@ -61,6 +61,10 @@
             }
         });
 
+        $(document).find('.form-select').select2({
+            placeholder: "Select an option",
+        });
+
         if (t) {
             let a = new DataTable(t, {
                 processing: true,
@@ -235,6 +239,13 @@
                 };
             }
 
+            if (type === "password") {
+                fieldConfig.validators.stringLength = {
+                    min: 6,
+                    message: "Password must be at least 6 characters long",
+                };
+            }
+
             if (Object.keys(fieldConfig.validators).length > 0) {
                 fields[name] = fieldConfig;
             }
@@ -269,9 +280,7 @@
         fv.on("core.form.valid", function() {
             const submitBtn = $(form).find('button[type=submit]');
             const formData = new FormData(form);
-
             submitBtn.prop("disabled", true).text("Submitting...");
-
             $.ajax({
                 url: form.action,
                 method: form.method,
@@ -279,10 +288,18 @@
                 contentType: false,
                 processData: false,
                 success: function(response) {
-                    iziToast.success({
-                        message: response.message || "Form submitted successfully",
-                        position: "topRight"
-                    });
+                    if (response.status === 200) {
+                        iziToast.success({
+                            message: response.message ||
+                                "Form submitted successfully",
+                            position: "topRight"
+                        });
+                        if (document.referrer !== "") {
+                            window.location.href = document.referrer;
+                        } else {
+                            window.location.reload();
+                        }
+                    }
                 },
                 error: function(xhr) {
                     iziToast.error({
