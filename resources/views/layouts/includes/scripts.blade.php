@@ -71,6 +71,12 @@
         const datatableElement = document.querySelector(".common-datatable");
         if (datatableElement) {
             const datatable = new DataTable(datatableElement, {
+                ajax: {
+                    url: datatableElement.dataset.url,
+                    method: "GET",
+                    dataSrc: "",
+                },
+                columns: JSON.parse(datatableElement.dataset.columns),
                 processing: true,
                 layout: {
                     topStart: {
@@ -281,7 +287,7 @@
                         if (parent.classList.contains("input-group")) {
                             parent.insertAdjacentElement("afterend", e.messageElement);
                         } else if (parent.parentElement.classList.contains(
-                            "custom-option")) {
+                                "custom-option")) {
                             e.element.closest(".row").insertAdjacentElement("afterend", e
                                 .messageElement);
                         }
