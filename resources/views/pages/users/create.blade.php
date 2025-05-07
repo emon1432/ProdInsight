@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-md-6 form-control-validation">
                             <label class="form-label" for="address">Address</label>
-                            <textarea name="address" id="address" class="form-control" rows="4" placeholder="Enter address"></textarea>
+                            <textarea name="address" id="address" class="form-control" rows="3" placeholder="Enter address"></textarea>
                         </div>
                         <div class="col-12">
                             <h6>2. Password</h6>

@@ -4,14 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\View\Components\UserInfo;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('pages.users.index', compact('users'));
+        if (request()->ajax()) {
+            return response()->json($this->data());
+        }
+        return view('pages.users.index');
     }
 
     public function create()
@@ -42,7 +45,7 @@ class UserController extends Controller
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
         $user->role_id = $request->role;
-        $user->image = imageUploadManager($request->file('image'), slugify($request->name), 'users');
+        $user->image = $request->file('image') ? imageUploadManager($request->file('image'), slugify($request->name), 'users') : null;
         $user->save();
 
         return response()->json([
@@ -69,5 +72,16 @@ class UserController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    protected function data()
+    {
+        $users = User::all()->map(function ($user) {
+            $user->rendered_name = (new UserInfo($user))->render()->render();
+            $user->rendered_role = $user->role->name;
+            return $user;
+        });
+
+        return $users;
     }
 }
