@@ -1,6 +1,6 @@
 <script>
     @foreach (session('toasts', collect())->toArray() as $toast)
-        var options = {
+        const toastOptions = {
             title: '{{ $toast['title'] }}',
             message: '{{ $toast['message'] }}',
             messageColor: '{{ $toast['messageColor'] }}',
@@ -11,62 +11,66 @@
             titleSize: '{{ $toast['titleSize'] }}',
             titleColor: '{{ $toast['titleColor'] }}',
             closeOnClick: '{{ $toast['closeOnClick'] }}',
-
         };
 
-        var type = '{{ $toast['type'] }}';
-
-        show(type, options);
+        const toastType = '{{ $toast['type'] }}';
+        displayToast(toastType, toastOptions);
     @endforeach
-    function show(type, options) {
-        if (type === 'info') {
-            iziToast.info(options);
-        } else if (type === 'success') {
-            iziToast.success(options);
-        } else if (type === 'warning') {
-            iziToast.warning(options);
-        } else if (type === 'error') {
-            iziToast.error(options);
-        } else {
-            iziToast.show(options);
-        }
 
+    function displayToast(type, options) {
+        switch (type) {
+            case 'info':
+                return iziToast.info(options);
+            case 'success':
+                return iziToast.success(options);
+            case 'warning':
+                return iziToast.warning(options);
+            case 'error':
+                return iziToast.error(options);
+            default:
+                return iziToast.show(options);
+        }
     }
 
     {{ session()->forget('toasts') }}
 
     $(document).ready(function() {
+        // Sidebar Menu Activation
         const currentPath = window.location.pathname;
-        let t = document.querySelector(".common-datatable");
         $('.menu-inner .menu-link').each(function() {
             const link = $(this);
             const href = link.attr('href');
-
             if (!href || href === 'javascript:void(0);') return;
 
             const linkPath = new URL(href, window.location.origin).pathname;
+            const isActive = currentPath === linkPath || currentPath.startsWith(linkPath + '/');
 
-            // Exact match or wildcard match
-            const isExactMatch = currentPath === linkPath;
-            const isWildcardMatch = currentPath.startsWith(linkPath + '/');
-
-            if (isExactMatch || isWildcardMatch) {
+            if (isActive) {
                 const menuItem = link.closest('.menu-item');
                 menuItem.addClass('active');
 
-                // Add 'active open' to all parent .menu-item
+                // Open all parent submenus
                 link.parents('.menu-sub').each(function() {
                     $(this).closest('.menu-item').addClass('active open');
                 });
             }
         });
 
-        $(document).find('.form-select').select2({
-            placeholder: "Select an option",
+        // Select2 Initialization
+        $(".form-select").each(function() {
+            const selectElement = $(this);
+            selectElement
+                .wrap('<div class="position-relative"></div>')
+                .select2({
+                    placeholder: "Select an option",
+                    dropdownParent: selectElement.parent(),
+                });
         });
 
-        if (t) {
-            let a = new DataTable(t, {
+        // DataTable Initialization
+        const datatableElement = document.querySelector(".common-datatable");
+        if (datatableElement) {
+            const datatable = new DataTable(datatableElement, {
                 processing: true,
                 layout: {
                     topStart: {
@@ -75,39 +79,41 @@
                             buttons: [{
                                 extend: "collection",
                                 className: "btn btn-label-secondary dropdown-toggle",
-                                text: '<span class="d-flex align-items-center gap-2"><i class="icon-base ti tabler-upload icon-xs"></i> <span class="d-none d-sm-inline-block">Export</span></span>',
+                                text: `<span class="d-flex align-items-center gap-2">
+                                    <i class="icon-base ti tabler-upload icon-xs"></i>
+                                    <span class="d-none d-sm-inline-block">Export</span>
+                                </span>`,
                                 buttons: [{
-                                    extend: "print",
-                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-printer me-1"></i>Print</span>',
-                                    className: "dropdown-item",
-
-                                }, {
-                                    extend: "csv",
-                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-text me-1"></i>Csv</span>',
-                                    className: "dropdown-item",
-
-                                }, {
-                                    extend: "excel",
-                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-spreadsheet me-1"></i>Excel</span>',
-                                    className: "dropdown-item",
-
-                                }, {
-                                    extend: "pdf",
-                                    text: '<span class="d-flex align-items-center"><i class="icon-base ti tabler-file-description me-1"></i>Pdf</span>',
-                                    className: "dropdown-item",
-
-                                }, {
-                                    extend: "copy",
-                                    text: '<i class="icon-base ti tabler-copy me-1"></i>Copy',
-                                    className: "dropdown-item",
-
-                                }]
+                                        extend: "print",
+                                        text: `<i class="icon-base ti tabler-printer me-1"></i>Print`,
+                                        className: "dropdown-item"
+                                    },
+                                    {
+                                        extend: "csv",
+                                        text: `<i class="icon-base ti tabler-file-text me-1"></i>Csv`,
+                                        className: "dropdown-item"
+                                    },
+                                    {
+                                        extend: "excel",
+                                        text: `<i class="icon-base ti tabler-file-spreadsheet me-1"></i>Excel`,
+                                        className: "dropdown-item"
+                                    },
+                                    {
+                                        extend: "pdf",
+                                        text: `<i class="icon-base ti tabler-file-description me-1"></i>Pdf`,
+                                        className: "dropdown-item"
+                                    },
+                                    {
+                                        extend: "copy",
+                                        text: `<i class="icon-base ti tabler-copy me-1"></i>Copy`,
+                                        className: "dropdown-item"
+                                    },
+                                ]
                             }]
                         }]
                     },
                     topEnd: {
                         rowClass: "row m-1 my-0 justify-content-center",
-
                         features: [{
                             search: {
                                 placeholder: "Search",
@@ -124,200 +130,200 @@
                 responsive: {
                     details: {
                         display: DataTable.Responsive.display.modal({
-                            header: function(e) {
-                                return "Details"
-                            }
+                            header: () => "Details"
                         }),
                         type: "column",
-                        renderer: function(e, t, a) {
-                            var n, r, o, a = a.map(function(e) {
-                                return "" !== e.title ? `<tr data-dt-row="${e.rowIndex}" data-dt-column="${e.columnIndex}">
-                                            <td>${e.title}:</td>
-                                            <td>${e.data}</td>
-                                            </tr>` : ""
-                            }).join("");
-                            return !!a && ((n = document.createElement("div")).classList.add(
-                                    "table-responsive"),
-                                r = document.createElement("table"),
-                                n.appendChild(r),
-                                r.classList.add("table"),
-                                (o = document.createElement("tbody")).innerHTML = a,
-                                r.appendChild(o),
-                                n)
+                        renderer: function(api, rowIdx, columns) {
+                            const rows = columns
+                                .map(col => col.title ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                                    <td>${col.title}:</td><td>${col.data}</td></tr>` : "")
+                                .join("");
+                            if (!rows) return;
+
+                            const wrapper = document.createElement("div");
+                            wrapper.classList.add("table-responsive");
+
+                            const table = document.createElement("table");
+                            table.classList.add("table");
+
+                            const tbody = document.createElement("tbody");
+                            tbody.innerHTML = rows;
+
+                            table.appendChild(tbody);
+                            wrapper.appendChild(table);
+                            return wrapper;
                         }
                     }
                 }
             });
+
+            // Style Adjustments After DataTable Init
+            const adjustClasses = [{
+                    selector: ".dt-buttons .btn",
+                    remove: "btn-secondary"
+                },
+                {
+                    selector: ".dt-search .form-control",
+                    remove: "form-control-sm"
+                },
+                {
+                    selector: ".dt-length .form-select",
+                    remove: "form-select-sm",
+                    add: "ms-0"
+                },
+                {
+                    selector: ".dt-length",
+                    add: "mb-md-6 mb-0"
+                },
+                {
+                    selector: ".dt-layout-start",
+                    remove: "justify-content-between",
+                    add: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto pe-0"
+                },
+                {
+                    selector: ".dt-layout-end",
+                    remove: "justify-content-between",
+                    add: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto ps-0"
+                },
+                {
+                    selector: ".dt-buttons",
+                    remove: "mb-4",
+                    add: "d-flex gap-4 mb-md-0 mb-0"
+                },
+                {
+                    selector: ".dt-layout-table",
+                    remove: "row mt-2"
+                },
+                {
+                    selector: ".dt-layout-full",
+                    remove: "col-md col-12",
+                    add: "table-responsive"
+                },
+            ];
+
+            setTimeout(() => {
+                adjustClasses.forEach(({
+                    selector,
+                    remove,
+                    add
+                }) => {
+                    document.querySelectorAll(selector).forEach(el => {
+                        remove?.split(" ").forEach(cls => el.classList.remove(cls));
+                        add?.split(" ").forEach(cls => el.classList.add(cls));
+                    });
+                });
+            });
         }
 
-        setTimeout(() => {
-            [{
-                selector: ".dt-buttons .btn",
-                classToRemove: "btn-secondary"
-            }, {
-                selector: ".dt-search .form-control",
-                classToRemove: "form-control-sm"
-            }, {
-                selector: ".dt-length .form-select",
-                classToRemove: "form-select-sm",
-                classToAdd: "ms-0"
-            }, {
-                selector: ".dt-length",
-                classToAdd: "mb-md-6 mb-0"
-            }, {
-                selector: ".dt-layout-start",
-                classToRemove: "justify-content-between",
-                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto pe-0"
-            }, {
-                selector: ".dt-layout-end",
-                classToRemove: "justify-content-between",
-                classToAdd: "d-flex gap-md-4 justify-content-md-between justify-content-center gap-2 flex-wrap w-auto ps-0"
-            }, {
-                selector: ".dt-buttons",
-                classToRemove: "mb-4",
-                classToAdd: "d-flex gap-4 mb-md-0 mb-0"
-            }, {
-                selector: ".dt-layout-table",
-                classToRemove: "row mt-2"
-            }, {
-                selector: ".dt-layout-full",
-                classToRemove: "col-md col-12",
-                classToAdd: "table-responsive"
-            }].forEach(({
-                selector: e,
-                classToRemove: a,
-                classToAdd: n
-            }) => {
-                document.querySelectorAll(e).forEach(t => {
-                    a && a.split(" ").forEach(e => t.classList.remove(e)),
-                        n && n.split(" ").forEach(e => t.classList.add(e))
-                })
-            })
-        });
-
+        // Form Validation
         const form = document.querySelector("#validation-form");
-        if (!form) return;
+        if (form) {
+            const validationFields = {};
+            form.querySelectorAll("[name]").forEach(input => {
+                const name = input.name;
+                const type = input.type;
+                const validators = {};
 
-        // Build validation rules based on `required` and `type`
-        const fields = {};
-        form.querySelectorAll("[name]").forEach((input) => {
-            const name = input.name;
-            const type = input.getAttribute("type");
-            const fieldConfig = {
-                validators: {}
-            };
+                if (input.required) {
+                    validators.notEmpty = {
+                        message: "This field is required"
+                    };
+                }
+                if (type === "email") {
+                    validators.emailAddress = {
+                        message: "Please include an '@' in the email address."
+                    };
+                }
+                if (type === "url") {
+                    validators.uri = {
+                        message: "Please enter a valid URL"
+                    };
+                }
+                if (type === "number") {
+                    validators.numeric = {
+                        message: "Please enter a valid number"
+                    };
+                }
+                if (type === "tel") {
+                    validators.regexp = {
+                        regexp: /^[0-9+\-\s()]*$/,
+                        message: "Please enter a valid phone number",
+                    };
+                }
+                if (type === "password") {
+                    validators.stringLength = {
+                        min: 6,
+                        message: "Password must be at least 6 characters long",
+                    };
+                }
 
-            if (input.required) {
-                fieldConfig.validators.notEmpty = {
-                    message: "This field is required",
-                };
-            }
+                if (Object.keys(validators).length) {
+                    validationFields[name] = {
+                        validators
+                    };
+                }
+            });
 
-            // Add type-specific validators
-            if (type === "email") {
-                fieldConfig.validators.emailAddress = {
-                    message: "Please include an '@' in the email address. 'email' is missing an '@'.",
-                };
-            }
+            const formValidation = FormValidation.formValidation(form, {
+                fields: validationFields,
+                plugins: {
+                    trigger: new FormValidation.plugins.Trigger(),
+                    bootstrap5: new FormValidation.plugins.Bootstrap5({
+                        eleValidClass: "",
+                        rowSelector: ".form-control-validation",
+                    }),
+                    submitButton: new FormValidation.plugins.SubmitButton(),
+                    autoFocus: new FormValidation.plugins.AutoFocus(),
+                },
+                init: instance => {
+                    instance.on("plugins.message.placed", function(e) {
+                        const parent = e.element.parentElement;
+                        if (parent.classList.contains("input-group")) {
+                            parent.insertAdjacentElement("afterend", e.messageElement);
+                        } else if (parent.parentElement.classList.contains(
+                            "custom-option")) {
+                            e.element.closest(".row").insertAdjacentElement("afterend", e
+                                .messageElement);
+                        }
+                    });
+                }
+            });
 
-            if (type === "url") {
-                fieldConfig.validators.uri = {
-                    message: "Please enter a valid URL",
-                };
-            }
+            // Submit handler
+            formValidation.on("core.form.valid", function() {
+                const submitBtn = $(form).find("button[type=submit]");
+                const formData = new FormData(form);
 
-            if (type === "number") {
-                fieldConfig.validators.numeric = {
-                    message: "Please enter a valid number",
-                };
-            }
-
-            if (type === "tel") {
-                fieldConfig.validators.regexp = {
-                    regexp: /^[0-9+\-\s()]*$/,
-                    message: "Please enter a valid phone number",
-                };
-            }
-
-            if (type === "password") {
-                fieldConfig.validators.stringLength = {
-                    min: 6,
-                    message: "Password must be at least 6 characters long",
-                };
-            }
-
-            if (Object.keys(fieldConfig.validators).length > 0) {
-                fields[name] = fieldConfig;
-            }
-        });
-
-        // Initialize FormValidation
-        const fv = FormValidation.formValidation(form, {
-            fields,
-            plugins: {
-                trigger: new FormValidation.plugins.Trigger(),
-                bootstrap5: new FormValidation.plugins.Bootstrap5({
-                    eleValidClass: "",
-                    rowSelector: ".form-control-validation",
-                }),
-                submitButton: new FormValidation.plugins.SubmitButton(),
-                autoFocus: new FormValidation.plugins.AutoFocus(),
-            },
-            init: (instance) => {
-                instance.on("plugins.message.placed", function(e) {
-                    const parent = e.element.parentElement;
-                    if (parent.classList.contains("input-group")) {
-                        parent.insertAdjacentElement("afterend", e.messageElement);
-                    } else if (parent.parentElement.classList.contains("custom-option")) {
-                        e.element.closest(".row").insertAdjacentElement("afterend", e
-                            .messageElement);
-                    }
-                });
-            },
-        });
-
-        // Handle form submit after validation
-        fv.on("core.form.valid", function() {
-            const submitBtn = $(form).find('button[type=submit]');
-            const formData = new FormData(form);
-            submitBtn.prop("disabled", true).text("Submitting...");
-            $.ajax({
-                url: form.action,
-                method: form.method,
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    if (response.status === 200) {
+                submitBtn.prop("disabled", true).text("Submitting...");
+                $.ajax({
+                    url: form.action,
+                    method: form.method,
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
                         iziToast.success({
                             message: response.message ||
                                 "Form submitted successfully",
                             position: "topRight"
                         });
-                        if (document.referrer !== "") {
-                            window.location.href = document.referrer;
-                        } else {
-                            window.location.reload();
-                        }
+                        window.location.href = document.referrer || window.location.href;
+                    },
+                    error: function(xhr) {
+                        iziToast.error({
+                            message: xhr.responseJSON?.message ||
+                                "Something went wrong",
+                            position: "topRight"
+                        });
+                    },
+                    complete: function() {
+                        submitBtn.prop("disabled", false).text("Submit");
                     }
-                },
-                error: function(xhr) {
-                    iziToast.error({
-                        message: xhr.responseJSON?.message ||
-                            "Something went wrong",
-                        position: "topRight"
-                    });
-                },
-                complete: function() {
-                    submitBtn.prop("disabled", false).text("Submit");
-                }
+                });
             });
-        });
 
-        // Always prevent default submission
-        $('#validation-form').on('submit', function(e) {
-            e.preventDefault();
-        });
-
+            // Prevent default form submission
+            $('#validation-form').on('submit', e => e.preventDefault());
+        }
     });
 </script>
