@@ -8,6 +8,6 @@
         <a href="{{ route('users.show', $user->id) }}" class="text-heading text-truncate">
             <span class="fw-medium">{{ $user->name }}</span>
         </a>
-        <small>{{ $user->email }}</small>
+        <small>{{ $user->role->name }}</small>
     </div>
 </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->json('permission')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

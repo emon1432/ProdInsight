@@ -14,9 +14,7 @@ class UserInfo extends Component
     public function __construct($user)
     {
         $this->user = $user;
-        $this->initials = collect(explode(' ', $user->name))->map(function ($name) {
-            return strtoupper(substr($name, 0, 1));
-        })->implode('');
+        $this->initials = strtoupper(substr($user->name, 0, 1) . substr($user->name, strpos($user->name, ' ') + 1, 1));
     }
 
     public function render(): View|Closure|string

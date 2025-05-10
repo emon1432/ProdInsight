@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/core.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/css/demo.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/sweetalert2/sweetalert2.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/fonts/flag-icons.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/css/pages/cards-advance.css">
     <link rel="stylesheet" href="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.css">
@@ -65,6 +66,7 @@
     <script src="{{ asset('assets') }}/vendor/libs/hammer/hammer.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/i18n/i18n.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
+    <script src="{{ asset('assets') }}/vendor/libs/sweetalert2/sweetalert2.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/select2/select2.js"></script>

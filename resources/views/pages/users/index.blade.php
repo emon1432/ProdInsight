@@ -13,17 +13,17 @@
         <div class="card-datatable">
             <table class="common-datatable table d-table" data-url="{{ route('users.index') }}"
                 data-columns='[
-                { "data": "id" },
-                { "data": "rendered_name" },
+                { "data": "name" },
+                { "data": "email" },
                 { "data": "phone" },
-                { "data": "rendered_role" }
+                { "data": "actions"}
                 ]'>
                 <thead class="border-top">
                     <tr>
-                        <th>ID</th>
                         <th>User</th>
+                        <th>Email</th>
                         <th>Phone</th>
-                        <th>Role</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
             </table>
