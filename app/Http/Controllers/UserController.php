@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
+use App\View\Components\Actions;
 use App\View\Components\UserInfo;
 use Illuminate\Http\Request;
 
@@ -71,14 +72,37 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        imageDeleteManager($user->image);
+        $user->delete();
+
+        notify()->success('User deleted successfully');
+        return redirect()->route('users.index');
     }
 
     protected function data()
     {
         $users = User::all()->map(function ($user) {
-            $user->rendered_name = (new UserInfo($user))->render()->render();
-            $user->rendered_role = $user->role->name;
+            $user->name = (new UserInfo($user))->render()->render();
+            $user->actions = (new Actions(
+                [
+                    'model' => $user,
+                    'resource' => 'users',
+                    'buttons' => [
+                        'basic' => [
+                            'view' => true,
+                            'edit' => true,
+                            'delete' => true,
+                        ],
+                        'custom' => [
+                            'View' => [
+                                'route' => route('users.show', $user->id),
+                                'icon' => 'eye',
+                            ],
+                        ],
+                    ],
+                ]
+            ))->render()->render();
             return $user;
         });
 

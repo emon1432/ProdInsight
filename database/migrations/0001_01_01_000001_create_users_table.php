@@ -23,6 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamp('email_verified_at')->nullable();
             $table->foreignId('current_team_id')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
 

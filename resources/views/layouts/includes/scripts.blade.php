@@ -331,5 +331,46 @@
             // Prevent default form submission
             $('#validation-form').on('submit', e => e.preventDefault());
         }
+
+        $(document).on("click", ".delete-record", function(e) {
+            e.preventDefault();
+            const form = $(this).find("form");
+            const actionUrl = form.attr("action");
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: "Yes, delete it!",
+                customClass: {
+                    confirmButton: "btn btn-primary me-2 waves-effect waves-light",
+                    cancelButton: "btn btn-label-secondary waves-effect waves-light",
+                },
+                buttonsStyling: false,
+            }).then(function(e) {
+                if (e.isConfirmed) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Deleted!",
+                        text: "Your record has been deleted.",
+                        customClass: {
+                            confirmButton: "btn btn-success waves-effect waves-light",
+                        },
+                    });
+                    setTimeout(() => {
+                        form.submit();
+                    }, 1000);
+                } else if (e.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        title: "Cancelled",
+                        text: "Your record is safe :)",
+                        icon: "error",
+                        customClass: {
+                            confirmButton: "btn btn-success waves-effect waves-light",
+                        },
+                    });
+                }
+            });
+        });
     });
 </script>
