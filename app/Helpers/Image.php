@@ -24,7 +24,7 @@ function imageUpdateManager($image, $slug, $path, $old_image)
 
     $image->move($path, $image_name);
 
-    if (file_exists($old_image) && $old_image != 'default.png') {
+    if (file_exists($old_image) && $old_image != 'default.jpg') {
         @unlink($old_image);
     }
 
@@ -33,7 +33,7 @@ function imageUpdateManager($image, $slug, $path, $old_image)
 
 function imageDeleteManager($old_image)
 {
-    if (file_exists($old_image) && $old_image != 'default.png') {
+    if (file_exists($old_image) && $old_image != 'default.jpg') {
         @unlink($old_image);
     }
 }
@@ -44,9 +44,9 @@ function imageShow($image)
         if (file_exists(public_path($image))) {
             return asset($image);
         } else {
-            return asset('uploads/default.png');
+            return asset('uploads/default.jpg');
         }
     } else {
-        return asset('uploads/default.png');
+        return asset('uploads/default.jpg');
     }
 }

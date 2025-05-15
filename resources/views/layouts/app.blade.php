@@ -39,7 +39,7 @@
 </head>
 
 <body>
-    <div class="layout-wrapper layout-content-navbar  ">
+    <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             @include('layouts.includes.sidebar')
             <div class="layout-page">
@@ -64,7 +64,6 @@
     <script src="{{ asset('assets') }}/vendor/libs/pickr/pickr.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/hammer/hammer.js"></script>
-    <script src="{{ asset('assets') }}/vendor/libs/i18n/i18n.js"></script>
     <script src="{{ asset('assets') }}/vendor/js/menu.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/sweetalert2/sweetalert2.js"></script>
     <script src="{{ asset('assets') }}/vendor/libs/iziToast/iziToast.js"></script>

@@ -2,11 +2,11 @@
 @section('content')
     <div class="card">
         <div class="card-header border-bottom d-flex justify-content-between align-items-center">
-            <h5 class="card-title mb-0">Users</h5>
+            <h5 class="card-title mb-0">{{ __('Users') }}</h5>
             <a class="btn add-new btn-primary" href="{{ route('users.create') }}">
                 <span class="d-flex align-items-center gap-2 text-white">
                     <i class="icon-base ti tabler-plus icon-xs"></i>
-                    Add New Record
+                    {{ __('Add New Record') }}
                 </span>
             </a>
         </div>
@@ -20,10 +20,10 @@
                 ]'>
                 <thead class="border-top">
                     <tr>
-                        <th>User</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Actions</th>
+                        <th>{{ __('User') }}</th>
+                        <th>{{ __('Email') }}</th>
+                        <th>{{ __('Phone') }}</th>
+                        <th>{{ __('Action') }}</th>
                     </tr>
                 </thead>
             </table>

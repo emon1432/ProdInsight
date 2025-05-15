@@ -14,7 +14,14 @@ class UserInfo extends Component
     public function __construct($user)
     {
         $this->user = $user;
-        $this->initials = strtoupper(substr($user->name, 0, 1) . substr($user->name, strpos($user->name, ' ') + 1, 1));
+        if ($user->image) {
+            if (file_exists(public_path($user->image))) {
+                $this->initials = imageShow($user->image);
+            }
+        }
+        if (empty($this->initials)) {
+            $this->initials = strtoupper(substr($user->name, 0, 1) . substr($user->name, strpos($user->name, ' ') + 1, 1));
+        }
     }
 
     public function render(): View|Closure|string
