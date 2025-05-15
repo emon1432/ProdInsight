@@ -50,6 +50,11 @@
                         <div>{{ __('User List') }}</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="{{ route('roles-permissions.index') }}" class="menu-link">
+                        <div>{{ __('Roles & Permissions') }}</div>
+                    </a>
+                </li>
             </ul>
         </li>
     </ul>
