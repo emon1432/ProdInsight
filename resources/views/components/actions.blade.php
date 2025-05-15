@@ -24,13 +24,13 @@
             @if ($buttons['view'])
                 <a href="{{ route($resource . '.show', $model->id) }}" class="dropdown-item d-flex align-items-center">
                     <i class="icon-base ti tabler-eye me-2"></i>
-                    View
+                    {{ __('View') }}
                 </a>
             @endif
             @if ($buttons['edit'])
                 <a href="{{ route($resource . '.edit', $model->id) }}" class="dropdown-item d-flex align-items-center">
                     <i class="icon-base ti tabler-edit me-2"></i>
-                    Edit
+                    {{ __('Edit') }}
                 </a>
             @endif
             @if ($buttons['delete'])
@@ -39,7 +39,7 @@
                     <form action="{{ route($resource . '.destroy', $model->id) }}" method="DELETE" class="d-none">
                         @csrf
                     </form>
-                    Delete
+                    {{ __('Delete') }}
                 </a>
             @endif
         @endisset

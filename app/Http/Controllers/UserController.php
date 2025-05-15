@@ -51,7 +51,7 @@ class UserController extends Controller
 
         return response()->json([
             'status' => 200,
-            'message' => 'User created successfully'
+            'message' => __('User created successfully'),
         ]);
     }
 
@@ -79,7 +79,7 @@ class UserController extends Controller
 
             return response()->json([
                 'status' => 200,
-                'message' => 'User deleted successfully'
+                'message' => __('User deleted successfully'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -104,7 +104,7 @@ class UserController extends Controller
                             'delete' => true,
                         ],
                         'custom' => [
-                            'View' => [
+                            __('View') => [
                                 'route' => route('users.show', $user->id),
                                 'icon' => 'eye',
                             ],

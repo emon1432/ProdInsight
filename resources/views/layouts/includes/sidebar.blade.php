@@ -28,26 +28,26 @@
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
         <li class="menu-header small">
-            <span class="menu-header-text">{{ trans('Home') }}</span>
+            <span class="menu-header-text">{{ __('Home') }}</span>
         </li>
         <li class="menu-item">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon icon-base ti tabler-smart-home"></i>
-                <div>{{ trans('Dashboard') }}</div>
+                <div>{{ __('Dashboard') }}</div>
             </a>
         </li>
         <li class="menu-header small">
-            <span class="menu-header-text">{{ trans('System') }}</span>
+            <span class="menu-header-text">{{ __('System') }}</span>
         </li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon icon-base ti tabler-users"></i>
-                <div>{{ trans('User Management') }}</div>
+                <div>{{ __('User Management') }}</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
                     <a href="{{ route('users.index') }}" class="menu-link">
-                        <div>{{ trans('User List') }}</div>
+                        <div>{{ __('User List') }}</div>
                     </a>
                 </li>
             </ul>

@@ -61,21 +61,21 @@
                         <button type="button" class="dropdown-item align-items-center active"
                             data-bs-theme-value="light" aria-pressed="false">
                             <span><i class="icon-base ti tabler-sun icon-22px me-3"
-                                    data-icon="sun"></i>{{ trans('Light') }}</span>
+                                    data-icon="sun"></i>{{ __('Light') }}</span>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="dark"
                             aria-pressed="true">
                             <span><i class="icon-base ti tabler-moon-stars icon-22px me-3"
-                                    data-icon="moon-stars"></i>{{ trans('Dark') }}</span>
+                                    data-icon="moon-stars"></i>{{ __('Dark') }}</span>
                         </button>
                     </li>
                     <li>
                         <button type="button" class="dropdown-item align-items-center" data-bs-theme-value="system"
                             aria-pressed="false">
                             <span><i class="icon-base ti tabler-device-desktop-analytics icon-22px me-3"
-                                    data-icon="device-desktop-analytics"></i>{{ trans('System') }}</span>
+                                    data-icon="device-desktop-analytics"></i>{{ __('System') }}</span>
                         </button>
                     </li>
                 </ul>
@@ -93,7 +93,7 @@
                 <div class="dropdown-menu dropdown-menu-end p-0">
                     <div class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
-                            <h6 class="mb-0 me-auto">{{ trans('Shortcuts') }}</h6>
+                            <h6 class="mb-0 me-auto">{{ __('Shortcuts') }}</h6>
                             <a href="javascript:void(0)"
                                 class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i
@@ -477,7 +477,7 @@
                             <a class="btn btn-sm btn-danger d-flex" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
-                                <small class="align-middle">{{ trans('Logout') }}</small>
+                                <small class="align-middle">{{ __('Logout') }}</small>
                                 <i class="icon-base ti tabler-logout ms-2 icon-14px"></i>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST"
