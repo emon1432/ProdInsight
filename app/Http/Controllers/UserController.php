@@ -134,12 +134,6 @@ class UserController extends Controller
                             'edit' => true,
                             'delete' => true,
                         ],
-                        'custom' => [
-                            __('View') => [
-                                'route' => route('users.show', $user->id),
-                                'icon' => 'eye',
-                            ],
-                        ],
                     ],
                 ]
             ))->render()->render();
