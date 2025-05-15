@@ -62,12 +62,43 @@ class UserController extends Controller
 
     public function edit(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $roles = Role::all();
+        return view('pages.users.edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'phone' => 'required|string|unique:users,phone,' . $id,
+            'role' => 'required|exists:roles,id',
+            'address' => 'nullable|string|max:255',
+            'password' => 'nullable|string|min:8|confirmed',
+        ]);
+        if (!$validated) {
+            return redirect()->back()->withErrors($validated)->withInput();
+        }
+
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->address = $request->address;
+        $user->role_id = $request->role;
+        if ($request->file('image')) {
+            $user->image = imageUpdateManager($request->file('image'), slugify($request->name), 'users', $user->image);
+        }
+        if ($request->password) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('User updated successfully'),
+        ]);
     }
 
     public function destroy(string $id)
