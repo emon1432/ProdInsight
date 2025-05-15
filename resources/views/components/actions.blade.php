@@ -36,9 +36,8 @@
             @if ($buttons['delete'])
                 <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center delete-record">
                     <i class="icon-base ti tabler-trash me-2"></i>
-                    <form action="{{ route($resource . '.destroy', $model->id) }}" method="POST" class="d-none">
+                    <form action="{{ route($resource . '.destroy', $model->id) }}" method="DELETE" class="d-none">
                         @csrf
-                        @method('DELETE')
                     </form>
                     Delete
                 </a>

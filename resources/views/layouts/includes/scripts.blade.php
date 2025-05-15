@@ -332,10 +332,12 @@
             $('#validation-form').on('submit', e => e.preventDefault());
         }
 
+        // Delete Record Confirmation
         $(document).on("click", ".delete-record", function(e) {
             e.preventDefault();
             const form = $(this).find("form");
             const actionUrl = form.attr("action");
+            const method = form.attr("method") || "DELETE";
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -349,17 +351,60 @@
                 buttonsStyling: false,
             }).then(function(e) {
                 if (e.isConfirmed) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Deleted!",
-                        text: "Your record has been deleted.",
-                        customClass: {
-                            confirmButton: "btn btn-success waves-effect waves-light",
+                    $.ajax({
+                        url: actionUrl,
+                        type: method,
+                        data: {
+                            _token: "{{ csrf_token() }}",
+                            _method: "DELETE"
                         },
+                        beforeSend: function() {
+                            Swal.fire({
+                                title: "Deleting...",
+                                text: "Please wait",
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
+                        },
+                        success: function(response) {
+                            if (response.status === 200) {
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Deleted!",
+                                    text: response.message,
+                                    customClass: {
+                                        confirmButton: "btn btn-success waves-effect waves-light",
+                                    },
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error!",
+                                    text: response.message,
+                                    customClass: {
+                                        confirmButton: "btn btn-danger waves-effect waves-light",
+                                    },
+                                });
+                            }
+                        },
+                        complete: function() {
+                            const datatable = $(".common-datatable").DataTable();
+                            datatable.ajax.reload(null, false);
+                        },
+                        error: function(xhr) {
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error!",
+                                text: xhr.responseJSON?.message ||
+                                    "Something went wrong",
+                                customClass: {
+                                    confirmButton: "btn btn-danger waves-effect waves-light",
+                                },
+                            });
+                        }
                     });
-                    setTimeout(() => {
-                        form.submit();
-                    }, 1000);
                 } else if (e.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({
                         title: "Cancelled",

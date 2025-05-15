@@ -72,12 +72,21 @@ class UserController extends Controller
 
     public function destroy(string $id)
     {
-        $user = User::findOrFail($id);
-        imageDeleteManager($user->image);
-        $user->delete();
+        try {
+            $user = User::findOrFail($id);
+            imageDeleteManager($user->image);
+            $user->delete();
 
-        notify()->success('User deleted successfully');
-        return redirect()->route('users.index');
+            return response()->json([
+                'status' => 200,
+                'message' => 'User deleted successfully'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Error deleting user: ' . $e->getMessage()
+            ])->setStatusCode(500);
+        }
     }
 
     protected function data()
