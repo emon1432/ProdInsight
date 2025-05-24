@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RolePermissionRequest;
 use App\Models\Role;
 use App\View\Components\Actions;
 use App\View\Components\TotalUsers;
@@ -18,17 +19,110 @@ class RolesPermissionsController extends Controller
         return view('pages.roles-permissions.index');
     }
 
-    public function create() {}
+    public function create()
+    {
+        $routeList = get_route_list();
+        return view('pages.roles-permissions.create', compact('routeList'));
+    }
 
-    public function store(Request $request) {}
+    public function store(RolePermissionRequest $request)
+    {
+        $routeList = get_route_list();
 
-    public function show(string $id) {}
+        if ($request->filled('permission')) {
+            foreach ($request->permission as $group => $actions) {
+                if (isset($routeList[$group])) {
+                    foreach ($routeList[$group] as $action => $_) {
+                        $routeList[$group][$action] = in_array($action, $actions);
+                    }
+                }
+            }
+        }
 
-    public function edit(string $id) {}
+        $role = new Role();
+        $role->name = $request->name;
+        $role->slug = slugify($request->name);
+        $role->status = $request->status;
+        $role->permission = $routeList;
+        $role->save();
 
-    public function update(Request $request, string $id) {}
+        return response()->json([
+            'status' => 200,
+            'message' => __('Role created successfully'),
+        ]);
+    }
 
-    public function destroy(string $id) {}
+
+    public function show(string $id)
+    {
+        //
+    }
+
+    public function edit(string $id)
+    {
+        $role = Role::findOrFail($id);
+        $routeList = get_route_list();
+
+        if (is_null($role->permission)) {
+            $role->permission = json_encode($routeList);
+            $role->save();
+        }
+
+        $savedPermissions = $role->permission;
+        foreach ($routeList as $group => $actions) {
+            foreach ($actions as $action => $value) {
+                $routeList[$group][$action] = $savedPermissions[$group][$action] ?? false;
+            }
+        }
+        $role->permission = $routeList;
+        $role->save();
+        return view('pages.roles-permissions.edit', compact('role'));
+    }
+
+    public function update(RolePermissionRequest $request, string $id)
+    {
+        $routeList = get_route_list();
+
+        if ($request->filled('permission')) {
+            foreach ($request->permission as $group => $actions) {
+                if (isset($routeList[$group])) {
+                    foreach ($routeList[$group] as $action => $_) {
+                        $routeList[$group][$action] = in_array($action, $actions);
+                    }
+                }
+            }
+        }
+
+        $role = Role::findOrFail($id);
+        $role->name = $request->name;
+        $role->slug = slugify($request->name);
+        $role->status = $request->status;
+        $role->permission = $routeList;
+        $role->save();
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Role updated successfully'),
+        ]);
+    }
+
+    public function destroy(string $id)
+    {
+        $role = Role::findOrFail($id);
+        if ($role->id == 1) {
+            return response()->json([
+                'status' => 403,
+                'message' => __('You cannot delete the super admin role'),
+            ]);
+        }
+
+        $role->delete();
+
+        return response()->json([
+            'status' => 200,
+            'message' => __('Role deleted successfully'),
+        ]);
+    }
 
     protected function data()
     {

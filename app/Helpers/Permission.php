@@ -5,51 +5,72 @@ use Illuminate\Support\Facades\Auth;
 
 function get_route_list()
 {
-    //get only 'permission' middleware routes
     $routes = Route::getRoutes()->getRoutes();
     $routes = array_filter($routes, function ($route) {
         return in_array('permission', $route->gatherMiddleware());
     });
 
-    //
     $routeList = [];
     foreach ($routes as $route) {
         $routeName = explode('.', $route->getName());
         if (isset($routeName[1])) {
-            $routeList[$routeName[0]][] = $routeName[1];
+            $group = $routeName[0];
+            $action = $routeName[1];
+            if ($action === 'store') {
+                $action = 'create';
+            } elseif ($action === 'update') {
+                $action = 'edit';
+            }
+            $routeList[$group][] = $action;
         }
     }
-    //remove duplicate routes
-    foreach ($routeList as $key => $value) {
-        $routeList[$key] = array_unique($value);
+    foreach ($routeList as $key => $actions) {
+        $routeList[$key] = array_unique($actions);
     }
-    // return response()->json($routeList);
-
-    //remove unnecessary routes
-    unset($routeList['login']);
-    unset($routeList['logout']);
-    unset($routeList['register']);
-    unset($routeList['password']);
-    unset($routeList['verification']);
-    unset($routeList['password']);
-    unset($routeList['user-profile-information']);
-    unset($routeList['user-password']);
-    unset($routeList['two-factor']);
-    unset($routeList['profile']);
-    unset($routeList['sanctum']);
-    unset($routeList['livewire']);
-    unset($routeList['ignition']);
-
-    //sort ascending
+    $excluded = [
+        'login',
+        'logout',
+        'register',
+        'password',
+        'verification',
+        'user-profile-information',
+        'user-password',
+        'two-factor',
+        'profile',
+        'sanctum',
+        'livewire',
+        'ignition'
+    ];
+    foreach ($excluded as $exclude) {
+        unset($routeList[$exclude]);
+    }
     ksort($routeList);
-
-
-    //set all routes to false
-    foreach ($routeList as $key => $value) {
-        $routeList[$key] = array_fill_keys($value, false);
+    foreach ($routeList as $key => $actions) {
+        $routeList[$key] = array_fill_keys($actions, false);
     }
 
     return $routeList;
+}
+
+function get_readable_action_name($action)
+{
+    $map = [
+        'index' => 'List',
+        'show' => 'Details',
+        'create' => 'Add',
+        'store' => 'Add',
+        'edit' => 'Edit',
+        'update' => 'Edit',
+        'destroy' => 'Delete',
+        'delete' => 'Delete',
+        'download' => 'Download',
+        'upload' => 'Upload',
+        'approve' => 'Approve',
+        'reject' => 'Reject',
+        'restore' => 'Restore',
+    ];
+
+    return $map[$action] ?? ucfirst(str_replace(['-', '_'], ' ', $action));
 }
 
 function check_permission($routeName)
@@ -59,39 +80,36 @@ function check_permission($routeName)
 
     $routeName = explode('.', $routeName);
     if (count($routeName) < 2) {
-        if ($routeName[0] == 'dashboard')
-            return true;
-        else
-            return false;
+        return $routeName[0] === 'dashboard';
     }
+
+    $group = $routeName[0];
+    $action = $routeName[1];
+
+    // Normalize action names just like in get_route_list()
+    if ($action === 'store') {
+        $action = 'create';
+    } elseif ($action === 'update') {
+        $action = 'edit';
+    }
+
     $authUserPermissions = Auth::user()->role->permission;
-    $authUserPermissions = json_decode($authUserPermissions, true);
-    if (isset($authUserPermissions[$routeName[0]][$routeName[1]])) {
-        if ($authUserPermissions[$routeName[0]][$routeName[1]] == true) {
-            return true;
-        } else {
-            return false;
-        }
-    } else {
-        return false;
-    }
+
+    return isset($authUserPermissions[$group][$action]) && $authUserPermissions[$group][$action] === true;
 }
+
 
 function main_menu_permission($menuName)
 {
-    if (Auth::user()->role->id == 1)
+    if (Auth::user()->role->id == 1) {
         return true;
+    }
 
-    $authUserPermissions = Auth::user()->role->permission;
-    $authUserPermissions = json_decode($authUserPermissions, true);
-    if (isset($authUserPermissions[$menuName])) {
-        foreach ($authUserPermissions[$menuName] as $key => $value) {
-            if ($value == true) {
-                return true;
-            }
-        }
-        return false;
-    } else {
+    $permissions = Auth::user()->role->permission;
+
+    if (!isset($permissions[$menuName])) {
         return false;
     }
+
+    return in_array(true, $permissions[$menuName], true);
 }
