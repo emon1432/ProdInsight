@@ -13,8 +13,8 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form id="validation-form" class="row g-6 ajax-validate-form"
-                        action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data">
+                    <form id="validation-form" class="row g-6" action="{{ route('users.update', $user->id) }}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
                         <div class="col-12">
@@ -41,9 +41,9 @@
                                 required />
                         </div>
                         <div class="col-md-6 form-control-validation">
-                            <label class="form-label" for="role">{{ __('Role') }}<span
+                            <label class="form-label" for="role_id">{{ __('Role') }}<span
                                     class="text-danger">*</span></label>
-                            <select class="form-select" name="role" id="role" required>
+                            <select class="form-select" name="role_id" id="role_id" required>
                                 <option value="">{{ __('Select Role') }}</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}"

@@ -30,7 +30,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|unique:users,phone',
-            'role' => 'required|exists:roles,id',
+            'role_id' => 'required|exists:roles,id',
             'address' => 'nullable|string|max:255',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -45,7 +45,7 @@ class UserController extends Controller
         $user->phone = $request->phone;
         $user->address = $request->address;
         $user->password = bcrypt($request->password);
-        $user->role_id = $request->role;
+        $user->role_id = $request->role_id;
         $user->image = $request->file('image') ? imageUploadManager($request->file('image'), slugify($request->name), 'users') : null;
         $user->save();
 
@@ -73,7 +73,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $id,
             'phone' => 'required|string|unique:users,phone,' . $id,
-            'role' => 'required|exists:roles,id',
+            'role_id' => 'required|exists:roles,id',
             'address' => 'nullable|string|max:255',
             'password' => 'nullable|string|min:8|confirmed',
         ]);
@@ -86,7 +86,7 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->address = $request->address;
-        $user->role_id = $request->role;
+        $user->role_id = $request->role_id;
         if ($request->file('image')) {
             $user->image = imageUpdateManager($request->file('image'), slugify($request->name), 'users', $user->image);
         }
