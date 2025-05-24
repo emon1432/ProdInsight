@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\View\Components\Actions;
@@ -24,21 +26,8 @@ class UserController extends Controller
         return view('pages.users.create', compact('roles'));
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email',
-            'phone' => 'required|string|unique:users,phone',
-            'role_id' => 'required|exists:roles,id',
-            'address' => 'nullable|string|max:255',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        if (!$validated) {
-            return redirect()->back()->withErrors($validated)->withInput();
-        }
-
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
@@ -67,20 +56,8 @@ class UserController extends Controller
         return view('pages.users.edit', compact('user', 'roles'));
     }
 
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $id,
-            'phone' => 'required|string|unique:users,phone,' . $id,
-            'role_id' => 'required|exists:roles,id',
-            'address' => 'nullable|string|max:255',
-            'password' => 'nullable|string|min:8|confirmed',
-        ]);
-        if (!$validated) {
-            return redirect()->back()->withErrors($validated)->withInput();
-        }
-
         $user = User::findOrFail($id);
         $user->name = $request->name;
         $user->email = $request->email;
