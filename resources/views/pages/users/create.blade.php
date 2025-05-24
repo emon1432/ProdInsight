@@ -13,7 +13,7 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form id="validation-form" class="row g-6 ajax-validate-form" action="{{ route('users.store') }}"
+                    <form id="validation-form" class="row g-6" action="{{ route('users.store') }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-12">
@@ -39,9 +39,9 @@
                                 placeholder="{{ __('Enter phone number') }}" required />
                         </div>
                         <div class="col-md-6 form-control-validation">
-                            <label class="form-label" for="password">{{ __('Role') }}<span
+                            <label class="form-label" for="role_id">{{ __('Role') }}<span
                                     class="text-danger">*</span></label>
-                            <select class="form-select" name="role" id="role" required>
+                            <select class="form-select" name="role_id" id="role_id" required>
                                 <option value="">{{ __('Select Role') }}</option>
                                 @foreach ($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
