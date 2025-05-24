@@ -16,6 +16,12 @@ class Permission
         }
         $routeName = $request->route()->getName();
         if (!check_permission($routeName)) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'status' => 403,
+                    'message' => __('You do not have permission to access this page'),
+                ]);
+            }
             notify()->error('You do not have permission to access this page');
             return redirect()->route('dashboard');
         }

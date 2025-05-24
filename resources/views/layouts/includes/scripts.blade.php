@@ -315,6 +315,13 @@
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        if (response.status !== 200) {
+                            iziToast.error({
+                                message: response.message || "Something went wrong",
+                                position: "topRight"
+                            });
+                            return;
+                        }
                         iziToast.success({
                             message: response.message ||
                                 "Form submitted successfully",
