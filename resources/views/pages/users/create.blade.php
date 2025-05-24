@@ -13,8 +13,8 @@
                     </a>
                 </div>
                 <div class="card-body">
-                    <form id="validation-form" class="row g-6" action="{{ route('users.store') }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form id="validation-form" class="row g-6" action="{{ route('users.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-12">
                             <h6>{{ __('User Information') }}</h6>
@@ -73,9 +73,11 @@
                             <label class="form-label" for="password">{{ __('Password') }}</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password"
-                                    placeholder="{{ __('Enter password') }}" name="password" required />
-                                <span class="input-group-text cursor-pointer"><i
-                                        class="icon-base ti tabler-eye-off"></i></span>
+                                    placeholder="{{ __('Enter password') }}" name="password" required
+                                    autocomplete="new-password" />
+                                <span class="input-group-text cursor-pointer">
+                                    <i class="icon-base ti tabler-eye-off"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-md-6 form-password-toggle form-control-validation">
@@ -83,9 +85,11 @@
                                     class="text-danger">*</span></label>
                             <div class="input-group">
                                 <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="form-control" placeholder="{{ __('Confirm password') }}" required />
-                                <span class="input-group-text cursor-pointer"><i
-                                        class="icon-base ti tabler-eye-off"></i></span>
+                                    class="form-control" placeholder="{{ __('Confirm password') }}" required
+                                    autocomplete="new-password" />
+                                <span class="input-group-text cursor-pointer">
+                                    <i class="icon-base ti tabler-eye-off"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-12 form-control-validation">

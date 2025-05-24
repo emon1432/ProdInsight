@@ -78,9 +78,10 @@
                             <label class="form-label" for="password">{{ __('Password') }}</label>
                             <div class="input-group">
                                 <input type="password" class="form-control" id="password"
-                                    placeholder="{{ __('Enter password') }}" name="password" />
-                                <span class="input-group-text cursor-pointer"><i
-                                        class="icon-base ti tabler-eye-off"></i></span>
+                                    placeholder="{{ __('Enter password') }}" name="password" autocomplete="new-password" />
+                                <span class="input-group-text cursor-pointer">
+                                    <i class="icon-base ti tabler-eye-off"></i>
+                                </span>
                             </div>
                             <small
                                 class="text-muted">{{ __('Leave blank if you don\'t want to change the password.') }}</small>
@@ -89,9 +90,11 @@
                             <label class="form-label" for="password_confirmation">{{ __('Confirm Password') }}</label>
                             <div class="input-group">
                                 <input type="password" name="password_confirmation" id="password_confirmation"
-                                    class="form-control" placeholder="{{ __('Confirm password') }}" />
-                                <span class="input-group-text cursor-pointer"><i
-                                        class="icon-base ti tabler-eye-off"></i></span>
+                                    class="form-control" placeholder="{{ __('Confirm password') }}"
+                                    autocomplete="new-password" />
+                                <span class="input-group-text cursor-pointer">
+                                    <i class="icon-base ti tabler-eye-off"></i>
+                                </span>
                             </div>
                         </div>
                         <div class="col-12 form-control-validation">
