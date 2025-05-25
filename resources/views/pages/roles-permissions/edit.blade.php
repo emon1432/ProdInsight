@@ -49,15 +49,18 @@
                                     <tbody>
                                         <tr>
                                             <td class="text-nowrap fw-medium">
-                                                Administrator Access
+                                                {{ __('Administrator Access') }}
                                                 <i class="icon-base ti tabler-info-circle icon-xs" data-bs-toggle="tooltip"
-                                                    data-bs-placement="top" title="Allows a full access to the system"></i>
+                                                    data-bs-placement="top"
+                                                    title="{{ __('Allows a full access to the system') }}"></i>
                                             </td>
                                             <td>
                                                 <div class="d-flex justify-content-end">
                                                     <div class="form-check mb-0">
                                                         <input class="form-check-input" type="checkbox" id="selectAll" />
-                                                        <label class="form-check-label" for="selectAll"> Select All </label>
+                                                        <label class="form-check-label" for="selectAll">
+                                                            {{ __('Select All') }}
+                                                        </label>
                                                     </div>
                                                 </div>
                                             </td>

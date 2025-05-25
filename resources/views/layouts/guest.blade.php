@@ -7,7 +7,7 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Demo: Login Cover - Pages | Vuexy - Bootstrap Dashboard PRO</title>
+    <title>{{ __('Demo: Login Cover - Pages | Vuexy - Bootstrap Dashboard PRO') }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/img/favicon/favicon.ico">
 
     <!-- Fonts -->
@@ -48,7 +48,7 @@
                     </svg>
                 </span>
             </span>
-            <span class="app-brand-text demo text-heading fw-bold">Vuexy</span>
+            <span class="app-brand-text demo text-heading fw-bold">{{ __('Vuexy') }}</span>
         </a>
         <div class="authentication-inner row m-0">
             @yield('content')

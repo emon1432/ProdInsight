@@ -55,22 +55,22 @@ function get_route_list()
 function get_readable_action_name($action)
 {
     $map = [
-        'index' => 'List',
-        'show' => 'Details',
-        'create' => 'Add',
-        'store' => 'Add',
-        'edit' => 'Edit',
-        'update' => 'Edit',
-        'destroy' => 'Delete',
-        'delete' => 'Delete',
-        'download' => 'Download',
-        'upload' => 'Upload',
-        'approve' => 'Approve',
-        'reject' => 'Reject',
-        'restore' => 'Restore',
+        'index' => __('List'),
+        'show' => __('Details'),
+        'create' => __('Add'),
+        'store' => __('Add'),
+        'edit' => __('Edit'),
+        'update' => __('Edit'),
+        'destroy' => __('Delete'),
+        'delete' => __('Delete'),
+        'download' => __('Download'),
+        'upload' => __('Upload'),
+        'approve' => __('Approve'),
+        'reject' => __('Reject'),
+        'restore' => __('Restore'),
     ];
 
-    return $map[$action] ?? ucfirst(str_replace(['-', '_'], ' ', $action));
+    return $map[$action] ?? __(ucfirst(str_replace(['-', '_'], ' ', $action)));
 }
 
 function check_permission($routeName)
