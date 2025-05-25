@@ -78,6 +78,8 @@
                 },
                 columns: JSON.parse(datatableElement.dataset.columns),
                 processing: true,
+                ordering: true,
+                order: JSON.parse(datatableElement.dataset.order || "[]"),
                 layout: {
                     topStart: {
                         rowClass: "row m-1 my-0 justify-content-center",

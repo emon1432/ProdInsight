@@ -8,7 +8,7 @@ use Illuminate\View\Component;
 
 class Permissions extends Component
 {
-    public $routeList;
+    public array $routeList;
     public function __construct($routeList = [])
     {
         $this->routeList = $routeList;

@@ -94,6 +94,8 @@
                         </div>
                         <div class="col-12 form-control-validation">
                             <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                            <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+                            <a href="{{ route('users.create') }}" class="btn btn-danger">{{ __('Reset') }}</a>
                         </div>
                     </form>
                 </div>
