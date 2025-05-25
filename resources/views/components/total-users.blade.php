@@ -2,7 +2,7 @@
     @if ($users->isEmpty())
         <li class="avatar pull-up">
             <span class="avatar-initial rounded-circle pull-up" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                title="{{ __('No users found') }}">N/A</span>
+                title="{{ __('No users found') }}">{{ __('N/A') }}</span>
         </li>
     @else
         @foreach ($users as $user)
@@ -14,7 +14,7 @@
         @if ($moreCount > 0)
             <li class="avatar">
                 <span class="avatar-initial rounded-circle pull-up" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                    title="{{ $moreCount }} more">+{{ $moreCount }}</span>
+                    title="{{ $moreCount }} {{ __('more') }}">+{{ $moreCount }}</span>
             </li>
         @endif
     @endif

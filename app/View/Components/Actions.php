@@ -16,7 +16,6 @@ class Actions extends Component
         $this->actions = $actions;
     }
 
-
     public function render(): View|Closure|string
     {
         return view('components.actions', [

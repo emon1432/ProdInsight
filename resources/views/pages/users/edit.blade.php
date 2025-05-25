@@ -5,12 +5,14 @@
             <div class="card">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <h5 class="card-title mb-0">{{ __('Update User') }}</h5>
-                    <a class="btn add-new btn-primary" href="{{ route('users.index') }}">
-                        <span class="d-flex align-items-center gap-2 text-white">
-                            <i class="icon-base ti tabler-arrow-back-up icon-xs"></i>
-                            {{ __('Back to User List') }}
-                        </span>
-                    </a>
+                    @if (check_permission('users.index'))
+                        <a class="btn add-new btn-primary" href="{{ route('users.index') }}">
+                            <span class="d-flex align-items-center gap-2 text-white">
+                                <i class="icon-base ti tabler-arrow-back-up icon-xs"></i>
+                                {{ __('Back to User List') }}
+                            </span>
+                        </a>
+                    @endif
                 </div>
                 <div class="card-body">
                     <form id="validation-form" class="row g-6" action="{{ route('users.update', $user->id) }}"
@@ -98,11 +100,17 @@
                             </div>
                         </div>
                         <div class="col-12 form-control-validation">
-                            <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-                            <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
-                            <a href="{{ route('users.edit', $user->id) }}" class="btn btn-danger">
-                                {{ __('Reset') }}
-                            </a>
+                            @if (check_permission('users.edit'))
+                                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
+                            @endif
+                            @if (check_permission('users.index'))
+                                <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
+                            @endif
+                            @if (check_permission('users.edit'))
+                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-danger">
+                                    {{ __('Reset') }}
+                                </a>
+                            @endif
                         </div>
                     </form>
                 </div>

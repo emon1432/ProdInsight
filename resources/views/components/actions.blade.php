@@ -11,10 +11,12 @@
                     $customButtons = $actions['buttons']['custom'];
                 @endphp
                 @foreach ($customButtons as $button => $details)
-                    <a href="{{ $details['route'] }}" class="dropdown-item d-flex align-items-center">
-                        <i class="icon-base ti tabler-{{ $details['icon'] }} me-2"></i>
-                        {{ $button }}
-                    </a>
+                    @if (check_permission($details['route']))
+                        <a href="{{ $details['route'] }}" class="dropdown-item d-flex align-items-center">
+                            <i class="icon-base ti tabler-{{ $details['icon'] }} me-2"></i>
+                            {{ $button }}
+                        </a>
+                    @endif
                 @endforeach
             @endisset
             @isset($actions['buttons']['basic'])
@@ -23,19 +25,19 @@
                     $resource = $actions['resource'];
                     $model = $actions['model'];
                 @endphp
-                @if ($buttons['view'])
+                @if ($buttons['view'] && check_permission($resource . '.show'))
                     <a href="{{ route($resource . '.show', $model->id) }}" class="dropdown-item d-flex align-items-center">
                         <i class="icon-base ti tabler-eye me-2"></i>
                         {{ __('View') }}
                     </a>
                 @endif
-                @if ($buttons['edit'])
+                @if ($buttons['edit'] && check_permission($resource . '.edit'))
                     <a href="{{ route($resource . '.edit', $model->id) }}" class="dropdown-item d-flex align-items-center">
                         <i class="icon-base ti tabler-edit me-2"></i>
                         {{ __('Edit') }}
                     </a>
                 @endif
-                @if ($buttons['delete'])
+                @if ($buttons['delete'] && check_permission($resource . '.destroy'))
                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center delete-record">
                         <i class="icon-base ti tabler-trash me-2"></i>
                         <form action="{{ route($resource . '.destroy', $model->id) }}" method="DELETE" class="d-none">

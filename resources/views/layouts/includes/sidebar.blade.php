@@ -39,24 +39,30 @@
         <li class="menu-header small">
             <span class="menu-header-text">{{ __('System') }}</span>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon icon-base ti tabler-users"></i>
-                <div>{{ __('User Management') }}</div>
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('users.index') }}" class="menu-link">
-                        <div>{{ __('User List') }}</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('roles-permissions.index') }}" class="menu-link">
-                        <div>{{ __('Roles & Permissions') }}</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if (main_menu_permission('users') || main_menu_permission('roles-permissions'))
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon icon-base ti tabler-users"></i>
+                    <div>{{ __('User Management') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    @if (check_permission('users.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('users.index') }}" class="menu-link">
+                                <div>{{ __('User List') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (check_permission('roles-permissions.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('roles-permissions.index') }}" class="menu-link">
+                                <div>{{ __('Roles & Permissions') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
     </ul>
 </aside>
 <div class="menu-mobile-toggler d-xl-none rounded-1">
