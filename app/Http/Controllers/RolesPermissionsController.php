@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RolePermissionRequest;
 use App\Models\Role;
 use App\View\Components\Actions;
+use App\View\Components\PermissionsViewModal;
+use App\View\Components\StatusBadge;
 use App\View\Components\TotalUsers;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
@@ -128,20 +130,25 @@ class RolesPermissionsController extends Controller
     {
         $roles = Role::with('users')->get()->map(function ($role) {
             $role->total_users = (new TotalUsers($role))->render()->render();
-            $role->actions = (new Actions([
-                'model' => $role,
-                'resource' => 'roles-permissions',
-                'buttons' => [
+            $role->permission_view = (new PermissionsViewModal($role))->render()->render();
+            $role->status = (new StatusBadge($role->status))->render()->render();
+            $buttons = [];
+            if ($role->id != 1) {
+                $buttons = [
                     'basic' => [
                         'view' => false,
                         'edit' => true,
                         'delete' => true,
                     ],
-                ],
+                ];
+            }
+            $role->actions = (new Actions([
+                'model' => $role,
+                'resource' => 'roles-permissions',
+                'buttons' => $buttons,
             ]))->render()->render();
             return $role;
         });
-
         return $roles;
     }
 }

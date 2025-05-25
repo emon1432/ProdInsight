@@ -15,12 +15,18 @@
                 data-columns='[
                 { "data": "name" },
                 { "data": "total_users" },
+                 @if (check_permission('roles-permissions.show')) { "data": "permission_view" }, @endif
+                { "data": "status" },
                 { "data": "actions"}
                 ]'>
                 <thead class="border-top">
                     <tr>
                         <th>{{ __('Role') }}</th>
                         <th>{{ __('Total Users') }}</th>
+                        @if (check_permission('roles-permissions.show'))
+                            <th>{{ __('Permissions') }}</th>
+                        @endif
+                        <th>{{ __('Status') }}</th>
                         <th>{{ __('Action') }}</th>
                     </tr>
                 </thead>
