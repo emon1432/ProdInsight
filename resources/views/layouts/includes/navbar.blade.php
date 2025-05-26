@@ -96,7 +96,7 @@
                             <h6 class="mb-0 me-auto">{{ __('Shortcuts') }}</h6>
                             <a href="javascript:void(0)"
                                 class="dropdown-shortcuts-add py-2 btn btn-text-secondary rounded-pill btn-icon"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Add shortcuts"><i
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Add shortcuts') }}"><i
                                     class="icon-base ti tabler-plus icon-20px text-heading"></i></a>
                         </div>
                     </div>
@@ -106,16 +106,15 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-calendar icon-26px text-heading"></i>
                                 </span>
-                                <a href="app-calendar.html" class="stretched-link">Calendar</a>
-                                <small>Appointments</small>
+                                <a href="app-calendar.html" class="stretched-link">{{ __('Calendar') }}</a>
+                                <small>{{ __('Appointments') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-file-dollar icon-26px text-heading"></i>
                                 </span>
-                                <a href="app-invoice-list.html" class="stretched-link">Invoice
-                                    App</a>
-                                <small>Manage Accounts</small>
+                                <a href="app-invoice-list.html" class="stretched-link">{{ __('Invoice App') }}</a>
+                                <small>{{ __('Manage Accounts') }}</small>
                             </div>
                         </div>
                         <div class="row row-bordered overflow-visible g-0">
@@ -123,16 +122,15 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-user icon-26px text-heading"></i>
                                 </span>
-                                <a href="app-user-list.html" class="stretched-link">User App</a>
-                                <small>Manage Users</small>
+                                <a href="app-user-list.html" class="stretched-link">{{ __('User App') }}</a>
+                                <small>{{ __('Manage Users') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-users icon-26px text-heading"></i>
                                 </span>
-                                <a href="app-access-roles.html" class="stretched-link">Role
-                                    Management</a>
-                                <small>Permission</small>
+                                <a href="app-access-roles.html" class="stretched-link">{{ __('Role Management') }}</a>
+                                <small>{{ __('Permission') }}</small>
                             </div>
                         </div>
                         <div class="row row-bordered overflow-visible g-0">
@@ -140,15 +138,15 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-device-desktop-analytics icon-26px text-heading"></i>
                                 </span>
-                                <a href="{{ route('dashboard') }}" class="stretched-link">Dashboard</a>
-                                <small>User Dashboard</small>
+                                <a href="{{ route('dashboard') }}" class="stretched-link">{{ __('Dashboard') }}</a>
+                                <small>{{ __('User Dashboard') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-settings icon-26px text-heading"></i>
                                 </span>
-                                <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
-                                <small>Account Settings</small>
+                                <a href="pages-account-settings-account.html" class="stretched-link">{{ __('Setting') }}</a>
+                                <small>{{ __('Account Settings') }}</small>
                             </div>
                         </div>
                         <div class="row row-bordered overflow-visible g-0">
@@ -156,15 +154,15 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-help-circle icon-26px text-heading"></i>
                                 </span>
-                                <a href="pages-faq.html" class="stretched-link">FAQs</a>
-                                <small>FAQs & Articles</small>
+                                <a href="pages-faq.html" class="stretched-link">{{ __('FAQs') }}</a>
+                                <small>{{ __('FAQs & Articles') }}</small>
                             </div>
                             <div class="dropdown-shortcuts-item col">
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-square icon-26px text-heading"></i>
                                 </span>
-                                <a href="modal-examples.html" class="stretched-link">Modals</a>
-                                <small>Useful Popups</small>
+                                <a href="modal-examples.html" class="stretched-link">{{ __('Modals') }}</a>
+                                <small>{{ __('Useful Popups') }}</small>
                             </div>
                         </div>
                     </div>
@@ -185,11 +183,11 @@
                 <ul class="dropdown-menu dropdown-menu-end p-0">
                     <li class="dropdown-menu-header border-bottom">
                         <div class="dropdown-header d-flex align-items-center py-3">
-                            <h6 class="mb-0 me-auto">Notification</h6>
+                            <h6 class="mb-0 me-auto">{{ __('Notification') }}</h6>
                             <div class="d-flex align-items-center h6 mb-0">
-                                <span class="badge bg-label-primary me-2">8 New</span>
+                                <span class="badge bg-label-primary me-2">{{ __('8 New') }}</span>
                                 <a href="javascript:void(0)" class="dropdown-notifications-all p-2 btn btn-icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Mark all as read"><i
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Mark all as read') }}"><i
                                         class="icon-base ti tabler-mail-opened text-heading"></i></a>
                             </div>
                         </div>
@@ -205,10 +203,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="small mb-1">Congratulation Lettie 🎉</h6>
-                                        <small class="mb-1 d-block text-body">Won the monthly best
-                                            seller gold badge</small>
-                                        <small class="text-body-secondary">1h ago</small>
+                                        <h6 class="small mb-1">{{ __('Congratulation Lettie 🎉') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('Won the monthly best seller gold badge') }}</small>
+                                        <small class="text-body-secondary">{{ __('1h ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -226,10 +223,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">Charles Franklin</h6>
-                                        <small class="mb-1 d-block text-body">Accepted your
-                                            connection</small>
-                                        <small class="text-body-secondary">12hr ago</small>
+                                        <h6 class="mb-1 small">{{ __('Charles Franklin') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('Accepted your connection') }}</small>
+                                        <small class="text-body-secondary">{{ __('12hr ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -249,10 +245,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">New Message ✉️</h6>
-                                        <small class="mb-1 d-block text-body">You have new message
-                                            from Natalie</small>
-                                        <small class="text-body-secondary">1h ago</small>
+                                        <h6 class="mb-1 small">{{ __('New Message ✉️') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('You have new message from Natalie') }}</small>
+                                        <small class="text-body-secondary">{{ __('1h ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -271,10 +266,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">Whoo! You have new order 🛒</h6>
-                                        <small class="mb-1 d-block text-body">ACME Inc. made new order
-                                            $1,154</small>
-                                        <small class="text-body-secondary">1 day ago</small>
+                                        <h6 class="mb-1 small">{{ __('Whoo! You have new order 🛒') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('ACME Inc. made new order $1,154') }}</small>
+                                        <small class="text-body-secondary">{{ __('1 day ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -294,10 +288,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">Application has been approved 🚀</h6>
-                                        <small class="mb-1 d-block text-body">Your ABC project
-                                            application has been approved.</small>
-                                        <small class="text-body-secondary">2 days ago</small>
+                                        <h6 class="mb-1 small">{{ __('Application has been approved 🚀') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('Your ABC project application has been approved.') }}</small>
+                                        <small class="text-body-secondary">{{ __('2 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -317,10 +310,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">Monthly report is generated</h6>
-                                        <small class="mb-1 d-block text-body">July monthly financial
-                                            report is generated </small>
-                                        <small class="text-body-secondary">3 days ago</small>
+                                        <h6 class="mb-1 small">{{ __('Monthly report is generated') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('July monthly financial report is generated') }}</small>
+                                        <small class="text-body-secondary">{{ __('3 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -340,10 +332,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">Send connection request</h6>
-                                        <small class="mb-1 d-block text-body">Peter sent you
-                                            connection request</small>
-                                        <small class="text-body-secondary">4 days ago</small>
+                                        <h6 class="mb-1 small">{{ __('Send connection request') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('Peter sent you connection request') }}</small>
+                                        <small class="text-body-secondary">{{ __('4 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -362,10 +353,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">New message from Jane</h6>
-                                        <small class="mb-1 d-block text-body">Your have new message
-                                            from Jane</small>
-                                        <small class="text-body-secondary">5 days ago</small>
+                                        <h6 class="mb-1 small">{{ __('New message from Jane') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('Your have new message from Jane') }}</small>
+                                        <small class="text-body-secondary">{{ __('5 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -385,10 +375,9 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <h6 class="mb-1 small">CPU is running high</h6>
-                                        <small class="mb-1 d-block text-body">CPU Utilization Percent
-                                            is currently at 88.63%,</small>
-                                        <small class="text-body-secondary">5 days ago</small>
+                                        <h6 class="mb-1 small">{{ __('CPU is running high') }}</h6>
+                                        <small class="mb-1 d-block text-body">{{ __('CPU Utilization Percent is currently at 88.63%,') }}</small>
+                                        <small class="text-body-secondary">{{ __('5 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
                                         <a href="javascript:void(0)" class="dropdown-notifications-read"><span
@@ -403,7 +392,7 @@
                     <li class="border-top">
                         <div class="d-grid p-4">
                             <a class="btn btn-primary btn-sm d-flex" href="javascript:void(0);">
-                                <small class="align-middle">View all notifications</small>
+                                <small class="align-middle">{{ __('View all notifications') }}</small>
                             </a>
                         </div>
                     </li>
@@ -430,8 +419,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">John Doe</h6>
-                                    <small class="text-body-secondary">Admin</small>
+                                    <h6 class="mb-0">{{ __('John Doe') }}</h6>
+                                    <small class="text-body-secondary">{{ __('Admin') }}</small>
                                 </div>
                             </div>
                         </a>
@@ -441,19 +430,18 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-profile-user.html"> <i
-                                class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">My
-                                Profile</span> </a>
+                                class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">{{ __('My Profile') }}</span> </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-account-settings-account.html"> <i
                                 class="icon-base ti tabler-settings me-3 icon-md"></i><span
-                                class="align-middle">Settings</span> </a>
+                                class="align-middle">{{ __('Settings') }}</span> </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-account-settings-billing.html">
                             <span class="d-flex align-items-center align-middle">
                                 <i class="flex-shrink-0 icon-base ti tabler-file-dollar me-3 icon-md"></i><span
-                                    class="flex-grow-1 align-middle">Billing</span>
+                                    class="flex-grow-1 align-middle">{{ __('Billing') }}</span>
                                 <span
                                     class="flex-shrink-0 badge bg-danger d-flex align-items-center justify-content-center">4</span>
                             </span>
@@ -465,12 +453,12 @@
                     <li>
                         <a class="dropdown-item" href="pages-pricing.html"> <i
                                 class="icon-base ti tabler-currency-dollar me-3 icon-md"></i><span
-                                class="align-middle">Pricing</span> </a>
+                                class="align-middle">{{ __('Pricing') }}</span> </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-faq.html"> <i
                                 class="icon-base ti tabler-question-mark me-3 icon-md"></i><span
-                                class="align-middle">FAQ</span> </a>
+                                class="align-middle">{{ __('FAQ') }}</span> </a>
                     </li>
                     <li>
                         <div class="d-grid px-2 pt-2 pb-1">

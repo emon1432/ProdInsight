@@ -4,7 +4,11 @@
             @if (strlen($initials) > 2)
                 <img src="{{ $initials }}" alt="{{ $user->name }}" class="rounded-circle">
             @else
-                <span class="avatar-initial rounded-circle bg-label-success">{{ $initials }}</span>
+                @php
+                    $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                @endphp
+                <span
+                    class="avatar-initial rounded-circle bg-label-{{ $colors[array_rand($colors)] }}">{{ $initials }}</span>
             @endif
         </div>
     </div>
