@@ -25,11 +25,13 @@ class SettingController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => __('Setting updated successfully'),
+                'redirect' => null,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 500,
                 'message' => __('An error occurred while updating the setting: ') . $e->getMessage(),
+                'redirect' => null,
             ]);
         }
     }

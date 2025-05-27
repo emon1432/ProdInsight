@@ -28,11 +28,13 @@ class OthersController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => __('Test email sent successfully to ') . $request->test_email,
+                'redirect' => null,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 500,
                 'message' => __('Failed to send test email: ') . $e->getMessage(),
+                'redirect' => null,
             ]);
         }
     }

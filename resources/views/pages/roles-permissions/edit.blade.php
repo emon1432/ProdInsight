@@ -15,7 +15,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form id="validation-form" class="row g-6" action="{{ route('roles-permissions.update', $role->id) }}"
+                    <form class="row g-6 common-form" action="{{ route('roles-permissions.update', $role->id) }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

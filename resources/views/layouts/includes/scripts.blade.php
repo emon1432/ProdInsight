@@ -331,8 +331,11 @@
                                 "Form submitted successfully",
                             position: "topRight"
                         });
-                        window.location.href = document.referrer || window.location
-                            .href;
+                        if (response.redirect) {
+                            setTimeout(() => {
+                                window.location.href = response.redirect;
+                            }, 1000);
+                        }
                     },
                     error: function(xhr) {
                         iziToast.error({
@@ -439,4 +442,3 @@
         });
     });
 </script>
-
