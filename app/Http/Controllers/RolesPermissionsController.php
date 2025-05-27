@@ -51,6 +51,7 @@ class RolesPermissionsController extends Controller
         return response()->json([
             'status' => 200,
             'message' => __('Role created successfully'),
+            'redirect' => route('roles-permissions.index'),
         ]);
     }
 
@@ -105,6 +106,7 @@ class RolesPermissionsController extends Controller
         return response()->json([
             'status' => 200,
             'message' => __('Role updated successfully'),
+            'redirect' => route('roles-permissions.index'),
         ]);
     }
 
@@ -115,6 +117,7 @@ class RolesPermissionsController extends Controller
             return response()->json([
                 'status' => 403,
                 'message' => __('You cannot delete the super admin role'),
+                'redirect' => route('roles-permissions.index'),
             ]);
         }
 
@@ -123,6 +126,7 @@ class RolesPermissionsController extends Controller
         return response()->json([
             'status' => 200,
             'message' => __('Role deleted successfully'),
+            'redirect' => route('roles-permissions.index'),
         ]);
     }
 

@@ -15,7 +15,7 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form id="validation-form" class="row g-6" action="{{ route('roles-permissions.store') }}"
+                    <form class="row g-6 common-form" action="{{ route('roles-permissions.store') }}"
                         method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-12">

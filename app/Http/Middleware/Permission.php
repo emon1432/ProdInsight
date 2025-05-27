@@ -20,6 +20,7 @@ class Permission
                 return response()->json([
                     'status' => 403,
                     'message' => __('You do not have permission to access this page'),
+                    'redirect' => route('dashboard'),
                 ]);
             }
             notify()->error('You do not have permission to access this page');

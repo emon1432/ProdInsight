@@ -41,6 +41,7 @@ class UserController extends Controller
         return response()->json([
             'status' => 200,
             'message' => __('User created successfully'),
+            'redirect' => route('users.index'),
         ]);
     }
 
@@ -75,6 +76,7 @@ class UserController extends Controller
         return response()->json([
             'status' => 200,
             'message' => __('User updated successfully'),
+            'redirect' => route('users.index'),
         ]);
     }
 
@@ -88,11 +90,13 @@ class UserController extends Controller
             return response()->json([
                 'status' => 200,
                 'message' => __('User deleted successfully'),
+                'redirect' => route('users.index'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 500,
-                'message' => 'Error deleting user: ' . $e->getMessage()
+                'message' => 'Error deleting user: ' . $e->getMessage(),
+                'redirect' => null,
             ])->setStatusCode(500);
         }
     }
