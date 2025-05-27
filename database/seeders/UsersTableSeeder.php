@@ -31,9 +31,11 @@ class UsersTableSeeder extends Seeder
                 'two_factor_recovery_codes' => NULL,
                 'two_factor_confirmed_at' => NULL,
                 'image' => NULL,
+                'address' => NULL,
                 'remember_token' => 'Sj8nXaG35X',
                 'email_verified_at' => '2025-04-19 05:17:43',
                 'current_team_id' => NULL,
+                'deleted_at' => NULL,
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-04-19 05:17:43',
             ),
@@ -49,14 +51,16 @@ class UsersTableSeeder extends Seeder
                 'two_factor_recovery_codes' => NULL,
                 'two_factor_confirmed_at' => NULL,
                 'image' => NULL,
+                'address' => NULL,
                 'remember_token' => 'Sj8nXaG35X',
                 'email_verified_at' => '2025-04-19 05:17:43',
                 'current_team_id' => NULL,
+                'deleted_at' => NULL,
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-04-19 05:17:43',
             ),
         ));
-        
+
         
     }
 }

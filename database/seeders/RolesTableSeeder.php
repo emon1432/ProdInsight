@@ -26,11 +26,12 @@ class RolesTableSeeder extends Seeder
                 'slug' => 'super-admin',
                 'status' => 'Active',
                 'permission' => NULL,
+                'deleted_at' => NULL,
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-04-19 05:17:43',
             ),
         ));
-        
+
         
     }
 }
