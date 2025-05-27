@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OthersController;
 use App\Http\Controllers\RolesPermissionsController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 
     Route::resource('users', UserController::class);
     Route::resource('roles-permissions', RolesPermissionsController::class);
+    Route::resource('settings', SettingController::class)->only('index', 'update');
 });
 
 Route::controller(OthersController::class)->group(function () {

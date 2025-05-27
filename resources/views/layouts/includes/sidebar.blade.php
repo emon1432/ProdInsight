@@ -63,6 +63,14 @@
                 </ul>
             </li>
         @endif
+        @if (check_permission('settings.index'))
+            <li class="menu-item">
+                <a href="{{ route('settings.index') }}" class="menu-link">
+                    <i class="menu-icon icon-base ti tabler-settings"></i>
+                    <div>{{ __('Settings') }}</div>
+                </a>
+            </li>
+        @endif
     </ul>
 </aside>
 <div class="menu-mobile-toggler d-xl-none rounded-1">
