@@ -230,10 +230,10 @@
             });
         }
 
-        // Form Validation
-        const form = document.querySelector("#validation-form");
-        if (form) {
+        // Form Validation // .common-form
+        document.querySelectorAll(".common-form").forEach(form => {
             const validationFields = {};
+
             form.querySelectorAll("[name]").forEach(input => {
                 const name = input.name;
                 const type = input.type;
@@ -262,13 +262,13 @@
                 if (type === "tel") {
                     validators.regexp = {
                         regexp: /^[0-9+\-\s()]*$/,
-                        message: "Please enter a valid phone number",
+                        message: "Please enter a valid phone number"
                     };
                 }
                 if (type === "password") {
                     validators.stringLength = {
                         min: 6,
-                        message: "Password must be at least 6 characters long",
+                        message: "Password must be at least 6 characters long"
                     };
                 }
 
@@ -294,22 +294,23 @@
                     instance.on("plugins.message.placed", function(e) {
                         const parent = e.element.parentElement;
                         if (parent.classList.contains("input-group")) {
-                            parent.insertAdjacentElement("afterend", e.messageElement);
+                            parent.insertAdjacentElement("afterend", e
+                                .messageElement);
                         } else if (parent.parentElement.classList.contains(
                                 "custom-option")) {
-                            e.element.closest(".row").insertAdjacentElement("afterend", e
-                                .messageElement);
+                            e.element.closest(".row").insertAdjacentElement(
+                                "afterend", e.messageElement);
                         }
                     });
                 }
             });
 
-            // Submit handler
             formValidation.on("core.form.valid", function() {
                 const submitBtn = $(form).find("button[type=submit]");
                 const formData = new FormData(form);
 
                 submitBtn.prop("disabled", true).text("Submitting...");
+
                 $.ajax({
                     url: form.action,
                     method: form.method,
@@ -319,7 +320,8 @@
                     success: function(response) {
                         if (response.status !== 200) {
                             iziToast.error({
-                                message: response.message || "Something went wrong",
+                                message: response.message ||
+                                    "Something went wrong",
                                 position: "topRight"
                             });
                             return;
@@ -329,7 +331,8 @@
                                 "Form submitted successfully",
                             position: "topRight"
                         });
-                        window.location.href = document.referrer || window.location.href;
+                        window.location.href = document.referrer || window.location
+                            .href;
                     },
                     error: function(xhr) {
                         iziToast.error({
@@ -344,9 +347,10 @@
                 });
             });
 
-            // Prevent default form submission
-            $('#validation-form').on('submit', e => e.preventDefault());
-        }
+            // Prevent default submission for this specific form
+            form.addEventListener('submit', e => e.preventDefault());
+        });
+
 
         // Delete Record Confirmation
         $(document).on("click", ".delete-record", function(e) {
@@ -435,3 +439,4 @@
         });
     });
 </script>
+
