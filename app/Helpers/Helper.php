@@ -1,45 +1,40 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Cache;
 
-function slugify($text)
-{
-    // replace non letter or digits by -
-    $text = preg_replace('~[^\pL\d]+~u', '-', $text);
-
-    // transliterate
-    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
-
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
-
-    // trim
-    $text = trim($text, '-');
-
-    // remove duplicate -
-    $text = preg_replace('~-+~', '-', $text);
-
-    // lowercase
-    $text = strtolower($text);
-
-    if (empty($text)) {
-        return 'n-a';
+if (!function_exists('slugify')) {
+    function slugify(string $text): string
+    {
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+        $transliterated = iconv('utf-8', 'us-ascii//TRANSLIT//IGNORE', $text);
+        if ($transliterated !== false) {
+            $text = $transliterated;
+        }
+        $text = preg_replace('~[^-\w]+~', '', $text);
+        $text = trim($text, '-');
+        $text = preg_replace('~-+~', '-', $text);
+        $text = mb_strtolower($text);
+        if (empty($text)) {
+            return 'n-a';
+        }
+        return $text;
     }
-
-    return $text;
 }
 
-function setting()
-{
-    if (Schema::hasTable('settings') && DB::table('settings')->exists()) {
-        return DB::table('settings')->first();
-    }
+if (!function_exists('settings')) {
+    function settings(string $key, string $field = null, $default = null)
+    {
+        $setting = Cache::remember("settings.{$key}", 60, function () use ($key) {
+            return DB::table('settings')->where('key', $key)->value('value');
+        });
 
-    return (object) [
-        'favicon' => null,
-        'title' => 'Laravel',
-        'logo' => null,
-        'name' => 'Laravel',
-    ];
+        $decoded = json_decode($setting, true);
+
+        if ($field) {
+            return $decoded[$field] ?? $default;
+        }
+
+        return $decoded ?? $default;
+    }
 }
