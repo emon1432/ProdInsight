@@ -15,6 +15,10 @@ class MailConfigServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        if ($this->app->runningInConsole()) {
+            return;
+        }
+
         $mailSettings = DB::table('settings')->where('key', 'mail_settings')->value('value');
 
         if ($mailSettings) {
