@@ -34,26 +34,34 @@
 
             <div class="col-md-12 form-control-validation">
                 <label class="form-label" for="address">{{ __('Address') }}</label>
-                <textarea class="form-control" placeholder="{{ __('Enter address') }}" name="address" id="address" rows="3">{{ old('address', $values['address'] ?? '') }}</textarea>
+                <textarea class="form-control" placeholder="{{ __('Enter address') }}" name="address" id="address" rows="2">{{ old('address', $values['address'] ?? '') }}</textarea>
             </div>
 
-            <div class="col-md-12 form-control-validation">
-                <label class="form-label" for="company_logo">{{ __('Company Logo') }}</label>
-                <input type="file" class="form-control" name="company_logo" id="company_logo" accept="image/*" />
-                @if (!empty($values['company_logo']))
-                    <img src="{{ asset($values['company_logo']) }}" alt="Company Logo" class="mt-2"
-                        style="max-height: 80px;">
-                @endif
+            <div class="col-md-5 form-control-validation align-self-center">
+                <label class="form-label" for="logo">{{ __('Logo') }}</label>
+                <input type="file" name="logo" id="logo" class="form-control" accept="image/*"
+                    onchange="document.getElementById('logo_preview').src = window.URL.createObjectURL(this.files[0])" />
+            </div>
+            <div class="col-md-1 form-control-validation">
+                <label class="form-label" for="logo_preview">{{ __('Logo Preview') }}</label>
+                <div class="image-preview">
+                    <img id="logo_preview" src="{{ imageShow($values['logo'] ?? null) }}" class="img-fluid rounded"
+                        alt="{{ __('Logo Preview') }}" />
+                </div>
             </div>
 
-            <div class="col-md-12 form-control-validation">
-                <label class="form-label" for="company_favicon">{{ __('Company Favicon') }}</label>
-                <input type="file" class="form-control" name="company_favicon" id="company_favicon"
-                    accept="image/x-icon,image/png" />
-                @if (!empty($values['company_favicon']))
-                    <img src="{{ asset($values['company_favicon']) }}" alt="Company Favicon" class="mt-2"
-                        style="max-height: 32px;">
-                @endif
+            <div class="col-md-5 form-control-validation align-self-center">
+                <label class="form-label" for="favicon">{{ __('Favicon') }}</label>
+                <input type="file" name="favicon" id="favicon" class="form-control"
+                    placeholder="{{ __('Upload favicon') }}" accept="image/x-icon,image/png"
+                    onchange="document.getElementById('favicon_preview').src = window.URL.createObjectURL(this.files[0])" />
+            </div>
+            <div class="col-md-1 form-control-validation">
+                <label class="form-label" for="favicon_preview">{{ __('Favicon Preview') }}</label>
+                <div class="image-preview">
+                    <img id="favicon_preview" src="{{ imageShow($values['favicon'] ?? null) }}"
+                        class="img-fluid rounded" alt="{{ __('Favicon Preview') }}" />
+                </div>
             </div>
 
             <div class="col-12 form-control-validation d-flex justify-content-end gap-2">
