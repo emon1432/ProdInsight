@@ -22,6 +22,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
 });
 
 Route::controller(OthersController::class)->group(function () {
+    Route::post('/test-mail', 'testMail')->name('test.mail');
     Route::get('/migrate', 'migrate')->name('migration');
     Route::get('/clear', 'clear')->name('clear');
     Route::get('/composer', 'composer')->name('composer');
