@@ -7,8 +7,8 @@
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <meta name="robots" content="noindex">
-    <title>Demo: Dashboard - Analytics | Vuexy - Bootstrap Dashboard PRO</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('assets') }}/img/favicon/favicon.ico">
+    <title>@yield('title', settings('business_settings', 'company_name'))</title>
+    <link rel="icon" type="image/x-icon" href="{{ imageShow(settings('business_settings', 'favicon')) }}">
     <link
         href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&ampdisplay=swap"
         rel="stylesheet">

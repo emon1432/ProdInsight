@@ -53,7 +53,7 @@
             <div class="col-md-5 form-control-validation align-self-center">
                 <label class="form-label" for="favicon">{{ __('Favicon') }}</label>
                 <input type="file" name="favicon" id="favicon" class="form-control"
-                    placeholder="{{ __('Upload favicon') }}" accept="image/x-icon,image/png"
+                    placeholder="{{ __('Upload favicon') }}" accept="image/*"
                     onchange="document.getElementById('favicon_preview').src = window.URL.createObjectURL(this.files[0])" />
             </div>
             <div class="col-md-1 form-control-validation">
