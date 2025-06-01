@@ -1,4 +1,5 @@
 @extends('layouts.guest')
+@section('title', __('Login'))
 @section('content')
     <div class="d-none d-xl-flex col-xl-8 p-0">
         <div class="auth-cover-bg d-flex justify-content-center align-items-center">
@@ -12,7 +13,7 @@
     </div>
     <div class="d-flex col-12 col-xl-4 align-items-center authentication-bg p-sm-12 p-6">
         <div class="w-px-400 mx-auto mt-12 pt-5">
-            <h4 class="mb-1">{{ __('Welcome to Vuexy! 👋') }}</h4>
+            <h4 class="mb-1">{{ __('Welcome to ') . settings('business_settings', 'company_name') . '! 👋' }}</h4>
             <p class="mb-6">{{ __('Please sign-in to your account and start the adventure') }}</p>
 
             <form id="formAuthentication" class="mb-6 fv-plugins-bootstrap5 fv-plugins-framework"

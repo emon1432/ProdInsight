@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', __('Update Role & Permissions'))
 @section('content')
     <div class="row">
         <div class="col-12">

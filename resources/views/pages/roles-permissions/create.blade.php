@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', __('Create New Role & Permission'))
 @section('content')
     <div class="row">
         <div class="col-12">
@@ -15,8 +16,8 @@
                     @endif
                 </div>
                 <div class="card-body">
-                    <form class="row g-6 common-form" action="{{ route('roles-permissions.store') }}"
-                        method="POST" enctype="multipart/form-data">
+                    <form class="row g-6 common-form" action="{{ route('roles-permissions.store') }}" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="col-12">
                             <h6>{{ __('Role Information') }}</h6>

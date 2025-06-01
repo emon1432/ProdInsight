@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', __('Settings'))
 @section('content')
     <div class="col-12">
         <div class="bs-stepper vertical wizard-modern wizard-modern-vertical-icons-example mt-2">

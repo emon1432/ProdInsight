@@ -30,14 +30,14 @@ class UsersTableSeeder extends Seeder
                 'two_factor_secret' => NULL,
                 'two_factor_recovery_codes' => NULL,
                 'two_factor_confirmed_at' => NULL,
-                'image' => NULL,
+                'image' => 'uploads/users/khairul-islam-emon1748759077683bf225059ea.jpg',
                 'address' => NULL,
                 'remember_token' => 'Sj8nXaG35X',
                 'email_verified_at' => '2025-04-19 05:17:43',
                 'current_team_id' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-04-19 05:17:43',
-                'updated_at' => '2025-04-19 05:17:43',
+                'updated_at' => '2025-06-01 06:24:37',
             ),
             1 => 
             array (
@@ -50,14 +50,14 @@ class UsersTableSeeder extends Seeder
                 'two_factor_secret' => NULL,
                 'two_factor_recovery_codes' => NULL,
                 'two_factor_confirmed_at' => NULL,
-                'image' => NULL,
+                'image' => 'uploads/users/khairul-islam-emon1748759086683bf22ebbc71.jpg',
                 'address' => NULL,
                 'remember_token' => 'Sj8nXaG35X',
                 'email_verified_at' => '2025-04-19 05:17:43',
                 'current_team_id' => NULL,
                 'deleted_at' => NULL,
                 'created_at' => '2025-04-19 05:17:43',
-                'updated_at' => '2025-04-19 05:17:43',
+                'updated_at' => '2025-06-01 06:24:46',
             ),
         ));
 
