@@ -69,7 +69,7 @@
                     <a href="{{ route('settings.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
                 @endif
                 @if (check_permission('settings.edit'))
-                    <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
                 @endif
             </div>
         </form>

@@ -58,7 +58,7 @@
 
         // Select2 Initialization
         $(".form-select").each(function() {
-            const selectElement = $(this);
+            var selectElement = $(this);
             selectElement
                 .wrap('<div class="position-relative"></div>')
                 .select2({
@@ -307,9 +307,10 @@
 
             formValidation.on("core.form.valid", function() {
                 const submitBtn = $(form).find("button[type=submit]");
+                const submitBtnText = submitBtn.text().trim();
                 const formData = new FormData(form);
 
-                submitBtn.prop("disabled", true).text("Submitting...");
+                submitBtn.prop("disabled", true).text("Loading...");
 
                 $.ajax({
                     url: form.action,
@@ -345,7 +346,7 @@
                         });
                     },
                     complete: function() {
-                        submitBtn.prop("disabled", false).text("Submit");
+                        submitBtn.prop("disabled", false).text(submitBtnText);
                     }
                 });
             });
@@ -354,6 +355,25 @@
             form.addEventListener('submit', e => e.preventDefault());
         });
 
+        //on modal open or close, reset the form
+        $(document).on('hidden.bs.modal', '.modal', function() {
+            const form = $(this).find('.common-form');
+            if (form.length) {
+                form[0].reset();
+                form.find('.form-control-validation').removeClass('is-invalid is-valid');
+                form.find('.invalid-feedback').remove();
+                form.find('.valid-feedback').remove();
+                form.find('.form-check-input').prop('checked', false);
+            }
+            $(this).find('.select2-selection').removeClass('is-invalid is-valid');
+            //render select2 elements again
+            $(this).find('.form-select').each(function() {
+                $(this).select2({
+                    placeholder: "Select an option",
+                    dropdownParent: $(this).parent(),
+                });
+            });
+        });
 
         // Delete Record Confirmation
         $(document).on("click", ".delete-record", function(e) {

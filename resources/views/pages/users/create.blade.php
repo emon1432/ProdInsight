@@ -97,7 +97,7 @@
                         </div>
                         <div class="col-12 form-control-validation">
                             @if (check_permission('users.create'))
-                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                             @endif
                             @if (check_permission('users.index'))
                                 <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
