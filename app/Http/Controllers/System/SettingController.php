@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\System;
 
+use App\Http\Controllers\Controller;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -63,9 +64,9 @@ class SettingController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 500,
-                'message' => __('An error occurred while updating the setting: ') . $e->getMessage(),
+                'message' => __('Whoops! Something went wrong. Please try again later. Error: ') . $e->getMessage(),
                 'redirect' => null,
-            ]);
+            ], 500);
         }
     }
 }
