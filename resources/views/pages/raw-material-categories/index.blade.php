@@ -40,7 +40,21 @@
     @if (check_permission('raw-material-categories.create'))
         @include('pages.raw-material-categories.create')
     @endif
-    {{-- @if (check_permission('raw-material-categories.edit'))
+    @if (check_permission('raw-material-categories.edit'))
         @include('pages.raw-material-categories.edit')
-    @endif --}}
+    @endif
 @endsection
+@push('scripts')
+    <script>
+        $('.common-datatable').on('click', '.edit-raw-material-categories-modal', function() {
+            var model = $(this).data('model');
+            var modal = $('#edit-raw-material-categories-modal');
+
+            modal.find('#name').val(model.name);
+            modal.find('#description').val(model.description);
+            modal.find('#status').val(model.status).trigger('change');
+            modal.find('form').attr('action', "{{ url('raw-material-categories') }}/" + model.id);
+            modal.modal('show');
+        });
+    </script>
+@endpush

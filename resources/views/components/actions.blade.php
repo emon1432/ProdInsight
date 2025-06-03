@@ -26,25 +26,38 @@
                     $model = $actions['model'];
                 @endphp
                 @if ($buttons['view'] && check_permission($resource . '.show'))
-                    <a href="{{ route($resource . '.show', $model->id) }}" class="dropdown-item d-flex align-items-center">
+                    @if (isset($buttons['view']['modal']) && $buttons['view']['modal'])
+                        @php
+                            $url = 'javascript:void(0);';
+                        @endphp
+                    @else
+                        @php
+                            $url = route($resource . '.show', $model->id);
+                        @endphp
+                    @endif
+                    <a href="{{ $url }}"
+                        class="dropdown-item d-flex align-items-center {{ isset($buttons['view']['modal']) && $buttons['view']['modal'] ? 'view-' . $resource . '-modal' : '' }}"
+                        @if (isset($buttons['view']['modal']) && $buttons['view']['modal']) data-model="{{ $model }}" @endif>
                         <i class="icon-base ti tabler-eye me-2"></i>
                         {{ __('View') }}
                     </a>
                 @endif
                 @if ($buttons['edit'] && check_permission($resource . '.edit'))
                     @if (isset($buttons['edit']['modal']) && $buttons['edit']['modal'])
-                        <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center" data-bs-toggle="modal"
-                            data-model="{{ $model }}" data-bs-target="#edit-{{ $resource }}-modal">
-                            <i class="icon-base ti tabler-edit me-2"></i>
-                            {{ __('Edit') }}
-                        </a>
+                        @php
+                            $url = 'javascript:void(0);';
+                        @endphp
                     @else
-                        <a href="{{ route($resource . '.edit', $model->id) }}"
-                            class="dropdown-item d-flex align-items-center">
-                            <i class="icon-base ti tabler-edit me-2"></i>
-                            {{ __('Edit') }}
-                        </a>
+                        @php
+                            $url = route($resource . '.edit', $model->id);
+                        @endphp
                     @endif
+                    <a href="{{ $url }}"
+                        class="dropdown-item d-flex align-items-center {{ isset($buttons['edit']['modal']) && $buttons['edit']['modal'] ? 'edit-' . $resource . '-modal' : '' }}"
+                        @if (isset($buttons['edit']['modal']) && $buttons['edit']['modal']) data-model="{{ $model }}" @endif>
+                        <i class="icon-base ti tabler-edit me-2"></i>
+                        {{ __('Edit') }}
+                    </a>
                 @endif
                 @if ($buttons['delete'] && check_permission($resource . '.destroy'))
                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center delete-record">

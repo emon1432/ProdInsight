@@ -2,7 +2,8 @@
     data-bs-target="#permissionsViewModal{{ $role->id }}">
     {{ __('View') }}
 </button>
-<div class="modal fade" id="permissionsViewModal{{ $role->id }}" data-bs-backdrop="static" tabindex="-1">
+<div class="modal fade" id="permissionsViewModal{{ $role->id }}" tabindex="-1" aria-hidden="true"
+    data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
