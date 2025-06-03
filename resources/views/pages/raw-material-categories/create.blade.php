@@ -11,23 +11,23 @@
                 enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
-                    <div class="col-md-12 form-control-validation">
+                    <div class="col-md-12 form-control-validation mb-5">
                         <label class="form-label" for="name">{{ __('Name') }}
                             <span class="text-danger">*</span>
                         </label>
-                        <input type="text" name="name" id="name" class="form-control"
+                        <input type="text" name="name" class="form-control"
                             placeholder="{{ __('Enter name') }}" required />
                     </div>
-                    <div class="col-md-12 form-control-validation">
+                    <div class="col-md-12 form-control-validation mb-5">
                         <label class="form-label" for="description">{{ __('Description') }}</label>
-                        <textarea name="description" id="description" class="form-control" placeholder="{{ __('Enter description') }}"
+                        <textarea name="description" class="form-control" placeholder="{{ __('Enter description') }}"
                             rows="3"></textarea>
                     </div>
                     <div class="col-md-12 form-control-validation">
                         <label class="form-label" for="status">{{ __('Status') }}
                             <span class="text-danger">*</span>
                         </label>
-                        <select class="form-select" name="status" id="status" required>
+                        <select class="form-select" name="status" required>
                             <option value="Active">{{ __('Active') }}</option>
                             <option value="Inactive">{{ __('Inactive') }}</option>
                         </select>
@@ -38,7 +38,7 @@
                         {{ __('Close') }}
                     </button>
                     @if (check_permission('raw-material-categories.create'))
-                        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                     @endif
                 </div>
             </form>

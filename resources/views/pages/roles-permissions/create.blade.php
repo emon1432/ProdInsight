@@ -70,7 +70,7 @@
                         </div>
                         <div class="col-12 form-control-validation">
                             @if (check_permission('roles-permissions.create'))
-                                <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+                                <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
                             @endif
                             @if (check_permission('roles-permissions.index'))
                                 <a href="{{ route('roles-permissions.index') }}"

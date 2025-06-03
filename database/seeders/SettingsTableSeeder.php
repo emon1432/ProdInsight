@@ -47,7 +47,7 @@ class SettingsTableSeeder extends Seeder
                 'updated_at' => '2025-05-27 06:24:37',
             ),
         ));
-
+        
         
     }
 }
