@@ -28,6 +28,26 @@
             </a>
         </li>
         <li class="menu-header small">
+            <span class="menu-header-text">{{ __('Inventory') }}</span>
+        </li>
+        @if (main_menu_permission('raw-material-categories'))
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon icon-base ti tabler-category"></i>
+                    <div>{{ __('Item Management') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    @if (check_permission('raw-material-categories.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('raw-material-categories.index') }}" class="menu-link">
+                                <div>{{ __('Raw Material Categories') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
+        <li class="menu-header small">
             <span class="menu-header-text">{{ __('System') }}</span>
         </li>
         @if (main_menu_permission('users') || main_menu_permission('roles-permissions'))

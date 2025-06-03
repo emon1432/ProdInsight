@@ -32,10 +32,19 @@
                     </a>
                 @endif
                 @if ($buttons['edit'] && check_permission($resource . '.edit'))
-                    <a href="{{ route($resource . '.edit', $model->id) }}" class="dropdown-item d-flex align-items-center">
-                        <i class="icon-base ti tabler-edit me-2"></i>
-                        {{ __('Edit') }}
-                    </a>
+                    @if (isset($buttons['edit']['modal']) && $buttons['edit']['modal'])
+                        <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center" data-bs-toggle="modal"
+                            data-model="{{ $model }}" data-bs-target="#edit-{{ $resource }}-modal">
+                            <i class="icon-base ti tabler-edit me-2"></i>
+                            {{ __('Edit') }}
+                        </a>
+                    @else
+                        <a href="{{ route($resource . '.edit', $model->id) }}"
+                            class="dropdown-item d-flex align-items-center">
+                            <i class="icon-base ti tabler-edit me-2"></i>
+                            {{ __('Edit') }}
+                        </a>
+                    @endif
                 @endif
                 @if ($buttons['delete'] && check_permission($resource . '.destroy'))
                     <a href="javascript:void(0);" class="dropdown-item d-flex align-items-center delete-record">

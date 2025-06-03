@@ -1,10 +1,11 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\OthersController;
-use App\Http\Controllers\RolesPermissionsController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Item\RawMaterialCategoryController;
+use App\Http\Controllers\System\OthersController;
+use App\Http\Controllers\System\RolesPermissionsController;
+use App\Http\Controllers\System\SettingController;
+use App\Http\Controllers\System\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
         Route::get('/dashboard', 'index')->name('dashboard');
     });
 
+    Route::resource('raw-material-categories', RawMaterialCategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('roles-permissions', RolesPermissionsController::class);
     Route::resource('settings', SettingController::class)->only('index', 'update');
