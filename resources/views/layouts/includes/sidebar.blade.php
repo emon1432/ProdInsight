@@ -74,6 +74,23 @@
                 </ul>
             </li>
         @endif
+        @if (main_menu_permission('units'))
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon icon-base ti tabler-archive"></i>
+                    <div>{{ __('Accessories') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    @if (check_permission('units.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('units.index') }}" class="menu-link">
+                                <div>{{ __('Units') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
         @if (check_permission('settings.index'))
             <li class="menu-item">
                 <a href="{{ route('settings.index') }}" class="menu-link">
