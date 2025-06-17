@@ -1,36 +1,36 @@
 <?php
 
-namespace App\Http\Controllers\Item;
+namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RawMaterialCategoryStoreRequest;
-use App\Http\Requests\RawMaterialCategoryUpdateRequest;
-use App\Models\RawMaterialCategory;
+use App\Http\Requests\UnitStoreRequest;
+use App\Http\Requests\UnitUpdateRequest;
+use App\Models\Unit;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
 use App\View\Components\Description;
 use App\View\Components\StatusBadge;
 use Illuminate\Http\Request;
 
-class RawMaterialCategoryController extends Controller
+class UnitController extends Controller
 {
     public function index()
     {
         if (request()->ajax()) {
             return response()->json($this->data());
         }
-        return view('pages.raw-material-categories.index');
+        return view('pages.units.index');
     }
 
-    public function store(RawMaterialCategoryStoreRequest $request)
+    public function store(UnitStoreRequest $request)
     {
         try {
-            RawMaterialCategory::insert($request->except(['_token']));
+            Unit::insert($request->except(['_token']));
 
             return response()->json([
                 'status' => 200,
-                'message' => __('Raw Material Category created successfully'),
-                'redirect' => route('raw-material-categories.index'),
+                'message' => __('Unit created successfully'),
+                'redirect' => route('units.index'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -41,16 +41,16 @@ class RawMaterialCategoryController extends Controller
         }
     }
 
-    public function update(RawMaterialCategoryUpdateRequest $request, string $id)
+    public function update(UnitUpdateRequest $request, string $id)
     {
         try {
-            $rawMaterialCategory = RawMaterialCategory::findOrFail($id);
-            $rawMaterialCategory->update($request->except(['_token', '_method']));
+            $unit = Unit::findOrFail($id);
+            $unit->update($request->except(['_token', '_method']));
 
             return response()->json([
                 'status' => 200,
-                'message' => __('Raw Material Category updated successfully'),
-                'redirect' => route('raw-material-categories.index'),
+                'message' => __('Unit updated successfully'),
+                'redirect' => route('units.index'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -64,13 +64,13 @@ class RawMaterialCategoryController extends Controller
     public function destroy(string $id)
     {
         try {
-            $rawMaterialCategory = RawMaterialCategory::findOrFail($id);
-            $rawMaterialCategory->delete();
+            $unit = Unit::findOrFail($id);
+            $unit->delete();
 
             return response()->json([
                 'status' => 200,
-                'message' => __('Raw Material Category deleted successfully'),
-                'redirect' => route('raw-material-categories.index'),
+                'message' => __('Unit deleted successfully'),
+                'redirect' => route('units.index'),
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -83,11 +83,11 @@ class RawMaterialCategoryController extends Controller
 
     private function data()
     {
-        $rawMaterialCategories = RawMaterialCategory::all()->map(function ($rawMaterialCategory) {
-            $rawMaterialCategory->actions = (new Actions(
+        $units = Unit::all()->map(function ($unit) {
+            $unit->actions = (new Actions(
                 [
-                    'model' => $rawMaterialCategory,
-                    'resource' => 'raw-material-categories',
+                    'model' => $unit,
+                    'resource' => 'units',
                     'buttons' => [
                         'basic' => [
                             'view' => false,
@@ -99,11 +99,11 @@ class RawMaterialCategoryController extends Controller
                     ],
                 ]
             ))->render()->render();
-            $rawMaterialCategory->status = (new StatusBadge($rawMaterialCategory->status))->render()->render();
-            $rawMaterialCategory->description = (new Description($rawMaterialCategory->description))->render()->render();
-            $rawMaterialCategory->createdBy = (new CreatedBy($rawMaterialCategory->createdBy))->render()->render();
-            return $rawMaterialCategory;
+            $unit->status = (new StatusBadge($unit->status))->render()->render();
+            $unit->description = (new Description($unit->description))->render()->render();
+            $unit->createdBy = (new CreatedBy($unit->createdBy))->render()->render();
+            return $unit;
         });
-        return $rawMaterialCategories;
+        return $units;
     }
 }
