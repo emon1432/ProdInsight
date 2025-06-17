@@ -38,3 +38,10 @@ if (!function_exists('settings')) {
         return $decoded ?? $default;
     }
 }
+
+if (!function_exists('format_date')) {
+    function format_date($date)
+    {
+        return \Carbon\Carbon::parse($date)->format(config('app.date_format'));
+    }
+}
