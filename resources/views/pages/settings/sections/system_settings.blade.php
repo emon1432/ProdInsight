@@ -17,13 +17,11 @@
                 <input type="text" class="form-control" name="app_name" id="app_name"
                     value="{{ old('app_name', $values['app_name'] ?? '') }}" required>
             </div>
-
             <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="app_url">{{ __('App URL') }}<span class="text-danger">*</span></label>
                 <input type="url" class="form-control" name="app_url" id="app_url"
                     value="{{ old('app_url', $values['app_url'] ?? '') }}" required>
             </div>
-
             <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="app_locale">{{ __('App Locale') }}<span
                         class="text-danger">*</span></label>
@@ -32,24 +30,45 @@
                     </option>
                     <option value="bn" {{ ($values['app_locale'] ?? '') === 'bn' ? 'selected' : '' }}>Bangla
                     </option>
-                    <!-- Add more locales if needed -->
                 </select>
             </div>
-
             <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="app_timezone">{{ __('Timezone') }}<span
                         class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="app_timezone" id="app_timezone"
-                    value="{{ old('app_timezone', $values['app_timezone'] ?? '') }}" required>
+                <select name="app_timezone" id="app_timezone" class="form-select" required>
+                    @foreach (timezone_identifiers_list() as $timezone)
+                        <option value="{{ $timezone }}"
+                            {{ ($values['app_timezone'] ?? '') === $timezone ? 'selected' : '' }}>
+                            {{ $timezone }}</option>
+                    @endforeach
+                </select>
             </div>
-
             <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="date_format">{{ __('Date Format') }}<span
                         class="text-danger">*</span></label>
-                <input type="text" class="form-control" name="date_format" id="date_format"
-                    value="{{ old('date_format', $values['date_format'] ?? '') }}" required>
+                <select name="date_format" id="date_format" class="form-select" required>
+                    <option value="Y-m-d" {{ ($values['date_format'] ?? '') === 'Y-m-d' ? 'selected' : '' }}>Y-m-d
+                        ({{ date('Y-m-d') }})</option>
+                    <option value="d-m-Y" {{ ($values['date_format'] ?? '') === 'd-m-Y' ? 'selected' : '' }}>d-m-Y
+                        ({{ date('d-m-Y') }})</option>
+                    <option value="m-d-Y" {{ ($values['date_format'] ?? '') === 'm-d-Y' ? 'selected' : '' }}>m-d-Y
+                        ({{ date('m-d-Y') }})</option>
+                    <option value="m/d/Y" {{ ($values['date_format'] ?? '') === 'm/d/Y' ? 'selected' : '' }}>m/d/Y
+                        ({{ date('m/d/Y') }})</option>
+                    <option value="d/m/Y" {{ ($values['date_format'] ?? '') === 'd/m/Y' ? 'selected' : '' }}>d/m/Y
+                        ({{ date('d/m/Y') }})</option>
+                    <option value="Y/m/d" {{ ($values['date_format'] ?? '') === 'Y/m/d' ? 'selected' : '' }}>Y/m/d
+                        ({{ date('Y/m/d') }})</option>
+                    <option value="d.M.Y" {{ ($values['date_format'] ?? '') === 'd.M.Y' ? 'selected' : '' }}>d.M.Y
+                        ({{ date('d.M.Y') }})</option>
+                    <option value="M d, Y" {{ ($values['date_format'] ?? '') === 'M d, Y' ? 'selected' : '' }}>M d, Y
+                        ({{ date('M d, Y') }})</option>
+                    <option value="d M Y" {{ ($values['date_format'] ?? '') === 'd M Y' ? 'selected' : '' }}>d M Y
+                        ({{ date('d M Y') }})</option>
+                    <option value="D, d M Y" {{ ($values['date_format'] ?? '') === 'D, d M Y' ? 'selected' : '' }}>D, d
+                        M Y ({{ date('D, d M Y') }})</option>
+                </select>
             </div>
-
             <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="maintenance_mode">{{ __('Maintenance Mode') }}</label>
                 <select name="maintenance_mode" id="maintenance_mode" class="form-select">
@@ -59,19 +78,16 @@
                         {{ __('Enabled') }}</option>
                 </select>
             </div>
-
             <div class="col-md-12 form-control-validation">
                 <label class="form-label" for="footer_text">{{ __('Footer Text') }}</label>
                 <input type="text" class="form-control" name="footer_text" id="footer_text"
                     value="{{ old('footer_text', $values['footer_text'] ?? '') }}">
             </div>
-
             <div class="col-md-12 form-control-validation">
                 <label class="form-label" for="copyright">{{ __('Copyright') }}</label>
                 <input type="text" class="form-control" name="copyright" id="copyright"
                     value="{{ old('copyright', $values['copyright'] ?? '') }}">
             </div>
-
             <div class="col-12 d-flex justify-content-end gap-2">
                 @if (check_permission('settings.index'))
                     <a href="{{ route('settings.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>

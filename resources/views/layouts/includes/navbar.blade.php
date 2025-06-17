@@ -129,7 +129,8 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-users icon-26px text-heading"></i>
                                 </span>
-                                <a href="app-access-roles.html" class="stretched-link">{{ __('Role Management') }}</a>
+                                <a href="app-access-roles.html"
+                                    class="stretched-link">{{ __('Role Management') }}</a>
                                 <small>{{ __('Permission') }}</small>
                             </div>
                         </div>
@@ -145,7 +146,8 @@
                                 <span class="dropdown-shortcuts-icon rounded-circle mb-3">
                                     <i class="icon-base ti tabler-settings icon-26px text-heading"></i>
                                 </span>
-                                <a href="pages-account-settings-account.html" class="stretched-link">{{ __('Setting') }}</a>
+                                <a href="pages-account-settings-account.html"
+                                    class="stretched-link">{{ __('Setting') }}</a>
                                 <small>{{ __('Account Settings') }}</small>
                             </div>
                         </div>
@@ -187,7 +189,8 @@
                             <div class="d-flex align-items-center h6 mb-0">
                                 <span class="badge bg-label-primary me-2">{{ __('8 New') }}</span>
                                 <a href="javascript:void(0)" class="dropdown-notifications-all p-2 btn btn-icon"
-                                    data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('Mark all as read') }}"><i
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="{{ __('Mark all as read') }}"><i
                                         class="icon-base ti tabler-mail-opened text-heading"></i></a>
                             </div>
                         </div>
@@ -204,7 +207,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="small mb-1">{{ __('Congratulation Lettie 🎉') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('Won the monthly best seller gold badge') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('Won the monthly best seller gold badge') }}</small>
                                         <small class="text-body-secondary">{{ __('1h ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -224,7 +228,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('Charles Franklin') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('Accepted your connection') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('Accepted your connection') }}</small>
                                         <small class="text-body-secondary">{{ __('12hr ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -246,7 +251,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('New Message ✉️') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('You have new message from Natalie') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('You have new message from Natalie') }}</small>
                                         <small class="text-body-secondary">{{ __('1h ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -267,7 +273,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('Whoo! You have new order 🛒') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('ACME Inc. made new order $1,154') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('ACME Inc. made new order $1,154') }}</small>
                                         <small class="text-body-secondary">{{ __('1 day ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -289,7 +296,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('Application has been approved 🚀') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('Your ABC project application has been approved.') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('Your ABC project application has been approved.') }}</small>
                                         <small class="text-body-secondary">{{ __('2 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -311,7 +319,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('Monthly report is generated') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('July monthly financial report is generated') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('July monthly financial report is generated') }}</small>
                                         <small class="text-body-secondary">{{ __('3 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -333,7 +342,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('Send connection request') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('Peter sent you connection request') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('Peter sent you connection request') }}</small>
                                         <small class="text-body-secondary">{{ __('4 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -354,7 +364,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('New message from Jane') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('Your have new message from Jane') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('Your have new message from Jane') }}</small>
                                         <small class="text-body-secondary">{{ __('5 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -376,7 +387,8 @@
                                     </div>
                                     <div class="flex-grow-1">
                                         <h6 class="mb-1 small">{{ __('CPU is running high') }}</h6>
-                                        <small class="mb-1 d-block text-body">{{ __('CPU Utilization Percent is currently at 88.63%,') }}</small>
+                                        <small
+                                            class="mb-1 d-block text-body">{{ __('CPU Utilization Percent is currently at 88.63%,') }}</small>
                                         <small class="text-body-secondary">{{ __('5 days ago') }}</small>
                                     </div>
                                     <div class="flex-shrink-0 dropdown-notifications-actions">
@@ -405,7 +417,8 @@
                 <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt class="rounded-circle" />
+                        <img src="{{ imageShow(auth()->user()->image) }}" alt="{{ auth()->user()->name }}"
+                            class="rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -414,13 +427,13 @@
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-2">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets') }}/img/avatars/1.png" alt
-                                            class="rounded-circle" />
+                                        <img src="{{ imageShow(auth()->user()->image) }}"
+                                            alt="{{ auth()->user()->name }}" class="rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <h6 class="mb-0">{{ __('John Doe') }}</h6>
-                                    <small class="text-body-secondary">{{ __('Admin') }}</small>
+                                    <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+                                    <small class="text-body-secondary">{{ auth()->user()->role->name }}</small>
                                 </div>
                             </div>
                         </a>
@@ -430,7 +443,8 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-profile-user.html"> <i
-                                class="icon-base ti tabler-user me-3 icon-md"></i><span class="align-middle">{{ __('My Profile') }}</span> </a>
+                                class="icon-base ti tabler-user me-3 icon-md"></i><span
+                                class="align-middle">{{ __('My Profile') }}</span> </a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="pages-account-settings-account.html"> <i

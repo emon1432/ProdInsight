@@ -28,10 +28,7 @@ class AppServiceProvider extends ServiceProvider
                 'app.url' => $systemSettings['app_url'] ?? config('app.url'),
                 'app.locale' => $systemSettings['app_locale'] ?? config('app.locale'),
                 'app.timezone' => $systemSettings['app_timezone'] ?? config('app.timezone'),
-                'app.date_format' => $systemSettings['date_format'] ?? 'Y-m-d',
-                'app.maintenance_mode' => $systemSettings['maintenance_mode'] ?? false,
-                'app.footer_text' => $systemSettings['footer_text'] ?? '',
-                'app.copyright' => $systemSettings['copyright'] ?? '',
+                'app.date_format' => $systemSettings['date_format'] ??  config('app.date_format'),
             ]);
         }
     }
