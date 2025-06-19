@@ -74,7 +74,7 @@
                 </ul>
             </li>
         @endif
-        @if (main_menu_permission('units'))
+        @if (main_menu_permission('units') || main_menu_permission('currencies'))
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon icon-base ti tabler-archive"></i>
@@ -85,6 +85,13 @@
                         <li class="menu-item">
                             <a href="{{ route('units.index') }}" class="menu-link">
                                 <div>{{ __('Units') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (check_permission('currencies.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('currencies.index') }}" class="menu-link">
+                                <div>{{ __('Currencies') }}</div>
                             </a>
                         </li>
                     @endif
