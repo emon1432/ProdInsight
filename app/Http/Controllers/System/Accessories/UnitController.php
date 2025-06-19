@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return response()->json($this->data());
         }
         return view('pages.units.index');
@@ -25,7 +25,7 @@ class UnitController extends Controller
     public function store(UnitStoreRequest $request)
     {
         try {
-            Unit::insert($request->except(['_token']));
+            Unit::create($request->except(['_token']));
 
             return response()->json([
                 'status' => 200,
@@ -41,10 +41,9 @@ class UnitController extends Controller
         }
     }
 
-    public function update(UnitUpdateRequest $request, string $id)
+    public function update(UnitUpdateRequest $request, Unit $unit)
     {
         try {
-            $unit = Unit::findOrFail($id);
             $unit->update($request->except(['_token', '_method']));
 
             return response()->json([
@@ -61,10 +60,9 @@ class UnitController extends Controller
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(Unit $unit)
     {
         try {
-            $unit = Unit::findOrFail($id);
             $unit->delete();
 
             return response()->json([
@@ -83,27 +81,24 @@ class UnitController extends Controller
 
     private function data()
     {
-        $units = Unit::all()->map(function ($unit) {
-            $unit->actions = (new Actions(
-                [
-                    'model' => $unit,
-                    'resource' => 'units',
-                    'buttons' => [
-                        'basic' => [
-                            'view' => false,
-                            'edit' => [
-                                'modal' => true,
-                            ],
-                            'delete' => true,
+        return Unit::all()->map(function ($unit) {
+            $unit->actions = (new Actions([
+                'model' => $unit,
+                'resource' => 'units',
+                'buttons' => [
+                    'basic' => [
+                        'view' => false,
+                        'edit' => [
+                            'modal' => true,
                         ],
+                        'delete' => true,
                     ],
-                ]
-            ))->render()->render();
+                ],
+            ]))->render()->render();
             $unit->status = (new StatusBadge($unit->status))->render()->render();
             $unit->description = (new Description($unit->description))->render()->render();
             $unit->createdBy = (new CreatedBy($unit->createdBy))->render()->render();
             return $unit;
-        });
-        return $units;
+        })->toArray();
     }
 }

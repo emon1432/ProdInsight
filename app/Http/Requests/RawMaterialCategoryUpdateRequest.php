@@ -17,7 +17,7 @@ class RawMaterialCategoryUpdateRequest extends FormRequest
             'slug' => slugify($this->name),
         ]);
 
-        $id = $this->route('raw_material_category');
+        $id = $this->route('raw_material_category')->id;
 
         return [
             'name' => 'required|string|unique:raw_material_categories,name,' . $id . '|max:255',

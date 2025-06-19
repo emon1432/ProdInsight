@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return response()->json($this->data());
         }
         return view('pages.users.index');
@@ -59,17 +59,15 @@ class UserController extends Controller
         //
     }
 
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        $user = User::findOrFail($id);
         $roles = Role::all();
         return view('pages.users.edit', compact('user', 'roles'));
     }
 
-    public function update(UserUpdateRequest $request, string $id)
+    public function update(UserUpdateRequest $request, User $user)
     {
         try {
-            $user = User::findOrFail($id);
             $user->name = $request->name;
             $user->email = $request->email;
             $user->phone = $request->phone;
@@ -97,10 +95,9 @@ class UserController extends Controller
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
         try {
-            $user = User::findOrFail($id);
             imageDeleteManager($user->image);
             $user->delete();
 
@@ -120,24 +117,20 @@ class UserController extends Controller
 
     protected function data()
     {
-        $users = User::all()->map(function ($user) {
-            $user->actions = (new Actions(
-                [
-                    'model' => $user,
-                    'resource' => 'users',
-                    'buttons' => [
-                        'basic' => [
-                            'view' => true,
-                            'edit' => true,
-                            'delete' => true,
-                        ],
+        return User::all()->map(function ($user) {
+            $user->actions = (new Actions([
+                'model' => $user,
+                'resource' => 'users',
+                'buttons' => [
+                    'basic' => [
+                        'view' => true,
+                        'edit' => true,
+                        'delete' => true,
                     ],
-                ]
-            ))->render()->render();
+                ],
+            ]))->render()->render();
             $user->name = (new UserInfo($user))->render()->render();
             return $user;
-        });
-
-        return $users;
+        })->toArray();
     }
 }
