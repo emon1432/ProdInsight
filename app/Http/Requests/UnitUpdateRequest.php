@@ -17,8 +17,8 @@ class UnitUpdateRequest extends FormRequest
             'slug' => slugify($this->name),
         ]);
 
-        $id = $this->route('unit');
-        
+        $id = $this->route('unit')->id;
+
         return [
             'name' => 'required|string|unique:units,name,' . $id . '|max:255',
             'slug' => 'required|string|unique:units,slug,' . $id . '|max:255',

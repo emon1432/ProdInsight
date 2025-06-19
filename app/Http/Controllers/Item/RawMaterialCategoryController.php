@@ -14,9 +14,9 @@ use Illuminate\Http\Request;
 
 class RawMaterialCategoryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return response()->json($this->data());
         }
         return view('pages.raw-material-categories.index');
@@ -25,7 +25,7 @@ class RawMaterialCategoryController extends Controller
     public function store(RawMaterialCategoryStoreRequest $request)
     {
         try {
-            RawMaterialCategory::insert($request->except(['_token']));
+            RawMaterialCategory::create($request->except(['_token']));
 
             return response()->json([
                 'status' => 200,
@@ -41,10 +41,9 @@ class RawMaterialCategoryController extends Controller
         }
     }
 
-    public function update(RawMaterialCategoryUpdateRequest $request, string $id)
+    public function update(RawMaterialCategoryUpdateRequest $request, RawMaterialCategory $rawMaterialCategory)
     {
         try {
-            $rawMaterialCategory = RawMaterialCategory::findOrFail($id);
             $rawMaterialCategory->update($request->except(['_token', '_method']));
 
             return response()->json([
@@ -61,10 +60,9 @@ class RawMaterialCategoryController extends Controller
         }
     }
 
-    public function destroy(string $id)
+    public function destroy(RawMaterialCategory $rawMaterialCategory)
     {
         try {
-            $rawMaterialCategory = RawMaterialCategory::findOrFail($id);
             $rawMaterialCategory->delete();
 
             return response()->json([
@@ -83,27 +81,24 @@ class RawMaterialCategoryController extends Controller
 
     private function data()
     {
-        $rawMaterialCategories = RawMaterialCategory::all()->map(function ($rawMaterialCategory) {
-            $rawMaterialCategory->actions = (new Actions(
-                [
-                    'model' => $rawMaterialCategory,
-                    'resource' => 'raw-material-categories',
-                    'buttons' => [
-                        'basic' => [
-                            'view' => false,
-                            'edit' => [
-                                'modal' => true,
-                            ],
-                            'delete' => true,
+        return RawMaterialCategory::all()->map(function ($rawMaterialCategory) {
+            $rawMaterialCategory->actions = (new Actions([
+                'model' => $rawMaterialCategory,
+                'resource' => 'raw-material-categories',
+                'buttons' => [
+                    'basic' => [
+                        'view' => false,
+                        'edit' => [
+                            'modal' => true,
                         ],
+                        'delete' => true,
                     ],
-                ]
-            ))->render()->render();
+                ],
+            ]))->render()->render();
             $rawMaterialCategory->status = (new StatusBadge($rawMaterialCategory->status))->render()->render();
             $rawMaterialCategory->description = (new Description($rawMaterialCategory->description))->render()->render();
             $rawMaterialCategory->createdBy = (new CreatedBy($rawMaterialCategory->createdBy))->render()->render();
             return $rawMaterialCategory;
-        });
-        return $rawMaterialCategories;
+        })->toArray();
     }
 }

@@ -13,9 +13,9 @@ use Illuminate\Http\Request;
 
 class RolesPermissionsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return response()->json($this->data());
         }
         return view('pages.roles-permissions.index');
@@ -150,7 +150,7 @@ class RolesPermissionsController extends Controller
 
     protected function data()
     {
-        $roles = Role::with('users')->get()->map(function ($role) {
+        return Role::with('users')->get()->map(function ($role) {
             $buttons = [];
             if ($role->id != 1) {
                 $buttons = [
@@ -170,7 +170,6 @@ class RolesPermissionsController extends Controller
             $role->permission_view = (new PermissionsViewModal($role))->render()->render();
             $role->status = (new StatusBadge($role->status))->render()->render();
             return $role;
-        });
-        return $roles;
+        })->toArray();
     }
 }
