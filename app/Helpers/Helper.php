@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Currency;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 
@@ -43,5 +44,34 @@ if (!function_exists('format_date')) {
     function format_date($date)
     {
         return \Carbon\Carbon::parse($date)->format(config('app.date_format'));
+    }
+}
+
+if (!function_exists('number_format_without_currency')) {
+    function number_format_without_currency($number)
+    {
+        $decimalSeparator = settings('system_settings', 'decimal_separator', '.');
+        $thousandSeparator = settings('system_settings', 'thousand_separator', '.');
+        $decimalPrecision = settings('system_settings', 'decimal_precision', 2);
+        return number_format($number, $decimalPrecision, $decimalSeparator, $thousandSeparator);
+    }
+}
+
+if (!function_exists('amount_format')) {
+    function amount_format($amount)
+    {
+        $currency = Currency::find(settings('system_settings', 'currency_id', 1));
+        $decimalSeparator = settings('system_settings', 'decimal_separator', '.');
+        $thousandSeparator = settings('system_settings', 'thousand_separator', '.');
+        $decimalPrecision = settings('system_settings', 'decimal_precision', 2);
+        $formattedAmount = number_format($amount, $decimalPrecision, $decimalSeparator, $thousandSeparator);
+        if ($currency) {
+            if ($currency->position === 'Left') {
+                return $currency->symbol . ' ' . $formattedAmount;
+            } else {
+                return $formattedAmount . ' ' . $currency->symbol;
+            }
+        }
+        return $formattedAmount;
     }
 }

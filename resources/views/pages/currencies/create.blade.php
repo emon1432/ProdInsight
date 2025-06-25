@@ -41,7 +41,7 @@
                                 placeholder="{{ __('Enter conversion rate') }}" required />
                         </div>
                         <div class="col-md-6 form-control-validation mb-5">
-                            <label class="form-label" for="position">{{ __('Position') }}
+                            <label class="form-label" for="position">{{ __('Symbol Position') }}
                                 <span class="text-danger">*</span>
                             </label>
                             <select class="form-select" name="position" required>
