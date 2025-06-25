@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class SettingController extends Controller
     public function index()
     {
         $settings = Setting::get();
-        return view('pages.settings.index', compact('settings'));
+        $currencies = Currency::where('status', 'Active')->get();
+        return view('pages.settings.index', compact('settings', 'currencies'));
     }
 
     public function update(Request $request, string $key)
