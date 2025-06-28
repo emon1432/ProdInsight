@@ -65,12 +65,7 @@
             </div>
 
             <div class="col-12 form-control-validation d-flex justify-content-end gap-2">
-                @if (check_permission('settings.index'))
-                    <a href="{{ route('settings.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
-                @endif
-                @if (check_permission('settings.edit'))
-                    <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-                @endif
+                <x-form-action-button :resource="'settings'" :action="'edit'" :type="'page'" />
             </div>
         </form>
     </div>

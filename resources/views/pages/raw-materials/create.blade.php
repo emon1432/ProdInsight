@@ -108,7 +108,8 @@
                                         class="text-danger">*</span></label>
                                 <input type="number" name="conversion_rate" id="conversion_rate" class="form-control"
                                     placeholder="{{ __('Enter conversion rate') }}" step="any" min="0" />
-                                <small class="text-muted">{{ __('How many consumption units in 1 purchase unit') }}</small>
+                                <small
+                                    class="text-muted">{{ __('How many consumption units in 1 purchase unit') }}</small>
                             </div>
                             <div class="col-md-4 form-control-validation">
                                 <label class="form-label" for="consumption_price">{{ __('Consumption Price') }}<span
@@ -121,7 +122,8 @@
                                         {{ active_currency()->symbol }}
                                     </span>
                                 </div>
-                                <small class="text-muted">{{ __('Auto-calculated based on purchase price and conversion rate') }}</small>
+                                <small
+                                    class="text-muted">{{ __('Auto-calculated based on purchase price and conversion rate') }}</small>
                             </div>
                         </div>
                         <div class="col-12">
@@ -178,24 +180,7 @@
                                 placeholder="{{ __('Enter description') }}"></textarea>
                         </div>
                         <div class="col-12 form-control-validation">
-                            @if (check_permission('raw-materials.create'))
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="icon-base ti tabler-device-floppy icon-xs me-2"></i>
-                                    {{ __('Save') }}
-                                </button>
-                            @endif
-                            @if (check_permission('raw-materials.index'))
-                                <a href="{{ route('raw-materials.index') }}" class="btn btn-secondary">
-                                    <i class="icon-base ti tabler-x icon-xs me-2"></i>
-                                    {{ __('Cancel') }}
-                                </a>
-                            @endif
-                            @if (check_permission('raw-materials.create'))
-                                <button type="button" class="btn btn-danger" onclick="resetForm()">
-                                    <i class="icon-base ti tabler-refresh icon-xs me-2"></i>
-                                    {{ __('Reset') }}
-                                </button>
-                            @endif
+                            <x-form-action-button :resource="'raw-materials'" :action="'create'" :type="'page'" />
                         </div>
                     </form>
                 </div>
@@ -267,7 +252,8 @@
                     selectedUnit = $purchaseUnitSelect.find('option:selected').text();
                 }
 
-                if (selectedUnit && selectedUnit !== '{{ __("Select purchase unit") }}' && selectedUnit !== '{{ __("Select consumption unit") }}') {
+                if (selectedUnit && selectedUnit !== '{{ __('Select purchase unit') }}' && selectedUnit !==
+                    '{{ __('Select consumption unit') }}') {
                     $unitNameSpans.text(selectedUnit);
                 }
             }
@@ -321,22 +307,5 @@
                 }
             });
         });
-
-        function resetForm() {
-            if (confirm('{{ __("Are you sure you want to reset the form? All changes will be lost.") }}')) {
-                document.querySelector('form').reset();
-                // Reset image preview
-                document.getElementById('image_preview').src = '{{ asset("uploads/default.jpg") }}';
-                // Reset unit names
-                $('.unitName').text('{{ __("Unit") }}');
-                // Reset consumption fields visibility
-                $('#consumption-section').hide();
-                $('#consumption-fields').hide();
-                // Remove required attributes
-                $('#consumption_unit_id, #conversion_rate, #consumption_price').prop('required', false);
-                // Clear consumption fields
-                $('#consumption_unit_id, #conversion_rate, #consumption_price').val('');
-            }
-        }
     </script>
 @endpush
