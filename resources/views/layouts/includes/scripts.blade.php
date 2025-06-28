@@ -310,7 +310,9 @@
                 const submitBtnText = submitBtn.text().trim();
                 const formData = new FormData(form);
 
-                submitBtn.prop("disabled", true).text("Loading...");
+                submitBtn.prop("disabled", true).html(
+                    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+                );
 
                 $.ajax({
                     url: form.action,
@@ -346,7 +348,9 @@
                         });
                     },
                     complete: function() {
-                        submitBtn.prop("disabled", false).text(submitBtnText);
+                        submitBtn.prop("disabled", false).html(
+                            `<i class="icon-base ti tabler-device-floppy icon-xs me-2"></i> ${submitBtnText}`
+                        );
                     }
                 });
             });
