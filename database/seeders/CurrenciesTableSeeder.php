@@ -14,12 +14,12 @@ class CurrenciesTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('currencies')->delete();
-
+        
         \DB::table('currencies')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'United States Dollar',
@@ -34,7 +34,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-19 10:38:38',
                 'updated_at' => '2025-06-19 10:38:38',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Bangladeshi Taka',
@@ -49,7 +49,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-19 10:38:38',
                 'updated_at' => '2025-06-19 10:38:38',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'Euro',
@@ -66,6 +66,6 @@ class CurrenciesTableSeeder extends Seeder
             ),
         ));
 
-
+        
     }
 }

@@ -60,7 +60,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2025-06-01 06:24:46',
             ),
         ));
-        
+
         
     }
 }

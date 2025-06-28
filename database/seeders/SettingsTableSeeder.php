@@ -33,9 +33,9 @@ class SettingsTableSeeder extends Seeder
                 'id' => 2,
                 'icon' => 'settings',
                 'key' => 'system_settings',
-                'value' => '{"app_name":"ProdInsight","app_url":"https:\\/\\/prodinsight.com","app_locale":"en","app_timezone":"Asia\\/Dhaka","date_format":"Y-m-d","maintenance_mode":"1","footer_text":"\\u00a9 2025 ProdInsight. All rights reserved.","copyright":"Copyright \\u00a9 2025 ProdInsight"}',
+                'value' => '{"app_name":"ProdInsight","app_url":"https:\\/\\/prodinsight.com","app_locale":"en","app_timezone":"Asia\\/Dhaka","date_format":"Y-m-d","currency_id":"1","decimal_separator":".","thousand_separator":",","decimal_precision":"2","footer_text":"\\u00a9 2025 ProdInsight. All rights reserved.","copyright":"Copyright \\u00a9 2025 ProdInsight","logo":null,"favicon":null}',
                 'created_at' => '2025-04-19 05:17:43',
-                'updated_at' => '2025-05-27 11:04:03',
+                'updated_at' => '2025-06-28 06:05:46',
             ),
             2 => 
             array (
@@ -47,7 +47,7 @@ class SettingsTableSeeder extends Seeder
                 'updated_at' => '2025-05-27 06:24:37',
             ),
         ));
-        
+
         
     }
 }
