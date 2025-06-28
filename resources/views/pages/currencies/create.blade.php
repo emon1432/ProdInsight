@@ -61,12 +61,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        {{ __('Close') }}
-                    </button>
-                    @if (check_permission('currencies.create'))
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    @endif
+                    <x-form-action-button :resource="'currencies'" :action="'create'" :type="'modal'" />
                 </div>
             </form>
         </div>

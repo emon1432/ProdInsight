@@ -101,17 +101,7 @@
                             </div>
                         </div>
                         <div class="col-12 form-control-validation">
-                            @if (check_permission('users.edit'))
-                                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-                            @endif
-                            @if (check_permission('users.index'))
-                                <a href="{{ route('users.index') }}" class="btn btn-secondary">{{ __('Cancel') }}</a>
-                            @endif
-                            @if (check_permission('users.edit'))
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-danger">
-                                    {{ __('Reset') }}
-                                </a>
-                            @endif
+                            <x-form-action-button :resource="'users'" :action="'edit'" :type="'page'" />
                         </div>
                     </form>
                 </div>

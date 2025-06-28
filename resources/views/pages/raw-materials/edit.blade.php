@@ -213,24 +213,7 @@
                                 placeholder="{{ __('Enter description') }}">{{ old('description', $rawMaterial->description) }}</textarea>
                         </div>
                         <div class="col-12 form-control-validation">
-                            @if (check_permission('raw-materials.update'))
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="icon-base ti tabler-device-floppy icon-xs me-2"></i>
-                                    {{ __('Update') }}
-                                </button>
-                            @endif
-                            @if (check_permission('raw-materials.index'))
-                                <a href="{{ route('raw-materials.index') }}" class="btn btn-secondary">
-                                    <i class="icon-base ti tabler-x icon-xs me-2"></i>
-                                    {{ __('Cancel') }}
-                                </a>
-                            @endif
-                            @if (check_permission('raw-materials.edit'))
-                                <button type="button" class="btn btn-danger" onclick="resetForm()">
-                                    <i class="icon-base ti tabler-refresh icon-xs me-2"></i>
-                                    {{ __('Reset') }}
-                                </button>
-                            @endif
+                            <x-form-action-button :resource="'raw-materials'" :action="'edit'" :type="'page'" />
                         </div>
                     </form>
                 </div>
@@ -358,11 +341,5 @@
                 }
             });
         });
-
-        function resetForm() {
-            if (confirm('{{ __('Are you sure you want to reset the form? All changes will be lost.') }}')) {
-                location.reload();
-            }
-        }
     </script>
 @endpush

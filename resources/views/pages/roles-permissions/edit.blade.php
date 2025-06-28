@@ -72,17 +72,7 @@
                             <x-permissions :routeList="$role->permission" />
                         </div>
                         <div class="col-12 form-control-validation">
-                            @if (check_permission('roles-permissions.edit'))
-                                <button type="submit" class="btn btn-primary">{{ __('Update') }}</button>
-                            @endif
-                            @if (check_permission('roles-permissions.index'))
-                                <a href="{{ route('roles-permissions.index') }}"
-                                    class="btn btn-secondary">{{ __('Cancel') }}</a>
-                            @endif
-                            @if (check_permission('roles-permissions.edit'))
-                                <a href="{{ route('roles-permissions.edit', $role->id) }}"
-                                    class="btn btn-danger">{{ __('Reset') }}</a>
-                            @endif
+                            <x-form-action-button :resource="'roles-permissions'" :action="'edit'" :type="'page'" />
                         </div>
                     </form>
                 </div>

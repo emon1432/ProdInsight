@@ -15,13 +15,12 @@
                         <label class="form-label" for="name">{{ __('Name') }}
                             <span class="text-danger">*</span>
                         </label>
-                        <input type="text" name="name" class="form-control"
-                            placeholder="{{ __('Enter name') }}" required />
+                        <input type="text" name="name" class="form-control" placeholder="{{ __('Enter name') }}"
+                            required />
                     </div>
                     <div class="col-md-12 form-control-validation mb-5">
                         <label class="form-label" for="description">{{ __('Description') }}</label>
-                        <textarea name="description" class="form-control" placeholder="{{ __('Enter description') }}"
-                            rows="3"></textarea>
+                        <textarea name="description" class="form-control" placeholder="{{ __('Enter description') }}" rows="3"></textarea>
                     </div>
                     <div class="col-md-12 form-control-validation">
                         <label class="form-label" for="status">{{ __('Status') }}
@@ -34,12 +33,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        {{ __('Close') }}
-                    </button>
-                    @if (check_permission('units.create'))
-                        <button type="submit" class="btn btn-primary">{{ __('Save') }}</button>
-                    @endif
+                    <x-form-action-button :resource="'units'" :action="'create'" :type="'modal'" />
                 </div>
             </form>
         </div>
