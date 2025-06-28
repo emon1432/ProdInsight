@@ -75,3 +75,32 @@ if (!function_exists('amount_format')) {
         return $formattedAmount;
     }
 }
+
+if (!function_exists('active_currency')) {
+    function active_currency()
+    {
+        return Currency::find(settings('system_settings', 'currency_id', 1));
+    }
+}
+
+if (!function_exists('unit_conversion')) {
+    function unit_conversion($value, $parentUnit, $childUnit, $conversionRate = 1)
+    {
+        if ($conversionRate <= 0) {
+            return "{$value}{$parentUnit}";
+        }
+
+        $parentValue = number_format_without_currency(floor($value / $conversionRate));
+        $childValue = number_format_without_currency($value % $conversionRate);
+
+        $result = [];
+        if ($parentValue > 0) {
+            $result[] = sprintf("%.2f%s", $parentValue, $parentUnit);
+        }
+        if ($childValue > 0 || empty($result)) {
+            $result[] = sprintf("%.2f%s", $childValue, $childUnit);
+        }
+
+        return implode(' ', $result);
+    }
+}

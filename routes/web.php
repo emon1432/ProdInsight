@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Item\RawMaterialCategoryController;
+use App\Http\Controllers\Item\RawMaterialController;
 use App\Http\Controllers\System\Accessories\CurrencyController;
 use App\Http\Controllers\System\Accessories\UnitController;
 use App\Http\Controllers\System\OthersController;
@@ -20,6 +21,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     });
 
     Route::resource('raw-material-categories', RawMaterialCategoryController::class);
+    Route::resource('raw-materials', RawMaterialController::class);
     Route::resource('users', UserController::class);
     Route::resource('roles-permissions', RolesPermissionsController::class);
     Route::resource('units', UnitController::class);
