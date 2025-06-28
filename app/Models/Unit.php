@@ -17,6 +17,16 @@ class Unit extends Model
         'created_by',
     ];
 
+    public function rawMaterialsPurchase()
+    {
+        return $this->hasMany(RawMaterial::class, 'purchase_unit_id');
+    }
+
+    public function rawMaterialsConsumption()
+    {
+        return $this->hasMany(RawMaterial::class, 'consumption_unit_id');
+    }
+
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');

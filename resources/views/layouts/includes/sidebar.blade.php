@@ -44,6 +44,13 @@
                             </a>
                         </li>
                     @endif
+                    @if (check_permission('raw-materials.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('raw-materials.index') }}" class="menu-link">
+                                <div>{{ __('Raw Materials') }}</div>
+                            </a>
+                        </li>
+                    @endif
                 </ul>
             </li>
         @endif
