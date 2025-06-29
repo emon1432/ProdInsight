@@ -51,6 +51,7 @@
             var modal = $('#edit-units-modal');
 
             modal.find('#name').val(model.name);
+            modal.find('#symbol').val(model.symbol);
             modal.find('#description').val(model.description);
             modal.find('#status').val(model.status).trigger('change');
             modal.find('form').attr('action', "{{ url('units') }}/" + model.id);

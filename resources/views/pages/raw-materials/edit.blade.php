@@ -66,7 +66,7 @@
                                 @foreach ($units as $unit)
                                     <option value="{{ $unit->id }}"
                                         {{ old('purchase_unit_id', $rawMaterial->purchase_unit_id) == $unit->id ? 'selected' : '' }}>
-                                        {{ $unit->name }}
+                                        {{ $unit->name . ' (' . $unit->symbol . ')' }}
                                     </option>
                                 @endforeach
                             </select>
@@ -120,7 +120,7 @@
                                     @foreach ($units as $unit)
                                         <option value="{{ $unit->id }}"
                                             {{ old('consumption_unit_id', $rawMaterial->consumption_unit_id) == $unit->id ? 'selected' : '' }}>
-                                            {{ $unit->name }}
+                                            {{ $unit->name . ' (' . $unit->symbol . ')' }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -162,7 +162,7 @@
                                     placeholder="{{ __('Enter current stock') }}" step="any" min="0"
                                     value="{{ old('stock', $rawMaterial->stock) }}" required />
                                 <span class="input-group-text cursor-pointer unitName">
-                                    {{ $rawMaterial->purchaseUnit->name ?? '' }}
+                                    {{ $rawMaterial->purchaseUnit->symbol ?? '' }}
                                 </span>
                             </div>
                         </div>
@@ -173,7 +173,7 @@
                                     placeholder="{{ __('Enter alert stock') }}" step="any" min="0"
                                     value="{{ old('alert_stock', $rawMaterial->alert_stock) }}" />
                                 <span class="input-group-text cursor-pointer unitName">
-                                    {{ $rawMaterial->purchaseUnit->name ?? '' }}
+                                    {{ $rawMaterial->purchaseUnit->symbol ?? '' }}
                                 </span>
                             </div>
                         </div>
@@ -285,7 +285,7 @@
                 } else {
                     selectedUnit = $purchaseUnitSelect.find('option:selected').text();
                 }
-
+                selectedUnit = selectedUnit.split('(')[1]?.replace(')', '').trim() || '{{ __('Unit') }}';
                 if (selectedUnit && selectedUnit !== '{{ __('Select purchase unit') }}' && selectedUnit !==
                     '{{ __('Select consumption unit') }}') {
                     $unitNameSpans.text(selectedUnit);

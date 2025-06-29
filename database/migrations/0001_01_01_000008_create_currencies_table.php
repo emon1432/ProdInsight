@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->string('code')->unique();
-            $table->string('symbol')->unique();
+            $table->string('symbol')->nullable();
             $table->enum('position', ['Left', 'Right'])->default('Left');
             $table->double('conversion_rate')->default(1.0);
             $table->enum('status', ['Active', 'Inactive'])->default('Active');

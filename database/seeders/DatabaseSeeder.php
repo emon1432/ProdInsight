@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UnitsTableSeeder::class);
         $this->call(RawMaterialCategoriesTableSeeder::class);
         $this->call(RawMaterialsTableSeeder::class);
+        $this->call(NonInventoryItemsTableSeeder::class);
     }
 }
