@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class RawMaterialCategoriesTableSeeder extends Seeder
+class NonInventoryItemsTableSeeder extends Seeder
 {
 
     /**
@@ -16,16 +16,17 @@ class RawMaterialCategoriesTableSeeder extends Seeder
     {
         
 
-        \DB::table('raw_material_categories')->delete();
+        \DB::table('non_inventory_items')->delete();
         
-        \DB::table('raw_material_categories')->insert(array (
+        \DB::table('non_inventory_items')->insert(array (
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Metals & Alloys',
-                'slug' => 'metals-alloys',
+                'name' => 'Machine Maintenance Service',
+                'slug' => 'machine-maintenance-service',
+                'code' => 'SRV-MNT-001',
                 'status' => 'Active',
-                'description' => 'Raw materials including steel, aluminum, copper, and various metal alloys',
+                'description' => 'Regular maintenance and repair services for production machinery',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -34,10 +35,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Plastics & Polymers',
-                'slug' => 'plastics-polymers',
+                'name' => 'Equipment Calibration',
+                'slug' => 'equipment-calibration',
+                'code' => 'SRV-CAL-002',
                 'status' => 'Active',
-                'description' => 'Various plastic materials, resins, and polymer compounds',
+                'description' => 'Precision calibration services for measuring instruments',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -46,10 +48,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Chemicals & Solvents',
-                'slug' => 'chemicals-solvents',
+                'name' => 'Quality Inspection Service',
+                'slug' => 'quality-inspection-service',
+                'code' => 'SRV-QIS-003',
                 'status' => 'Active',
-                'description' => 'Industrial chemicals, acids, bases, and various solvents',
+                'description' => 'Third-party quality inspection and certification services',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -58,10 +61,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'name' => 'Textiles & Fabrics',
-                'slug' => 'textiles-fabrics',
+                'name' => 'Transportation & Logistics',
+                'slug' => 'transportation-logistics',
+                'code' => 'SRV-TRA-004',
                 'status' => 'Active',
-                'description' => 'Cotton, wool, synthetic fibers, and various textile materials',
+                'description' => 'Freight and logistics services for raw material delivery',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -70,10 +74,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             4 => 
             array (
                 'id' => 5,
-                'name' => 'Wood & Paper',
-                'slug' => 'wood-paper',
+                'name' => 'Energy & Utilities',
+                'slug' => 'energy-utilities',
+                'code' => 'UTL-ENR-005',
                 'status' => 'Active',
-                'description' => 'Lumber, plywood, paper products, and wood-based materials',
+                'description' => 'Electricity, gas, and water utilities for production facility',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -82,10 +87,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             5 => 
             array (
                 'id' => 6,
-                'name' => 'Glass & Ceramics',
-                'slug' => 'glass-ceramics',
+                'name' => 'Software License',
+                'slug' => 'software-license',
+                'code' => 'LIC-SFT-006',
                 'status' => 'Active',
-                'description' => 'Various types of glass, ceramic materials, and related compounds',
+                'description' => 'Annual software licenses for production management systems',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -94,10 +100,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             6 => 
             array (
                 'id' => 7,
-                'name' => 'Rubber & Elastomers',
-                'slug' => 'rubber-elastomers',
+                'name' => 'Employee Training',
+                'slug' => 'employee-training',
+                'code' => 'TRN-EMP-007',
                 'status' => 'Active',
-                'description' => 'Natural and synthetic rubber, elastic materials',
+                'description' => 'Professional training programs for staff development',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -106,10 +113,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             7 => 
             array (
                 'id' => 8,
-                'name' => 'Electronics Components',
-                'slug' => 'electronics-components',
+                'name' => 'Safety Equipment Service',
+                'slug' => 'safety-equipment-service',
+                'code' => 'SRV-SAF-008',
                 'status' => 'Active',
-                'description' => 'Semiconductors, circuit boards, wires, and electronic components',
+                'description' => 'Maintenance and inspection of safety equipment and systems',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -118,10 +126,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             8 => 
             array (
                 'id' => 9,
-                'name' => 'Food Ingredients',
-                'slug' => 'food-ingredients',
+                'name' => 'Waste Management',
+                'slug' => 'waste-management',
+                'code' => 'SRV-WST-009',
                 'status' => 'Active',
-                'description' => 'Food processing ingredients, preservatives, and additives',
+                'description' => 'Industrial waste disposal and recycling services',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',
@@ -130,10 +139,11 @@ class RawMaterialCategoriesTableSeeder extends Seeder
             9 => 
             array (
                 'id' => 10,
-                'name' => 'Construction Materials',
-                'slug' => 'construction-materials',
+                'name' => 'Security Services',
+                'slug' => 'security-services',
+                'code' => 'SRV-SEC-010',
                 'status' => 'Active',
-                'description' => 'Cement, aggregates, adhesives, and construction-related materials',
+                'description' => 'Physical security and surveillance services for facility',
                 'created_by' => 1,
                 'deleted_at' => NULL,
                 'created_at' => '2025-06-29 09:32:31',

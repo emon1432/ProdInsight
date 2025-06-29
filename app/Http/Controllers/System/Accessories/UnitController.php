@@ -95,6 +95,7 @@ class UnitController extends Controller
                     ],
                 ],
             ]))->render()->render();
+            $unit->name = $unit->name. ' (' . $unit->symbol . ')';
             $unit->status = (new StatusBadge($unit->status))->render()->render();
             $unit->description = (new Description($unit->description))->render()->render();
             $unit->createdBy = (new CreatedBy($unit->createdBy))->render()->render();

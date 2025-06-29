@@ -22,6 +22,7 @@ class UnitUpdateRequest extends FormRequest
         return [
             'name' => 'required|string|unique:units,name,' . $id . '|max:255',
             'slug' => 'required|string|unique:units,slug,' . $id . '|max:255',
+            'symbol' => 'required|string|max:10',
             'description' => 'nullable|string|max:500',
             'status' => 'required|in:Active,Inactive',
         ];

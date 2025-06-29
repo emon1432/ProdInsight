@@ -16,7 +16,14 @@
                             <span class="text-danger">*</span>
                         </label>
                         <input type="text" name="name" id="name" class="form-control"
-                            placeholder="{{ __('Enter name') }}" required />
+                            placeholder="{{ __('Enter unit name, e.g. Kilogram') }}" required />
+                    </div>
+                    <div class="col-md-12 form-control-validation mb-5">
+                        <label class="form-label" for="symbol">{{ __('Symbol') }}
+                            <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" name="symbol" id="symbol" class="form-control"
+                            placeholder="{{ __('Enter unit symbol, e.g. kg') }}" required />
                     </div>
                     <div class="col-md-12 form-control-validation mb-5">
                         <label class="form-label" for="description">{{ __('Description') }}</label>

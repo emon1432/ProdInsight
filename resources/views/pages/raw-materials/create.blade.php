@@ -57,7 +57,7 @@
                             <select name="purchase_unit_id" id="purchase_unit_id" class="form-select" required>
                                 <option value="">{{ __('Select purchase unit') }}</option>
                                 @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                    <option value="{{ $unit->id }}">{{ $unit->name . ' (' . $unit->symbol . ')' }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -99,7 +99,7 @@
                                 <select name="consumption_unit_id" id="consumption_unit_id" class="form-select">
                                     <option value="">{{ __('Select consumption unit') }}</option>
                                     @foreach ($units as $unit)
-                                        <option value="{{ $unit->id }}">{{ $unit->name }}</option>
+                                        <option value="{{ $unit->id }}">{{ $unit->name . ' (' . $unit->symbol . ')' }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -251,6 +251,7 @@
                 } else {
                     selectedUnit = $purchaseUnitSelect.find('option:selected').text();
                 }
+                selectedUnit = selectedUnit.split('(')[1]?.replace(')', '').trim() || '{{ __('Unit') }}';
 
                 if (selectedUnit && selectedUnit !== '{{ __('Select purchase unit') }}' && selectedUnit !==
                     '{{ __('Select consumption unit') }}') {

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('symbol');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->longText('description')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
