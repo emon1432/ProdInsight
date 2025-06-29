@@ -17,11 +17,11 @@
             <table class="common-datatable table d-table" data-url="{{ route('raw-materials.index') }}"
                 data-columns='[
                 { "data": "itemInfo" },
-                 { "data": "category" },
-                   { "data": "purchasePricePerUnit" },
-                   {"data": "conversion_rate"},
-                   {"data":"consumptionPricePerUnit"},
-                   {"data":"stock"},
+                { "data": "category" },
+                { "data": "purchasePricePerUnit" },
+                { "data": "conversion_rate"},
+                { "data": "consumptionPricePerUnit"},
+                { "data": "stock"},
                 { "data": "status" },
                 @if (main_menu_permission('raw-materials')) { "data": "actions" } @endif
                 ]'>

@@ -30,7 +30,9 @@
         <li class="menu-header small">
             <span class="menu-header-text">{{ __('Inventory') }}</span>
         </li>
-        @if (main_menu_permission('raw-material-categories'))
+        @if (main_menu_permission('raw-material-categories') ||
+                main_menu_permission('raw-materials') ||
+                main_menu_permission('non-inventory-items'))
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon icon-base ti tabler-category"></i>
@@ -48,6 +50,13 @@
                         <li class="menu-item">
                             <a href="{{ route('raw-materials.index') }}" class="menu-link">
                                 <div>{{ __('Raw Materials') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (check_permission('non-inventory-items.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('non-inventory-items.index') }}" class="menu-link">
+                                <div>{{ __('Non Inventory Items') }}</div>
                             </a>
                         </li>
                     @endif
