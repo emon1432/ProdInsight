@@ -464,5 +464,10 @@
                 }
             });
         });
+
+        // tagify initialization
+        $('.tagify').each(function() {
+            new Tagify(this);
+        });
     });
 </script>

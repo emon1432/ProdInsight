@@ -28,6 +28,7 @@ class ItemInfo extends Component
         }
         if (empty($this->initials)) {
             $this->initials = strtoupper(substr($this->name, 0, 1) . substr($this->name, strpos($this->name, ' ') + 1, 1));
+            $this->image = null;
         }
     }
 

@@ -111,7 +111,7 @@ class RawMaterialController extends Controller
     {
         try {
             if ($rawMaterial->image) {
-                imageDeleteManager($rawMaterial->image, 'raw-materials');
+                imageDeleteManager($rawMaterial->image);
             }
             $rawMaterial->delete();
             return response()->json([
