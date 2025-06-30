@@ -26,7 +26,7 @@ return new class extends Migration
             $table->double('stock')->default(0);
             $table->double('alert_stock')->default(0);
             $table->string('image')->nullable();
-            $table->text('description')->nullable();
+            $table->longText('description')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();
             $table->softDeletes();

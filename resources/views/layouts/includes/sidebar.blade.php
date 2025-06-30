@@ -32,7 +32,8 @@
         </li>
         @if (main_menu_permission('raw-material-categories') ||
                 main_menu_permission('raw-materials') ||
-                main_menu_permission('non-inventory-items'))
+                main_menu_permission('non-inventory-items') ||
+                main_menu_permission('categories'))
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon icon-base ti tabler-category"></i>
@@ -57,6 +58,13 @@
                         <li class="menu-item">
                             <a href="{{ route('non-inventory-items.index') }}" class="menu-link">
                                 <div>{{ __('Non Inventory Items') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (check_permission('categories.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('categories.index') }}" class="menu-link">
+                                <div>{{ __('Categories') }}</div>
                             </a>
                         </li>
                     @endif

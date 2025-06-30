@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-start align-items-center item-info">
     <div class="avatar-wrapper">
         <div class="avatar avatar-sm me-4">
-            @if (!empty($image))
+            @if (!empty($image) && file_exists(public_path($image)))
                 <img src="{{ $image }}" alt="{{ $name }}" class="rounded-circle">
             @elseif (!empty($initials))
                 @php

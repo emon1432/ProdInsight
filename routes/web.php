@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Item\CategoryController;
 use App\Http\Controllers\Item\NonInventoryItemController;
 use App\Http\Controllers\Item\RawMaterialCategoryController;
 use App\Http\Controllers\Item\RawMaterialController;
@@ -24,6 +25,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('raw-material-categories', RawMaterialCategoryController::class);
     Route::resource('raw-materials', RawMaterialController::class);
     Route::resource('non-inventory-items', NonInventoryItemController::class);
+    Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('roles-permissions', RolesPermissionsController::class);
     Route::resource('units', UnitController::class);
