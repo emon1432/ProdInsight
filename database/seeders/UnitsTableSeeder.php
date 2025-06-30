@@ -14,10 +14,12 @@ class UnitsTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('units')->delete();
+        
 
+        \DB::table('units')->delete();
+        
         \DB::table('units')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'Kilogram',
@@ -30,7 +32,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Gram',
@@ -43,7 +45,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'Liter',
@@ -56,7 +58,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'Milliliter',
@@ -69,7 +71,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'Piece',
@@ -82,7 +84,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Meter',
@@ -95,7 +97,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'Centimeter',
@@ -108,7 +110,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Square Meter',
@@ -121,7 +123,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'Ton',
@@ -134,7 +136,7 @@ class UnitsTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'name' => 'Pound',
@@ -148,5 +150,7 @@ class UnitsTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:31',
             ),
         ));
+
+        
     }
 }

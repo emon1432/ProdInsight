@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 class CurrenciesTableSeeder extends Seeder
 {
+
     /**
      * Auto generated seed file
      *
@@ -13,10 +14,12 @@ class CurrenciesTableSeeder extends Seeder
      */
     public function run()
     {
-        \DB::table('currencies')->delete();
+        
 
+        \DB::table('currencies')->delete();
+        
         \DB::table('currencies')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'US Dollar',
@@ -31,7 +34,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Euro',
@@ -46,7 +49,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'British Pound',
@@ -61,7 +64,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'Japanese Yen',
@@ -76,7 +79,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'Swiss Franc',
@@ -91,7 +94,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Canadian Dollar',
@@ -106,7 +109,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'Australian Dollar',
@@ -121,7 +124,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Chinese Yuan',
@@ -136,7 +139,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'Bangladeshi Taka',
@@ -151,7 +154,7 @@ class CurrenciesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'name' => 'Singapore Dollar',
@@ -167,5 +170,7 @@ class CurrenciesTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:31',
             ),
         ));
+
+        
     }
 }
