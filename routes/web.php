@@ -6,6 +6,7 @@ use App\Http\Controllers\Item\NonInventoryItemController;
 use App\Http\Controllers\Item\RawMaterialCategoryController;
 use App\Http\Controllers\Item\RawMaterialController;
 use App\Http\Controllers\System\Accessories\CurrencyController;
+use App\Http\Controllers\System\Accessories\ProductionStageController;
 use App\Http\Controllers\System\Accessories\UnitController;
 use App\Http\Controllers\System\OthersController;
 use App\Http\Controllers\System\RolesPermissionsController;
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('roles-permissions', RolesPermissionsController::class);
     Route::resource('units', UnitController::class);
     Route::resource('currencies', CurrencyController::class);
+    Route::resource('production-stages', ProductionStageController::class);
     Route::resource('settings', SettingController::class)->only('index', 'update');
 });
 
