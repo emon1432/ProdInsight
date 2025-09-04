@@ -1,26 +1,27 @@
 <div class="d-flex justify-content-start align-items-center item-info">
     <div class="avatar-wrapper">
-        <div class="avatar avatar-sm me-4">
+        <div class="avatar avatar me-2 me-sm-4 rounded-2 bg-label-secondary">
             @if (!empty($image) && file_exists(public_path($image)))
-                <img src="{{ $image }}" alt="{{ $name }}" class="rounded-circle">
+                <img src="{{ $image }}" alt="{{ $name }}" class="rounded">
             @elseif (!empty($initials))
                 @php
-                    $colors = ['primary', 'secondary', 'success', 'danger', 'warning', 'info', 'dark'];
+                    $colors = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+                    $color = $colors[array_rand($colors)];
                 @endphp
-                <span class="avatar-initial rounded-circle bg-label-{{ $colors[array_rand($colors)] }}">
+                <span class="avatar-initial rounded-2 bg-label-{{ $color }}">
                     {{ $initials }}
                 </span>
             @endif
         </div>
     </div>
     <div class="d-flex flex-column">
-        <span class="fw-medium text-heading text-truncate">{{ $name }}</span>
+        <h6 class="text-nowrap mb-0">{{ $name }}</h6>
         @if (!empty($code) && !empty($barcode))
-            <small>{{ $code }} ({{ $barcode }})</small>
+            <small class="text-truncate d-none d-sm-block">{{ $code }} ({{ $barcode }})</small>
         @elseif(!empty($code))
-            <small>{{ $code }}</small>
+            <small class="text-truncate d-none d-sm-block">{{ $code }}</small>
         @elseif(!empty($barcode))
-            <small>{{ $barcode }}</small>
+            <small class="text-truncate d-none d-sm-block">{{ $barcode }}</small>
         @endif
     </div>
 </div>
