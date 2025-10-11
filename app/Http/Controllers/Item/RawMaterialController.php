@@ -144,8 +144,8 @@ class RawMaterialController extends Controller
             ]))->render()->render();
             $rawMaterial->itemInfo = (new ItemInfo($rawMaterial->name, $rawMaterial->image, $rawMaterial->code, $rawMaterial->barcode))->render()->render();
             $rawMaterial->category = $rawMaterial->rawMaterialCategory->name ?? 'N/A';
-            $rawMaterial->purchasePricePerUnit = amount_format($rawMaterial->purchase_price) . '/' . $rawMaterial->purchaseUnit->name;
-            $rawMaterial->consumptionPricePerUnit = amount_format($rawMaterial->consumption_price) . '/' . $rawMaterial->consumptionUnit->name;
+            $rawMaterial->purchasePricePerUnit = format_amount($rawMaterial->purchase_price) . '/' . $rawMaterial->purchaseUnit->name;
+            $rawMaterial->consumptionPricePerUnit = format_amount($rawMaterial->consumption_price) . '/' . $rawMaterial->consumptionUnit->name;
             $rawMaterial->stock = unit_conversion($rawMaterial->stock, $rawMaterial->purchaseUnit->name, $rawMaterial->consumptionUnit->name, $rawMaterial->conversion_rate);
             $rawMaterial->status = (new StatusBadge($rawMaterial->status))->render()->render();
             return $rawMaterial;
