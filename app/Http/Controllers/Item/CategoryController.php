@@ -15,10 +15,15 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
+        $view = $request->get('view', '');
+
         if ($request->ajax()) {
-            return response()->json($this->data());
+            return response()->json($view === 'tree' ? $this->treeData() : $this->data());
         }
-        return view('pages.categories.index');
+
+        return $view === 'tree'
+            ? view('pages.categories.tree')
+            : view('pages.categories.index');
     }
 
     public function create()
@@ -120,9 +125,34 @@ class CategoryController extends Controller
                 ],
             ]))->render()->render();
             $category->itemInfo = (new ItemInfo($category->name, $category->image, $category->code, $category->barcode))->render()->render();
-            $category->parentCategory = Category::find($category->parent_id) ?->name ?? __('N/A');
+            $category->parentCategory = Category::find($category->parent_id)?->name ?? __('N/A');
             $category->status = (new StatusBadge($category->status))->render()->render();
             return $category;
         })->toArray();
+    }
+
+    private function treeData()
+    {
+        $categories = Category::all();
+
+        $map = [];
+        foreach ($categories as $cat) {
+            $map[$cat->id] = [
+                'id' => $cat->id,
+                'text' => $cat->name,
+                'children' => [],
+            ];
+        }
+
+        $tree = [];
+        foreach ($categories as $cat) {
+            if ($cat->parent_id && isset($map[$cat->parent_id])) {
+                $map[$cat->parent_id]['children'][] = &$map[$cat->id];
+            } else {
+                $tree[] = &$map[$cat->id];
+            }
+        }
+
+        return $tree;
     }
 }
