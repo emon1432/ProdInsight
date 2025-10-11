@@ -36,7 +36,35 @@
                 <label class="form-label" for="address">{{ __('Address') }}</label>
                 <textarea class="form-control" placeholder="{{ __('Enter address') }}" name="address" id="address" rows="2">{{ old('address', $values['address'] ?? '') }}</textarea>
             </div>
-
+            <div class="col-md-4 form-control-validation">
+                <label class="form-label" for="tax_collection">{{ __('Tax Collection') }}<span
+                        class="text-danger">*</span></label>
+                <select name="tax_collection" id="tax_collection" class="form-select" required>
+                    <option value="1"
+                        {{ old('tax_collection', $values['tax_collection'] ?? '') == 1 ? 'selected' : '' }}>
+                        {{ __('Enable') }}</option>
+                    <option value="0"
+                        {{ old('tax_collection', $values['tax_collection'] ?? '') == 0 ? 'selected' : '' }}>
+                        {{ __('Disable') }}</option>
+                </select>
+            </div>
+            <div class="col-md-4 form-control-validation">
+                <label class="form-label" for="tax_registration_number">{{ __('Tax Registration Number') }}</label>
+                <input type="text" class="form-control" placeholder="{{ __('Enter tax registration number') }}"
+                    name="tax_registration_number" id="tax_registration_number"
+                    value="{{ old('tax_registration_number', $values['tax_registration_number'] ?? '') }}" />
+            </div>
+            <div class="col-md-4 form-control-validation">
+                <label class="form-label" for="tax_type">{{ __('Tax Type') }}</label>
+                <select name="tax_type" id="tax_type" class="form-select">
+                    <option value="exclusive"
+                        {{ old('tax_type', $values['tax_type'] ?? '') == 'exclusive' ? 'selected' : '' }}>
+                        {{ __('Exclusive') }}</option>
+                    <option value="inclusive"
+                        {{ old('tax_type', $values['tax_type'] ?? '') == 'inclusive' ? 'selected' : '' }}>
+                        {{ __('Inclusive') }}</option>
+                </select>
+            </div>
             <div class="col-md-5 form-control-validation align-self-center">
                 <label class="form-label" for="logo">{{ __('Logo') }}</label>
                 <input type="file" name="logo" id="logo" class="form-control" accept="image/*"

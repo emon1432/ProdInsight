@@ -14,21 +14,21 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('settings')->delete();
-        
+
         \DB::table('settings')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
                 'icon' => 'briefcase',
                 'key' => 'business_settings',
-                'value' => '{"company_name":"ProdInsight","email":"info@prodinsight.com","phone":"01638849305","address":"Dhaka, Bangladesh","logo":"uploads\\/settings\\/prodinsight1748758913683bf1815b1a7.jpg","favicon":"uploads\\/settings\\/prodinsight1748758913683bf1815cf0f.png"}',
+                'value' => '{"company_name":"ProdInsight","email":"info@prodinsight.com","phone":"01638849305","address":"Dhaka, Bangladesh","tax_collection":"1","tax_registration_number":null,"tax_type":"inclusive","logo":"uploads\\/settings\\/prodinsight1748758913683bf1815b1a7.jpg","favicon":"uploads\\/settings\\/prodinsight1748758913683bf1815cf0f.png"}',
                 'created_at' => '2025-04-19 05:17:43',
-                'updated_at' => '2025-06-01 06:21:53',
+                'updated_at' => '2025-10-11 18:15:41',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
                 'icon' => 'settings',
@@ -37,7 +37,7 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-06-28 06:05:46',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
                 'icon' => 'mail',
@@ -48,6 +48,6 @@ class SettingsTableSeeder extends Seeder
             ),
         ));
 
-        
+
     }
 }
