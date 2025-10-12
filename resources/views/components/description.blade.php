@@ -1,3 +1,3 @@
 <span>
-    {!! wordwrap($description, 50, '<br>', true) !!}
+    {!! wordwrap($description, 30, '<br>', true) !!}
 </span>
