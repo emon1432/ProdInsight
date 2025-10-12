@@ -14,6 +14,19 @@
                 </a>
             @endif
         </div>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class="d-flex align-items-center">
+                <i class="icon-base ti tabler-alert-triangle me-2"></i>
+                <div>
+                    <strong>{{ __('Important:') }}</strong>
+                    {{ __('Configure tax settings first! Go to') }}
+                    <a href="{{ route('settings.index') }}"
+                        class="alert-link fw-bold">{{ __('Settings -> Business Settings') }}</a>
+                    {{ __('and configure your tax preferences before creating taxes.') }}
+                </div>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         <div class="card-datatable">
             <table class="common-datatable table d-table" data-url="{{ route('taxes.index') }}"
                 data-columns='[
