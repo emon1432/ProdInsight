@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SettingsTableSeeder::class);
         $this->call(CurrenciesTableSeeder::class);
         $this->call(UnitsTableSeeder::class);
+        $this->call(TaxesTableSeeder::class);
         $this->call(RawMaterialCategoriesTableSeeder::class);
         $this->call(RawMaterialsTableSeeder::class);
         $this->call(NonInventoryItemsTableSeeder::class);
