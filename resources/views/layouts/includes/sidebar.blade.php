@@ -98,7 +98,8 @@
                 </ul>
             </li>
         @endif
-        @if (main_menu_permission('units') ||
+        @if (main_menu_permission('brands') ||
+                main_menu_permission('units') ||
                 main_menu_permission('currencies') ||
                 main_menu_permission('taxes') ||
                 main_menu_permission('production-stages'))
@@ -108,6 +109,13 @@
                     <div>{{ __('Accessories') }}</div>
                 </a>
                 <ul class="menu-sub">
+                    @if (check_permission('brands.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('brands.index') }}" class="menu-link">
+                                <div>{{ __('Brands') }}</div>
+                            </a>
+                        </li>
+                    @endif
                     @if (check_permission('units.index'))
                         <li class="menu-item">
                             <a href="{{ route('units.index') }}" class="menu-link">
