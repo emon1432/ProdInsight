@@ -5,6 +5,7 @@ use App\Http\Controllers\Item\CategoryController;
 use App\Http\Controllers\Item\NonInventoryItemController;
 use App\Http\Controllers\Item\RawMaterialCategoryController;
 use App\Http\Controllers\Item\RawMaterialController;
+use App\Http\Controllers\System\Accessories\BrandController;
 use App\Http\Controllers\System\Accessories\CurrencyController;
 use App\Http\Controllers\System\Accessories\ProductionStageController;
 use App\Http\Controllers\System\Accessories\TaxController;
@@ -30,6 +31,7 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
     Route::resource('roles-permissions', RolesPermissionsController::class);
+    Route::resource('brands', BrandController::class);
     Route::resource('units', UnitController::class);
     Route::resource('currencies', CurrencyController::class);
     Route::resource('taxes', TaxController::class);
