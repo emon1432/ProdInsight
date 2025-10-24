@@ -200,7 +200,7 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => '2025-06-30 06:33:46',
             ),
         ));
-
+        
         
     }
 }

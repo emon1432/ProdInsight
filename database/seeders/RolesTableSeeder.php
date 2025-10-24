@@ -14,12 +14,12 @@ class RolesTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('roles')->delete();
-
+        
         \DB::table('roles')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'Super Admin',
@@ -30,7 +30,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Admin',
@@ -41,7 +41,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-07-17 17:14:18',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'Manager',
@@ -52,7 +52,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'Production Supervisor',
@@ -63,7 +63,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'Inventory Manager',
@@ -74,7 +74,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Quality Controller',
@@ -85,7 +85,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'Purchasing Officer',
@@ -96,7 +96,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Warehouse Keeper',
@@ -107,7 +107,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'Analyst',
@@ -118,7 +118,7 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'name' => 'Operator',
@@ -130,7 +130,7 @@ class RolesTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:29',
             ),
         ));
-
-
+        
+        
     }
 }

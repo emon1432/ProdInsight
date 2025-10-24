@@ -150,7 +150,7 @@ class UnitsTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:31',
             ),
         ));
-
+        
         
     }
 }
