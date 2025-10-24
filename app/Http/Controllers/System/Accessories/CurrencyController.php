@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CurrencyStoreRequest;
-use App\Http\Requests\CurrencyUpdateRequest;
+use App\Http\Requests\CurrencyRequest;
 use App\Models\Currency;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -21,7 +20,7 @@ class CurrencyController extends Controller
         return view('pages.currencies.index');
     }
 
-    public function store(CurrencyStoreRequest $request)
+    public function store(CurrencyRequest $request)
     {
         try {
             Currency::create($request->except(['_token']));
@@ -40,7 +39,7 @@ class CurrencyController extends Controller
         }
     }
 
-    public function update(CurrencyUpdateRequest $request, Currency $currency)
+    public function update(CurrencyRequest $request, Currency $currency)
     {
         try {
             $currency->update($request->except(['_token', '_method']));

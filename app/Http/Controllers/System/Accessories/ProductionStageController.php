@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\ProductionStageStoreRequest;
-use App\Http\Requests\ProductionStageUpdateRequest;
+use App\Http\Requests\ProductionStageRequest;
 use App\Models\ProductionStage;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -25,7 +24,7 @@ class ProductionStageController extends Controller
         return view('pages.production-stages.index', compact('nextProductionStageCode'));
     }
 
-    public function store(ProductionStageStoreRequest $request)
+    public function store(ProductionStageRequest $request)
     {
         try {
             ProductionStage::create($request->except(['_token']));
@@ -44,7 +43,7 @@ class ProductionStageController extends Controller
         }
     }
 
-    public function update(ProductionStageUpdateRequest $request, ProductionStage $productionStage)
+    public function update(ProductionStageRequest $request, ProductionStage $productionStage)
     {
         try {
             $productionStage->update($request->except(['_token', '_method']));

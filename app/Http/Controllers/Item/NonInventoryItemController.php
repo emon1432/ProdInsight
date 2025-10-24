@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\NonInventoryItemStoreRequest;
-use App\Http\Requests\NonInventoryItemUpdateRequest;
+use App\Http\Requests\NonInventoryItemRequest;
 use App\Models\NonInventoryItem;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -25,7 +24,7 @@ class NonInventoryItemController extends Controller
         return view('pages.non-inventory-items.index', compact('nextNonInventoryItemCode'));
     }
 
-    public function store(NonInventoryItemStoreRequest $request)
+    public function store(NonInventoryItemRequest $request)
     {
         try {
             NonInventoryItem::create($request->except(['_token']));
@@ -44,7 +43,7 @@ class NonInventoryItemController extends Controller
         }
     }
 
-    public function update(NonInventoryItemUpdateRequest $request, NonInventoryItem $nonInventoryItem)
+    public function update(NonInventoryItemRequest $request, NonInventoryItem $nonInventoryItem)
     {
         try {
             $nonInventoryItem->update($request->except(['_token', '_method']));
