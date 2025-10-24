@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserStoreRequest;
-use App\Http\Requests\UserUpdateRequest;
+use App\Http\Requests\UserRequest;
 use App\Models\Role;
 use App\Models\User;
 use App\View\Components\Actions;
@@ -27,7 +26,7 @@ class UserController extends Controller
         return view('pages.users.create', compact('roles'));
     }
 
-    public function store(UserStoreRequest $request)
+    public function store(UserRequest $request)
     {
         try {
             $user = new User();
@@ -65,7 +64,7 @@ class UserController extends Controller
         return view('pages.users.edit', compact('user', 'roles'));
     }
 
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(UserRequest $request, User $user)
     {
         try {
             $user->name = $request->name;

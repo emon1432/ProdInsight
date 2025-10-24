@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RawMaterialStoreRequest;
-use App\Http\Requests\RawMaterialUpdateRequest;
+use App\Http\Requests\RawMaterialRequest;
 use App\Models\RawMaterial;
 use App\Models\RawMaterialCategory;
 use App\Models\Unit;
@@ -32,7 +31,7 @@ class RawMaterialController extends Controller
         return view('pages.raw-materials.create', compact('rawMaterialCategories', 'units', 'nextRawMaterialCode'));
     }
 
-    public function store(RawMaterialStoreRequest $request)
+    public function store(RawMaterialRequest $request)
     {
         try {
             if ($request->different_consumption == 0) {
@@ -74,7 +73,7 @@ class RawMaterialController extends Controller
         return view('pages.raw-materials.edit', compact('rawMaterial', 'rawMaterialCategories', 'units'));
     }
 
-    public function update(RawMaterialUpdateRequest $request, RawMaterial $rawMaterial)
+    public function update(RawMaterialRequest $request, RawMaterial $rawMaterial)
     {
         try {
             if ($request->different_consumption == 0) {

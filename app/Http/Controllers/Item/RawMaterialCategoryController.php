@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\RawMaterialCategoryStoreRequest;
-use App\Http\Requests\RawMaterialCategoryUpdateRequest;
+use App\Http\Requests\RawMaterialCategoryRequest;
 use App\Models\RawMaterialCategory;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -22,7 +21,7 @@ class RawMaterialCategoryController extends Controller
         return view('pages.raw-material-categories.index');
     }
 
-    public function store(RawMaterialCategoryStoreRequest $request)
+    public function store(RawMaterialCategoryRequest $request)
     {
         try {
             RawMaterialCategory::create($request->except(['_token']));
@@ -41,7 +40,7 @@ class RawMaterialCategoryController extends Controller
         }
     }
 
-    public function update(RawMaterialCategoryUpdateRequest $request, RawMaterialCategory $rawMaterialCategory)
+    public function update(RawMaterialCategoryRequest $request, RawMaterialCategory $rawMaterialCategory)
     {
         try {
             $rawMaterialCategory->update($request->except(['_token', '_method']));

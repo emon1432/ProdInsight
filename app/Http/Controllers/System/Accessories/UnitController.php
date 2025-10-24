@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UnitStoreRequest;
-use App\Http\Requests\UnitUpdateRequest;
+use App\Http\Requests\UnitRequest;
 use App\Models\Unit;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -22,7 +21,7 @@ class UnitController extends Controller
         return view('pages.units.index');
     }
 
-    public function store(UnitStoreRequest $request)
+    public function store(UnitRequest $request)
     {
         try {
             Unit::create($request->except(['_token']));
@@ -41,7 +40,7 @@ class UnitController extends Controller
         }
     }
 
-    public function update(UnitUpdateRequest $request, Unit $unit)
+    public function update(UnitRequest $request, Unit $unit)
     {
         try {
             $unit->update($request->except(['_token', '_method']));

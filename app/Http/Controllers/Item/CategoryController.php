@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Item;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CategoryStoreRequest;
-use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\View\Components\Actions;
 use App\View\Components\ItemInfo;
@@ -34,7 +33,7 @@ class CategoryController extends Controller
         return view('pages.categories.create', compact('nextCategoryCode', 'categories'));
     }
 
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryRequest $request)
     {
         try {
             Category::create($request->except(['_token', 'image']));
@@ -67,7 +66,7 @@ class CategoryController extends Controller
         return view('pages.categories.edit', compact('category', 'categories'));
     }
 
-    public function update(CategoryUpdateRequest $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         try {
             $category->update($request->except(['_token', 'image']));

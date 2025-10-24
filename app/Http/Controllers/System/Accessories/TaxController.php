@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\TaxStoreRequest;
-use App\Http\Requests\TaxUpdateRequest;
+use App\Http\Requests\TaxRequest;
 use App\Models\Tax;
 use App\View\Components\Actions;
 use App\View\Components\CreatedBy;
@@ -22,7 +21,7 @@ class TaxController extends Controller
         return view('pages.taxes.index');
     }
 
-    public function store(TaxStoreRequest $request)
+    public function store(TaxRequest $request)
     {
         try {
             Tax::create($request->except(['_token']));
@@ -41,7 +40,7 @@ class TaxController extends Controller
         }
     }
 
-    public function update(TaxUpdateRequest $request, Tax $tax)
+    public function update(TaxRequest $request, Tax $tax)
     {
         try {
             $tax->update($request->except(['_token', '_method']));

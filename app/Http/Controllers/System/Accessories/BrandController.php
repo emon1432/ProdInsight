@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\System\Accessories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BrandStoreRequest;
-use App\Http\Requests\BrandUpdateRequest;
+use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
 use App\View\Components\Actions;
 use App\View\Components\ItemInfo;
@@ -28,7 +27,7 @@ class BrandController extends Controller
         return view('pages.brands.create', compact('nextBrandCode'));
     }
 
-    public function store(BrandStoreRequest $request)
+    public function store(BrandRequest $request)
     {
         try {
             Brand::create($request->except(['_token', 'image']));
@@ -60,7 +59,7 @@ class BrandController extends Controller
         return view('pages.brands.edit', compact('brand'));
     }
 
-    public function update(BrandUpdateRequest $request, Brand $brand)
+    public function update(BrandRequest $request, Brand $brand)
     {
         try {
             $brand->update($request->except(['_token', 'image']));
