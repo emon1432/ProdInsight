@@ -14,12 +14,12 @@ class ProductionStagesTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('production_stages')->delete();
-
+        
         \DB::table('production_stages')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'Raw Material Procurement',
@@ -32,7 +32,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Material Preparation',
@@ -45,7 +45,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'Manufacturing',
@@ -58,7 +58,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'Assembly',
@@ -71,7 +71,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'Quality Control',
@@ -84,7 +84,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Finishing',
@@ -97,7 +97,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'Packaging',
@@ -110,7 +110,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Final Inspection',
@@ -123,7 +123,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'created_at' => '2025-07-17 16:57:32',
                 'updated_at' => '2025-07-17 16:57:32',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'Ready for Dispatch',
@@ -137,7 +137,7 @@ class ProductionStagesTableSeeder extends Seeder
                 'updated_at' => '2025-07-17 16:57:32',
             ),
         ));
-
-
+        
+        
     }
 }

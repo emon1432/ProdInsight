@@ -14,12 +14,12 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('settings')->delete();
-
+        
         \DB::table('settings')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'icon' => 'briefcase',
@@ -28,7 +28,7 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-10-11 18:15:41',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'icon' => 'settings',
@@ -37,7 +37,7 @@ class SettingsTableSeeder extends Seeder
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-06-28 06:05:46',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'icon' => 'mail',
@@ -47,7 +47,7 @@ class SettingsTableSeeder extends Seeder
                 'updated_at' => '2025-05-27 06:24:37',
             ),
         ));
-
-
+        
+        
     }
 }
