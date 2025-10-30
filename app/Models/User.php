@@ -21,8 +21,9 @@ class User extends Authenticatable
     use SoftDeletes;
 
     protected $fillable = [
-        'role_id',
         'name',
+        'role_group_id',
+        'role_id',
         'email',
         'phone',
         'image',
@@ -42,6 +43,11 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function roleGroup()
+    {
+        return $this->belongsTo(RoleGroup::class);
     }
 
     public function role()

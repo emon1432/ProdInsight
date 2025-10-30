@@ -14,16 +14,17 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
+
         \DB::table('users')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
-                'role_id' => 1,
                 'name' => 'Khairul Islam Emon',
+                'role_group_id' => 1,
+                'role_id' => 1,
                 'email' => 'admin@verticasoft.com',
                 'phone' => '01638849305',
                 'password' => '$2y$12$atEjRCnSoCeKnbOCT6a.p.EWTQ7GzU97eInXEyEp0OHnVd6vH4Dnm',
@@ -39,11 +40,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-06-01 06:24:37',
             ),
-            1 => 
+            1 =>
             array (
                 'id' => 2,
-                'role_id' => 2,
                 'name' => 'Sarah Johnson',
+                'role_group_id' => 1,
+                'role_id' => 2,
                 'email' => 'sarah.johnson@prodinsight.com',
                 'phone' => '+1-555-0124',
                 'password' => '$2y$12$vpOmftWFA8tmZ9kLX8ro1uh6U6ZQ66bhUo./hU5WQl843DLewWjUK',
@@ -59,11 +61,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            2 => 
+            2 =>
             array (
                 'id' => 3,
-                'role_id' => 3,
                 'name' => 'Michael Chen',
+                'role_group_id' => 1,
+                'role_id' => 3,
                 'email' => 'michael.chen@prodinsight.com',
                 'phone' => '+1-555-0125',
                 'password' => '$2y$12$.8c5hX6wY0wqMxIOi6/wpO3saC6jwIbAUsqg8A/vPuJ05cDgdNH0O',
@@ -79,11 +82,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            3 => 
+            3 =>
             array (
                 'id' => 4,
-                'role_id' => 4,
                 'name' => 'Emily Rodriguez',
+                'role_group_id' => 2,
+                'role_id' => 4,
                 'email' => 'emily.rodriguez@prodinsight.com',
                 'phone' => '+1-555-0126',
                 'password' => '$2y$12$GUVR9JGl4RTJrnrvF3oQDeBNsKv539FYyp2EQFoLdL8pQIkN6YI8W',
@@ -99,11 +103,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            4 => 
+            4 =>
             array (
                 'id' => 5,
-                'role_id' => 5,
                 'name' => 'David Wilson',
+                'role_group_id' => 3,
+                'role_id' => 5,
                 'email' => 'david.wilson@prodinsight.com',
                 'phone' => '+1-555-0127',
                 'password' => '$2y$12$A2AKTCB3Nr6nGRnGWy4vpO8korCdcFlFlMcU0pIcKfptPabQpjLK2',
@@ -119,11 +124,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            5 => 
+            5 =>
             array (
                 'id' => 6,
-                'role_id' => 6,
                 'name' => 'Lisa Thompson',
+                'role_group_id' => 2,
+                'role_id' => 6,
                 'email' => 'lisa.thompson@prodinsight.com',
                 'phone' => '+1-555-0128',
                 'password' => '$2y$12$ziGtLa9ZfteTIHCfdWE9MuN/ORJLR7Zesb43vtaEqmEljV9LUsL/6',
@@ -139,11 +145,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            6 => 
+            6 =>
             array (
                 'id' => 7,
-                'role_id' => 7,
                 'name' => 'Robert Garcia',
+                'role_group_id' => 2,
+                'role_id' => 7,
                 'email' => 'robert.garcia@prodinsight.com',
                 'phone' => '+1-555-0129',
                 'password' => '$2y$12$GwVkitKanUKScW4w7Kxe1e3eEf6I4iZwI8lrjEaHYyZDDw8JdIWyW',
@@ -159,11 +166,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            7 => 
+            7 =>
             array (
                 'id' => 8,
-                'role_id' => 8,
                 'name' => 'Jennifer Lee',
+                'role_group_id' => 1,
+                'role_id' => 8,
                 'email' => 'jennifer.lee@prodinsight.com',
                 'phone' => '+1-555-0130',
                 'password' => '$2y$12$7IFstF9E06lkTlqbqsNcpuLBn7BnaRR.Zeo/9B.c/gBj60XR6o4zm',
@@ -179,11 +187,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            8 => 
+            8 =>
             array (
                 'id' => 9,
-                'role_id' => 9,
                 'name' => 'Mark Anderson',
+                'role_group_id' => 1,
+                'role_id' => 9,
                 'email' => 'mark.anderson@prodinsight.com',
                 'phone' => '+1-555-0131',
                 'password' => '$2y$12$CdDrxQO4WwjxiosWRJOGTOd759d8bOb/PtPJqoezRFfoBjAyxJy5u',
@@ -199,11 +208,12 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            9 => 
+            9 =>
             array (
                 'id' => 10,
-                'role_id' => 10,
                 'name' => 'Ashley Brown',
+                'role_group_id' => 2,
+                'role_id' => 10,
                 'email' => 'ashley.brown@prodinsight.com',
                 'phone' => '+1-555-0132',
                 'password' => '$2y$12$xJrTtXRG/pBiWdGLqMUHe.dJZ2M17jOtS2pLyn2hRw1p7RUslALfm',
@@ -220,7 +230,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:31',
             ),
         ));
-        
-        
+
+
     }
 }

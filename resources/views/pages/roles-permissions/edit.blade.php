@@ -24,11 +24,24 @@
                             <h6>{{ __('Role Information') }}</h6>
                             <hr class="mt-0" />
                         </div>
-                        <div class="col-md-8 form-control-validation">
+                        <div class="col-md-4 form-control-validation">
+                            <label class="form-label" for="role_group">{{ __('Role Group') }}<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" name="role_group_id" id="role_group" required>
+                                <option value="">{{ __('Select Role Group') }}</option>
+                                @foreach ($roleGroups as $group)
+                                    <option value="{{ $group->id }}"
+                                        {{ $role->role_group_id == $group->id ? 'selected' : '' }}>
+                                        {{ $group->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-4 form-control-validation">
                             <label class="form-label" for="name">{{ __('Role Name') }}<span
                                     class="text-danger">*</span></label>
                             <input type="text" name="name" id="name" class="form-control"
-                                placeholder="{{ __('Enter Role Name') }}" required value="{{ old('name', $role->name) }}" />
+                                placeholder="{{ __('Enter Role Name') }}" required
+                                value="{{ old('name', $role->name) }}" />
                         </div>
                         <div class="col-md-4 form-control-validation">
                             <label class="form-label" for="status">{{ __('Status') }}<span
@@ -69,7 +82,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <x-permissions :routeList="$role->permission" />
+                            <div id="permissions-container">
+                                <x-permissions :routeList="$role->permission" />
+                            </div>
                         </div>
                         <div class="col-12 form-control-validation">
                             <x-form-action-button :resource="'roles-permissions'" :action="'edit'" :type="'page'" />
@@ -83,9 +98,44 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('#selectAll').on('change', function() {
-                $('.form-check-input').prop('checked', this.checked);
+            function bindPermissionCardHandlers() {
+                $('#permissions-container').find('.card-header .form-check-input').off('change').on('change',
+                    function() {
+                        var gid = $(this).attr('id');
+                        $(this).closest('.card').find('.item-' + gid).prop('checked', this.checked);
+                    });
+            }
+
+            $('#role_group').on('change', function() {
+                var groupId = $(this).val();
+                if (groupId) {
+                    $.ajax({
+                        url: '{{ route('roles-permissions.create') }}',
+                        type: 'GET',
+                        dataType: 'json',
+                        data: {
+                            group_id: groupId,
+                            role_id: '{{ $role->id }}'
+                        },
+                        success: function(data) {
+                            if (data.html) {
+                                $('#permissions-container').html(data.html);
+                                bindPermissionCardHandlers();
+                                $('[data-bs-toggle="tooltip"]').tooltip();
+                            }
+                        }
+                    });
+                } else {
+                    $('#permissions-container').find('.form-check-input').prop('checked', false);
+                }
             });
+
+            $('#selectAll').on('change', function() {
+                $('#permissions-container').find('.form-check-input').prop('checked', this.checked);
+            });
+
+            // Bind handlers for initially rendered permissions (if any)
+            bindPermissionCardHandlers();
             $('[data-bs-toggle="tooltip"]').tooltip();
         });
     </script>

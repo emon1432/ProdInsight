@@ -3,53 +3,45 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-function get_route_list()
+function get_route_list($roleGroup = null)
 {
     $routes = Route::getRoutes()->getRoutes();
-    $routes = array_filter($routes, function ($route) {
-        return in_array('permission', $route->gatherMiddleware());
-    });
+    $groupedRoutes = [];
 
-    $routeList = [];
     foreach ($routes as $route) {
-        $routeName = explode('.', $route->getName());
-        if (isset($routeName[1])) {
-            $group = $routeName[0];
-            $action = $routeName[1];
-            if ($action === 'store') {
-                $action = 'create';
-            } elseif ($action === 'update') {
-                $action = 'edit';
+        $middlewares = $route->gatherMiddleware();
+
+        // find role group from middleware
+        $currentGroup = null;
+        foreach ($middlewares as $m) {
+            if (str_starts_with($m, 'permission:')) {
+                $currentGroup = substr($m, strlen('permission:'));
+                break;
             }
-            $routeList[$group][] = $action;
         }
-    }
-    foreach ($routeList as $key => $actions) {
-        $routeList[$key] = array_unique($actions);
-    }
-    $excluded = [
-        'login',
-        'logout',
-        'register',
-        'password',
-        'verification',
-        'user-profile-information',
-        'user-password',
-        'two-factor',
-        'profile',
-        'sanctum',
-        'livewire',
-        'ignition'
-    ];
-    foreach ($excluded as $exclude) {
-        unset($routeList[$exclude]);
-    }
-    ksort($routeList);
-    foreach ($routeList as $key => $actions) {
-        $routeList[$key] = array_fill_keys($actions, false);
+
+        if (!$currentGroup) continue; // skip routes without permission middleware
+
+        // if a specific role group is passed, skip others
+        if ($roleGroup && $currentGroup !== $roleGroup) continue;
+
+        $routeName = $route->getName();
+        if (!$routeName) continue;
+
+        $parts = explode('.', $routeName);
+        if (count($parts) < 2) continue;
+
+        $group = $parts[0];
+        $action = $parts[1];
+
+        if ($action === 'store') $action = 'create';
+        if ($action === 'update') $action = 'edit';
+
+        $groupedRoutes[$currentGroup][$group][$action] = false;
     }
 
-    return $routeList;
+    // If specific role group requested, return only that group’s routes
+    return $roleGroup ? ($groupedRoutes[$roleGroup] ?? []) : $groupedRoutes;
 }
 
 function get_readable_action_name($action)
@@ -75,41 +67,31 @@ function get_readable_action_name($action)
 
 function check_permission($routeName)
 {
-    if (Auth::user()->role->id == 1)
-        return true;
+    $user = Auth::user();
 
-    $routeName = explode('.', $routeName);
-    if (count($routeName) < 2) {
-        return $routeName[0] === 'dashboard';
-    }
+    if ($user->role->id == 1) return true;
 
-    $group = $routeName[0];
-    $action = $routeName[1];
+    $parts = explode('.', $routeName);
+    $group = $parts[0] ?? '';
+    $action = $parts[1] ?? '';
 
-    // Normalize action names just like in get_route_list()
-    if ($action === 'store') {
-        $action = 'create';
-    } elseif ($action === 'update') {
-        $action = 'edit';
-    }
+    if ($action === 'store') $action = 'create';
+    if ($action === 'update') $action = 'edit';
 
-    $authUserPermissions = Auth::user()->role->permission;
+    $rolePermissions = $user->role->permission ?? [];
+    $groupPermissions = get_route_list()[$user->roleGroup->slug] ?? [];
 
-    return isset($authUserPermissions[$group][$action]) && $authUserPermissions[$group][$action] === true;
+    return ($rolePermissions[$group][$action] ?? false) || ($groupPermissions[$group][$action] ?? false);
 }
-
 
 function main_menu_permission($menuName)
 {
-    if (Auth::user()->role->id == 1) {
-        return true;
-    }
+    $user = Auth::user();
 
-    $permissions = Auth::user()->role->permission;
+    if ($user->role->id == 1) return true;
 
-    if (!isset($permissions[$menuName])) {
-        return false;
-    }
+    $rolePermissions = $user->role->permission[$menuName] ?? [];
+    $groupPermissions = get_route_list()[$user->roleGroup->slug][$menuName] ?? [];
 
-    return in_array(true, $permissions[$menuName], true);
+    return in_array(true, array_merge($rolePermissions, $groupPermissions), true);
 }
