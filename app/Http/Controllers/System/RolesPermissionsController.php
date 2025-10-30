@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RolePermissionRequest;
 use App\Models\Role;
+use App\Models\RoleGroup;
 use App\View\Components\Actions;
 use App\View\Components\PermissionsViewModal;
 use App\View\Components\StatusBadge;
@@ -21,16 +22,22 @@ class RolesPermissionsController extends Controller
         return view('pages.roles-permissions.index');
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        $routeList = get_route_list();
-        return view('pages.roles-permissions.create', compact('routeList'));
+        $routeList = [];
+        if ($request->ajax() && $request->has('group_id')) {
+            $routeList = $this->get_permissions($request->get('group_id'), $request->get('role_id') ?? null);
+            $html = view('components.permissions', ['routeList' => $routeList])->render();
+            return response()->json(['status' => 200, 'html' => $html]);
+        }
+        $roleGroups = RoleGroup::where('status', 'Active')->get();
+        return view('pages.roles-permissions.create', compact('roleGroups', 'routeList'));
     }
 
     public function store(RolePermissionRequest $request)
     {
         try {
-            $routeList = get_route_list();
+            $routeList = get_route_list(RoleGroup::findOrFail($request->role_group_id)->slug);
 
             if ($request->filled('permission')) {
                 foreach ($request->permission as $group => $actions) {
@@ -45,6 +52,7 @@ class RolesPermissionsController extends Controller
             $role = new Role();
             $role->name = $request->name;
             $role->slug = slugify($request->name);
+            $role->role_group_id = $request->role_group_id;
             $role->status = $request->status;
             $role->permission = $routeList;
             $role->save();
@@ -66,28 +74,17 @@ class RolesPermissionsController extends Controller
     public function edit(string $id)
     {
         $role = Role::findOrFail($id);
-        $routeList = get_route_list();
-
-        if (is_null($role->permission)) {
-            $role->permission = json_encode($routeList);
-            $role->save();
-        }
-
-        $savedPermissions = $role->permission;
-        foreach ($routeList as $group => $actions) {
-            foreach ($actions as $action => $value) {
-                $routeList[$group][$action] = $savedPermissions[$group][$action] ?? false;
-            }
-        }
+        $roleGroups = RoleGroup::where('status', 'Active')->get();
+        $routeList = $this->get_permissions($role->role_group_id, $role->id);
         $role->permission = $routeList;
         $role->save();
-        return view('pages.roles-permissions.edit', compact('role'));
+        return view('pages.roles-permissions.edit', compact('role', 'roleGroups'));
     }
 
     public function update(RolePermissionRequest $request, string $id)
     {
         try {
-            $routeList = get_route_list();
+            $routeList = $this->get_permissions($request->role_group_id, $id);
 
             if ($request->filled('permission')) {
                 foreach ($request->permission as $group => $actions) {
@@ -102,6 +99,7 @@ class RolesPermissionsController extends Controller
             $role = Role::findOrFail($id);
             $role->name = $request->name;
             $role->slug = slugify($request->name);
+            $role->role_group_id = $request->role_group_id;
             $role->status = $request->status;
             $role->permission = $routeList;
             $role->save();
@@ -150,7 +148,9 @@ class RolesPermissionsController extends Controller
 
     protected function data()
     {
-        return Role::with('users')->get()->map(function ($role) {
+        return Role::with('users','roleGroup')
+        ->orderBy('role_group_id')
+        ->get()->map(function ($role) {
             $buttons = [];
             if ($role->id != 1) {
                 $buttons = [
@@ -166,10 +166,31 @@ class RolesPermissionsController extends Controller
                 'resource' => 'roles-permissions',
                 'buttons' => $buttons,
             ]))->render()->render();
+            $role->group = $role->roleGroup->name;
             $role->total_users = (new TotalUsers($role))->render()->render();
             $role->permission_view = (new PermissionsViewModal($role))->render()->render();
             $role->status = (new StatusBadge($role->status))->render()->render();
             return $role;
         })->toArray();
+    }
+
+    private function get_permissions($group_id, $role_id = null)
+    {
+        $routeList = get_route_list(RoleGroup::findOrFail($group_id)->slug);
+        if (!is_null($role_id)) {
+            $role = Role::findOrFail($role_id);
+            if (is_null($role->permission)) {
+                $role->permission = json_encode($routeList);
+                $role->save();
+            }
+
+            $savedPermissions = $role->permission;
+            foreach ($routeList as $group => $actions) {
+                foreach ($actions as $action => $value) {
+                    $routeList[$group][$action] = $savedPermissions[$group][$action] ?? false;
+                }
+            }
+        }
+        return $routeList;
     }
 }

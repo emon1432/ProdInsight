@@ -16,6 +16,7 @@
         <div class="card-datatable">
             <table class="common-datatable table d-table" data-url="{{ route('roles-permissions.index') }}"
                 data-columns='[
+                { "data": "group" },
                 { "data": "name" },
                 { "data": "total_users" },
                  @if (check_permission('roles-permissions.show')) { "data": "permission_view" }, @endif
@@ -24,6 +25,7 @@
                 ]'>
                 <thead class="border-top">
                     <tr>
+                        <th>{{ __('Group') }}</th>
                         <th>{{ __('Role') }}</th>
                         <th>{{ __('Total Users') }}</th>
                         @if (check_permission('roles-permissions.show'))

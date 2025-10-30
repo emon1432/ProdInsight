@@ -5,25 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Role extends Model
+class RoleGroup extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
         'name',
         'slug',
-        'role_group_id',
         'status',
-        'permission',
     ];
 
-    protected $casts = [
-        'permission' => 'array',
-    ];
-
-    public function roleGroup()
+    public function roles()
     {
-        return $this->belongsTo(RoleGroup::class);
+        return $this->hasMany(Role::class);
     }
 
     public function users()
