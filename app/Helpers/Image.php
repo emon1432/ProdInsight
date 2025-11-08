@@ -24,9 +24,7 @@ function imageUpdateManager($image, $slug, $path, $old_image)
 
     $image->move($path, $image_name);
 
-    if (file_exists($old_image) && $old_image != 'default.jpg') {
-        @unlink($old_image);
-    }
+    imageDeleteManager($old_image);
 
     return $image_name;
 }

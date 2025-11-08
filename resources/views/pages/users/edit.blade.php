@@ -43,17 +43,26 @@
                                 placeholder="{{ __('Enter phone number') }}" value="{{ old('phone', $user->phone) }}"
                                 required />
                         </div>
-                        <div class="col-md-6 form-control-validation">
+
+                        <div class="col-md-3 form-control-validation">
+                            <label class="form-label" for="role_group_id">{{ __('Role Group') }}<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" name="role_group_id" id="role_group_id" required>
+                                <option value="">{{ __('Select Role Group') }}</option>
+                                @foreach ($roleGroups as $roleGroup)
+                                    <option value="{{ $roleGroup->id }}"
+                                        data-roles='{{ json_encode($roleGroup->roles) }}'
+                                        {{ $user->role_group_id == $roleGroup->id ? 'selected' : '' }}>
+                                        {{ $roleGroup->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-control-validation">
                             <label class="form-label" for="role_id">{{ __('Role') }}<span
                                     class="text-danger">*</span></label>
                             <select class="form-select" name="role_id" id="role_id" required>
                                 <option value="">{{ __('Select Role') }}</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}"
-                                        {{ $user->role_id == $role->id ? 'selected' : '' }}>
-                                        {{ $role->name }}
-                                    </option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-5 form-control-validation align-self-center">
@@ -109,3 +118,31 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            var currentRoleId = @json($user->role_id);
+
+            function populateRolesFromSelected() {
+                var roles = $('#role_group_id').find(':selected').data('roles');
+                var $roleSelect = $('#role_id');
+                $roleSelect.empty();
+                $roleSelect.append(`<option value="">{{ __('Select Role') }}</option>`);
+                if (roles) {
+                    // roles might be an array of objects
+                    roles.forEach(function(role) {
+                        var selected = (currentRoleId && currentRoleId == role.id) ? 'selected' : '';
+                        $roleSelect.append(`<option value="${role.id}" ${selected}>${role.name}</option>`);
+                    });
+                }
+            }
+
+            $('#role_group_id').on('change', function() {
+                populateRolesFromSelected();
+            });
+
+            // populate on load (so the current role is preselected)
+            populateRolesFromSelected();
+        });
+    </script>
+@endpush

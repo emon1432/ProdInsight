@@ -4,7 +4,7 @@ namespace App\Http\Controllers\System;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Models\Role;
+use App\Models\RoleGroup;
 use App\Models\User;
 use App\View\Components\Actions;
 use App\View\Components\UserInfo;
@@ -22,22 +22,17 @@ class UserController extends Controller
 
     public function create()
     {
-        $roles = Role::all();
-        return view('pages.users.create', compact('roles'));
+        $roleGroups = RoleGroup::with('roles')->get();
+        return view('pages.users.create', compact('roleGroups'));
     }
 
     public function store(UserRequest $request)
     {
         try {
-            $user = new User();
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->password = bcrypt($request->password);
-            $user->role_id = $request->role_id;
-            $user->image = $request->file('image') ? imageUploadManager($request->file('image'), slugify($request->name), 'users') : null;
-            $user->save();
+            User::create($request->except(['_token', 'image', 'password']) + [
+                'password' => bcrypt($request->password),
+                'image' => $request->file('image') ? imageUploadManager($request->file('image'), slugify($request->name), 'users') : null,
+            ]);
 
             return response()->json([
                 'status' => 200,
@@ -60,25 +55,17 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        $roles = Role::all();
-        return view('pages.users.edit', compact('user', 'roles'));
+        $roleGroups = RoleGroup::with('roles')->get();
+        return view('pages.users.edit', compact('user', 'roleGroups'));
     }
 
     public function update(UserRequest $request, User $user)
     {
         try {
-            $user->name = $request->name;
-            $user->email = $request->email;
-            $user->phone = $request->phone;
-            $user->address = $request->address;
-            $user->role_id = $request->role_id;
-            if ($request->file('image')) {
-                $user->image = imageUpdateManager($request->file('image'), slugify($request->name), 'users', $user->image);
-            }
-            if ($request->password) {
-                $user->password = bcrypt($request->password);
-            }
-            $user->save();
+            $user->update($request->except(['_token', 'image', 'password']) + [
+                'password' => $request->password ? bcrypt($request->password) : $user->password,
+                'image' => $request->file('image') ? imageUpdateManager($request->file('image'), slugify($request->name), 'users', $user->image) : $user->image,
+            ]);
 
             return response()->json([
                 'status' => 200,
