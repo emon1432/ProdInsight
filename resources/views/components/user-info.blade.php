@@ -16,6 +16,12 @@
         <a href="{{ route('users.show', $user->id) }}" class="text-heading text-truncate">
             <span class="fw-medium">{{ $user->name }}</span>
         </a>
-        <small>{{ $user->role->name }}</small>
+        <small>
+            @if ($user->role && $user->roleGroup)
+                {{ $user->role->name }} of {{ $user->roleGroup->name }}.
+            @else
+                <span class="text-muted">No role assigned</span>
+            @endif
+        </small>
     </div>
 </div>

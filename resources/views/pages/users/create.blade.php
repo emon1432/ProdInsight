@@ -41,14 +41,22 @@
                             <input type="text" name="phone" id="phone" class="form-control"
                                 placeholder="{{ __('Enter phone number') }}" required />
                         </div>
-                        <div class="col-md-6 form-control-validation">
+                        <div class="col-md-3 form-control-validation">
+                            <label class="form-label" for="role_group_id">{{ __('Role Group') }}<span
+                                    class="text-danger">*</span></label>
+                            <select class="form-select" name="role_group_id" id="role_group_id" required>
+                                <option value="">{{ __('Select Role Group') }}</option>
+                                @foreach ($roleGroups as $roleGroup)
+                                    <option value="{{ $roleGroup->id }}"
+                                        data-roles="{{ json_encode($roleGroup->roles) }}">{{ $roleGroup->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 form-control-validation">
                             <label class="form-label" for="role_id">{{ __('Role') }}<span
                                     class="text-danger">*</span></label>
                             <select class="form-select" name="role_id" id="role_id" required>
                                 <option value="">{{ __('Select Role') }}</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="col-md-5 form-control-validation align-self-center">
@@ -104,3 +112,20 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#role_group_id').on('change', function() {
+                var roles = $(this).find(':selected').data('roles');
+                var $roleSelect = $('#role_id');
+                $roleSelect.empty();
+                $roleSelect.append(`<option value="">{{ __('Select Role') }}</option>`);
+                if (roles) {
+                    roles.forEach(function(role) {
+                        $roleSelect.append(`<option value="${role.id}">${role.name}</option>`);
+                    });
+                }
+            });
+        });
+    </script>
+@endpush
