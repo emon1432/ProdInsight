@@ -1,8 +1,10 @@
 <?php
 
 use App\Models\Currency;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 if (!function_exists('slugify')) {
     function slugify(string $text): string
@@ -102,5 +104,67 @@ if (!function_exists('unit_conversion')) {
         }
 
         return implode(' ', $result);
+    }
+}
+
+if (!function_exists('resolve_related_value')) {
+    function resolve_related_value(string $key, $value)
+    {
+        if ($value === null || $value === '' || $value === '-') {
+            return '-';
+        }
+
+        $value = trim((string) $value);
+
+        if (preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $value)) {
+            $img = '<img src="' . imageShow($value) . '" alt="Image" style="max-height: 50px; max-width: 50px;">';
+            return $img;
+        }
+
+        if (Str::endsWith($key, '_by')) {
+            $user = \App\Models\User::find($value);
+            return $user?->name ?? "User ID: {$value}";
+        }
+
+        if (Str::endsWith($key, '_id')) {
+            $relation = Str::studly(Str::beforeLast($key, '_id'));
+            $modelClass = "App\\Models\\{$relation}";
+
+            if (class_exists($modelClass)) {
+                $record = $modelClass::find($value);
+                if ($record) {
+                    return $record->name
+                        ?? $record->title
+                        ?? $record->slug
+                        ?? $value;
+                }
+            }
+
+            $table = Str::plural(Str::snake(Str::beforeLast($key, '_id')));
+            $result = DB::table($table)->find($value);
+            if ($result) {
+                return $result->name
+                    ?? $result->title
+                    ?? $result->slug
+                    ?? $value;
+            }
+
+            return $value;
+        }
+
+        $isPotentialDate = preg_match('/(\d{4}-\d{2}-\d{2}|T|:\d{2})/', $value);
+
+        if ($isPotentialDate) {
+            try {
+                $carbon = Carbon::parse($value);
+                if ($carbon->year >= 1900 && $carbon->year <= 2100) {
+                    return $carbon->format('d M Y, h:i A');
+                }
+            } catch (\Throwable $e) {
+                return $value;
+            }
+        }
+
+        return $value;
     }
 }

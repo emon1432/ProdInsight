@@ -29,6 +29,9 @@ class StatusBadge extends Component
             'Active' => 'success',
             'Inactive' => 'danger',
             'Pending' => 'warning',
+            'Created' => 'success',
+            'Updated' => 'info',
+            'Deleted' => 'danger',
             default => 'secondary',
         };
     }
