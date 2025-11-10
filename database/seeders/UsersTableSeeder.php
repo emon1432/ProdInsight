@@ -14,12 +14,12 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('users')->delete();
-
+        
         \DB::table('users')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'Khairul Islam Emon',
@@ -32,7 +32,7 @@ class UsersTableSeeder extends Seeder
                 'two_factor_recovery_codes' => NULL,
                 'two_factor_confirmed_at' => NULL,
                 'image' => 'uploads/users/khairul-islam-emon1748759077683bf225059ea.jpg',
-                'address' => NULL,
+            'address' => '69 Outer Circular Rd, Gulfesha Plaza, 11/A (lift 11), Moghbazar, Dhaka 1217',
                 'remember_token' => 'Sj8nXaG35X',
                 'email_verified_at' => '2025-04-19 05:17:43',
                 'current_team_id' => NULL,
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-04-19 05:17:43',
                 'updated_at' => '2025-06-01 06:24:37',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'Sarah Johnson',
@@ -61,7 +61,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'Michael Chen',
@@ -82,7 +82,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:29',
                 'updated_at' => '2025-06-29 09:32:29',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'Emily Rodriguez',
@@ -103,7 +103,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'David Wilson',
@@ -124,7 +124,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Lisa Thompson',
@@ -145,7 +145,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'Robert Garcia',
@@ -166,7 +166,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:30',
                 'updated_at' => '2025-06-29 09:32:30',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'Jennifer Lee',
@@ -187,7 +187,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'Mark Anderson',
@@ -208,7 +208,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => '2025-06-29 09:32:31',
                 'updated_at' => '2025-06-29 09:32:31',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'name' => 'Ashley Brown',
@@ -230,7 +230,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2025-06-29 09:32:31',
             ),
         ));
-
-
+        
+        
     }
 }

@@ -147,6 +147,23 @@
                 </ul>
             </li>
         @endif
+        @if (main_menu_permission('activity-logs'))
+            <li class="menu-item">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon icon-base ti tabler-shield-check"></i>
+                    <div>{{ __('Administrator') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    @if (check_permission('activity-logs.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('activity-logs.index') }}" class="menu-link">
+                                <div>{{ __('Activity Logs') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                </ul>
+            </li>
+        @endif
         @if (check_permission('settings.index'))
             <li class="menu-item">
                 <a href="{{ route('settings.index') }}" class="menu-link">
