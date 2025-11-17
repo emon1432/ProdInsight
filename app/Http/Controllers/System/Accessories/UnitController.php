@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UnitRequest;
 use App\Models\Unit;
 use App\View\Components\Actions;
-use App\View\Components\CreatedBy;
+use App\View\Components\ActionBy;
 use App\View\Components\Description;
 use App\View\Components\StatusBadge;
 use Illuminate\Http\Request;
@@ -97,7 +97,7 @@ class UnitController extends Controller
             $unit->name = $unit->name. ' (' . $unit->symbol . ')';
             $unit->status = (new StatusBadge($unit->status))->render()->render();
             $unit->description = (new Description($unit->description))->render()->render();
-            $unit->createdBy = (new CreatedBy($unit->createdBy))->render()->render();
+            $unit->createdBy = (new ActionBy($unit->createdBy))->render()->render();
             return $unit;
         })->toArray();
     }

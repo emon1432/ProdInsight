@@ -17,7 +17,7 @@
             <span class="fw-medium">{{ $user->name }}</span>
         </a>
         <small>
-            @if ($user->role && $user->roleGroup)
+            @if (@$user->role && @$user->roleGroup)
                 {{ $user->role->name }} of {{ $user->roleGroup->name }}.
             @else
                 <span class="text-muted">No role assigned</span>

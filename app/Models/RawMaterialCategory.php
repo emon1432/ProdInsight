@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RawMaterialCategory extends Model
 {
-    use SoftDeletes,Loggable;
+    use SoftDeletes, Loggable;
 
     protected $fillable = [
         'name',
@@ -16,6 +16,7 @@ class RawMaterialCategory extends Model
         'status',
         'description',
         'created_by',
+        'deleted_by',
     ];
 
     public function rawMaterials()
@@ -26,5 +27,10 @@ class RawMaterialCategory extends Model
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

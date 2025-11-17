@@ -84,9 +84,6 @@ class BrandController extends Controller
     public function destroy(Brand $brand)
     {
         try {
-            if ($brand->image) {
-                imageDeleteManager($brand->image);
-            }
             $brand->delete();
             return response()->json([
                 'status' => 200,

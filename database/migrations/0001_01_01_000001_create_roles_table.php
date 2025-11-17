@@ -18,7 +18,9 @@ return new class extends Migration
             $table->foreignId('role_group_id')->constrained('role_groups')->onDelete('cascade');
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->json('permission')->nullable();
+            $table->foreignId('created_by')->nullable()->nullOnDelete();
             $table->softDeletes();
+            $table->foreignId('deleted_by')->nullable()->nullOnDelete();
             $table->timestamps();
         });
     }

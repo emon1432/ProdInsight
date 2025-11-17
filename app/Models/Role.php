@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Role extends Model
 {
-    use SoftDeletes,Loggable;
+    use SoftDeletes, Loggable;
 
     protected $fillable = [
         'name',
@@ -16,6 +16,8 @@ class Role extends Model
         'role_group_id',
         'status',
         'permission',
+        'created_by',
+        'deleted_by',
     ];
 
     protected $casts = [
@@ -30,5 +32,15 @@ class Role extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

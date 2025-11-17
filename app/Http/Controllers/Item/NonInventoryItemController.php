@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\NonInventoryItemRequest;
 use App\Models\NonInventoryItem;
 use App\View\Components\Actions;
-use App\View\Components\CreatedBy;
+use App\View\Components\ActionBy;
 use App\View\Components\Description;
 use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
@@ -100,7 +100,7 @@ class NonInventoryItemController extends Controller
             $nonInventoryItem->itemInfo = (new ItemInfo($nonInventoryItem->name, null, $nonInventoryItem->code, null))->render()->render();
             $nonInventoryItem->status = (new StatusBadge($nonInventoryItem->status))->render()->render();
             $nonInventoryItem->description = (new Description($nonInventoryItem->description))->render()->render();
-            $nonInventoryItem->createdBy = (new CreatedBy($nonInventoryItem->createdBy))->render()->render();
+            $nonInventoryItem->createdBy = (new ActionBy($nonInventoryItem->createdBy))->render()->render();
             return $nonInventoryItem;
         })->toArray();
     }

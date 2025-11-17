@@ -91,9 +91,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         try {
-            if ($category->image) {
-                imageDeleteManager($category->image);
-            }
             $category->delete();
             return response()->json([
                 'status' => 200,

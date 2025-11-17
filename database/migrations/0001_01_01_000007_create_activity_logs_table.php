@@ -29,7 +29,6 @@ return new class extends Migration
             $table->string('platform')->nullable();
             $table->string('source')->default('web');
             $table->string('url')->nullable();
-            $table->softDeletes();
             $table->timestamps();
             $table->index(['user_id', 'role_id']);
             $table->index(['model_type', 'model_id']);

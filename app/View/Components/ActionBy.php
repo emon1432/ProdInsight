@@ -6,17 +6,17 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CreatedBy extends Component
+class ActionBy extends Component
 {
     public $user;
-    public function __construct($createdBy)
+    public function __construct($actionBy)
     {
-        $this->user = $createdBy;
+        $this->user = $actionBy;
     }
 
     public function render(): View|Closure|string
     {
-        return view('components.created-by', [
+        return view('components.action-by', [
             'user' => $this->user,
         ]);
     }

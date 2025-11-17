@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CurrencyRequest;
 use App\Models\Currency;
 use App\View\Components\Actions;
-use App\View\Components\CreatedBy;
+use App\View\Components\ActionBy;
 use App\View\Components\StatusBadge;
 use Illuminate\Http\Request;
 
@@ -98,7 +98,7 @@ class CurrencyController extends Controller
                 'buttons' => $buttons,
             ]))->render()->render();
             $currency->status = (new StatusBadge($currency->status))->render()->render();
-            $currency->createdBy = (new CreatedBy($currency->createdBy))->render()->render();
+            $currency->createdBy = (new ActionBy($currency->createdBy))->render()->render();
             $currency->conversion_rate = '$ 1 = ' . ($currency->position === 'Left' ? $currency->symbol . ' ' . $currency->conversion_rate : $currency->conversion_rate . ' ' . $currency->symbol);
             return $currency;
         })->toArray();
