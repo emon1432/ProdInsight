@@ -10,6 +10,7 @@ use App\Http\Controllers\System\Accessories\ProductionStageController;
 use App\Http\Controllers\System\Accessories\TaxController;
 use App\Http\Controllers\System\Accessories\UnitController;
 use App\Http\Controllers\System\Administrator\ActivityLogController;
+use App\Http\Controllers\System\Administrator\TrashController;
 use App\Http\Controllers\System\RolesPermissionsController;
 use App\Http\Controllers\System\SettingController;
 use App\Http\Controllers\System\UserController;
@@ -28,5 +29,10 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::resource('taxes', TaxController::class);
     Route::resource('production-stages', ProductionStageController::class);
     Route::resource('activity-logs', ActivityLogController::class)->only('index', 'show');
+    Route::resource('trash', TrashController::class)->only('index');
+    Route::controller(TrashController::class)->group(function () {
+        Route::post('/trash/restore/{table}/{id}', 'restore')->name('trash.restore');
+        Route::delete('/trash/destroy/{table}/{id}', 'destroy')->name('trash.destroy');
+    });
     Route::resource('settings', SettingController::class)->only('index', 'update');
 });

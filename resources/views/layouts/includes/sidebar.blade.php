@@ -147,7 +147,7 @@
                 </ul>
             </li>
         @endif
-        @if (main_menu_permission('activity-logs'))
+        @if (main_menu_permission('activity-logs') || main_menu_permission('trash'))
             <li class="menu-item">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon icon-base ti tabler-shield-check"></i>
@@ -158,6 +158,13 @@
                         <li class="menu-item">
                             <a href="{{ route('activity-logs.index') }}" class="menu-link">
                                 <div>{{ __('Activity Logs') }}</div>
+                            </a>
+                        </li>
+                    @endif
+                    @if (check_permission('trash.index'))
+                        <li class="menu-item">
+                            <a href="{{ route('trash.index') }}" class="menu-link">
+                                <div>{{ __('Trash') }}</div>
                             </a>
                         </li>
                     @endif
