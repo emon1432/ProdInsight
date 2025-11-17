@@ -73,7 +73,14 @@ class TrashController extends Controller
                 throw new \Exception("Table {$table} does not exist.");
             }
 
-            DB::table($table)->where('id', $id)->delete();
+            $modelClass = "App\\Models\\" . Str::studly(Str::singular($table));
+
+            if (!class_exists($modelClass)) {
+                throw new \Exception("Model class for table {$table} does not exist.");
+            }
+
+            $record = $modelClass::onlyTrashed()->findOrFail($id);
+            $record->forceDelete();
 
             return response()->json([
                 'status' => 200,
