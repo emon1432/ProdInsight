@@ -8,21 +8,21 @@
         <div class="card-datatable">
             <table class="common-datatable table d-table" data-url="{{ route('activity-logs.index') }}"
                 data-columns='[
-                { "data": "userInfo" },
-                { "data": "event" },
-                { "data": "model" },
-                { "data": "description" },
-                { "data": "ip" },
-                { "data": "time" },
+                    { "data": "itemInfo" },
+                    { "data": "event" },
+                    { "data": "model" },
+                    { "data": "userInfo" },
+                    { "data": "description" },
+                    { "data": "time" },
                 @if (main_menu_permission('activity-logs')) { "data": "actions" } @endif
                 ]'>
                 <thead class="border-top">
                     <tr>
-                        <th>{{ __('User') }}</th>
+                        <th>{{ __('Item') }}</th>
                         <th>{{ __('Event') }}</th>
-                        <th>{{ __('Model') }}</th>
+                        <th>{{ __('Item Type') }}</th>
+                        <th>{{ __('Action By') }}</th>
                         <th>{{ __('Description') }}</th>
-                        <th>{{ __('IP') }}</th>
                         <th>{{ __('Time') }}</th>
                         @if (main_menu_permission('activity-logs'))
                             <th>{{ __('Actions') }}</th>
