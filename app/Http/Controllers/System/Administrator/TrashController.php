@@ -132,6 +132,7 @@ class TrashController extends Controller
                     'custom' => [
                         'Restore' => [
                             'route' => 'javascript:void(0);',
+                            'route_name' => 'trash.restore',
                             'icon' => 'restore',
                             'label' => 'Restore',
                             'class' => 'restore-record',
@@ -142,6 +143,7 @@ class TrashController extends Controller
                         ],
                         'Delete Permanently' => [
                             'route' => 'javascript:void(0);',
+                            'route_name' => 'trash.destroy',
                             'icon' => 'trash-x',
                             'label' => 'Delete Permanently',
                             'class' => 'permanently-delete-record',

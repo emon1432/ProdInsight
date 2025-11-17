@@ -19,7 +19,8 @@ class RolePermissionRequest extends FormRequest
             'slug' => Str::slug($this->name),
         ]);
 
-        $id = $this->route('role')?->id;
+        $id = $this->route('roles_permission');
+        $id = is_object($id) ? $id->id : $id;
 
         return [
             'name' => [
@@ -31,9 +32,9 @@ class RolePermissionRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('roles', 'slug')->where(function ($query) {
-                    return $query->where('role_group_id', $this->role_group_id);
-                })->ignore($id),
+                Rule::unique('roles')
+                    ->where('role_group_id', $this->role_group_id)
+                    ->ignore($id),
             ],
             'role_group_id' => [
                 'required',

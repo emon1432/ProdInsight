@@ -91,7 +91,6 @@ function main_menu_permission($menuName)
     if ($user->role->id == 1) return true;
 
     $rolePermissions = $user->role->permission[$menuName] ?? [];
-    $groupPermissions = get_route_list()[$user->roleGroup->slug][$menuName] ?? [];
-
-    return in_array(true, array_merge($rolePermissions, $groupPermissions), true);
+    
+    return in_array(true, $rolePermissions, true);
 }

@@ -11,7 +11,7 @@
                     $customButtons = $actions['buttons']['custom'];
                 @endphp
                 @foreach ($customButtons as $button => $details)
-                    @if (check_permission($details['route']))
+                    @if (check_permission($details['route_name']))
                         <a href="{{ $details['route'] }}"
                             class="dropdown-item d-flex align-items-center {{ $details['class'] }}">
                             <i class="icon-base ti tabler-{{ $details['icon'] }} me-2"></i>
