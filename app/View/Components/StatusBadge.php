@@ -31,7 +31,9 @@ class StatusBadge extends Component
             'Pending' => 'warning',
             'Created' => 'success',
             'Updated' => 'info',
-            'Deleted' => 'danger',
+            'Deleted' => 'warning',
+            'Restored' => 'primary',
+            'Permanently Deleted' => 'danger',
             default => 'secondary',
         };
     }

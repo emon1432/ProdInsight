@@ -41,7 +41,7 @@ class ActivityLogController extends Controller
                 ],
             ]))->render()->render();
             $activityLog->userInfo = (new UserInfo($activityLog->user))->render()->render() ?? 'System';
-            $activityLog->event = (new StatusBadge(ucfirst($activityLog->event)))->render()->render();
+            $activityLog->event = (new StatusBadge(ucwords(str_replace('_', ' ', $activityLog->event))))->render()->render();
             $activityLog->model = class_basename($activityLog->model_type);
             $item = $activityLog->subject;
             if (!$item) {

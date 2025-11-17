@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Currency;
+use App\View\Components\StatusBadge;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
@@ -107,8 +108,30 @@ if (!function_exists('unit_conversion')) {
     }
 }
 
+if (!function_exists('get_fk_table')) {
+    function get_fk_table(string $modelClass, string $foreignKey): ?string
+    {
+        if (!class_exists($modelClass)) {
+            return null;
+        }
+
+        $table = Str::snake(Str::pluralStudly(class_basename($modelClass)));
+
+        $db = env('DB_DATABASE');
+
+        $relation = DB::table('information_schema.KEY_COLUMN_USAGE')
+            ->where('TABLE_SCHEMA', $db)
+            ->where('TABLE_NAME', $table)
+            ->where('COLUMN_NAME', $foreignKey)
+            ->whereNotNull('REFERENCED_TABLE_NAME')
+            ->first();
+
+        return $relation?->REFERENCED_TABLE_NAME ?? null;
+    }
+}
+
 if (!function_exists('resolve_related_value')) {
-    function resolve_related_value(string $key, $value)
+    function resolve_related_value(string $key, $value, string $modelClass)
     {
         if ($value === null || $value === '' || $value === '-') {
             return '-';
@@ -116,55 +139,84 @@ if (!function_exists('resolve_related_value')) {
 
         $value = trim((string) $value);
 
+        /* ---------------------------------------------
+         * 1) Image detection
+         * --------------------------------------------- */
         if (preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $value)) {
-            $img = '<img src="' . imageShow($value) . '" alt="Image" style="max-height: 50px; max-width: 50px;">';
-            return $img;
+            return '<img src="' . imageShow($value) . '" alt="Image"
+                        style="max-height: 50px; max-width: 50px;">';
         }
 
+        /* ---------------------------------------------
+         * 2) created_by / updated_by / deleted_by
+         * --------------------------------------------- */
         if (Str::endsWith($key, '_by')) {
             $user = \App\Models\User::find($value);
             return $user?->name ?? "User ID: {$value}";
         }
 
+        /* ---------------------------------------------
+         * 3) *_id → Smart FK resolution
+         * --------------------------------------------- */
         if (Str::endsWith($key, '_id')) {
-            $relation = Str::studly(Str::beforeLast($key, '_id'));
-            $modelClass = "App\\Models\\{$relation}";
+            $fkTable = get_fk_table($modelClass, $key);
 
-            if (class_exists($modelClass)) {
-                $record = $modelClass::find($value);
+            if ($fkTable) {
+                $record = DB::table($fkTable)->find($value);
+
                 if ($record) {
                     return $record->name
                         ?? $record->title
                         ?? $record->slug
-                        ?? $value;
+                        ?? "ID: {$value}";
                 }
             }
 
-            $table = Str::plural(Str::snake(Str::beforeLast($key, '_id')));
-            $result = DB::table($table)->find($value);
-            if ($result) {
-                return $result->name
-                    ?? $result->title
-                    ?? $result->slug
-                    ?? $value;
+            // Try model-class mapping fallback
+            $relation = Str::studly(Str::beforeLast($key, '_id'));
+            $relatedModelClass = "App\\Models\\{$relation}";
+
+            if (class_exists($relatedModelClass)) {
+                $record = $relatedModelClass::find($value);
+                if ($record) {
+                    return $record->name
+                        ?? $record->title
+                        ?? $record->slug
+                        ?? "ID: {$value}";
+                }
             }
 
-            return $value;
+            return "ID: {$value}";
         }
 
-        $isPotentialDate = preg_match('/(\d{4}-\d{2}-\d{2}|T|:\d{2})/', $value);
+        /* ---------------------------------------------
+         * 4) Date detection (safe, no phone confusion)
+         * --------------------------------------------- */
+        $looksLikeDate = preg_match('/(\d{4}-\d{2}-\d{2}|T\d|:\d{2})/', $value);
 
-        if ($isPotentialDate) {
+        if ($looksLikeDate) {
             try {
                 $carbon = Carbon::parse($value);
+
+                // Only treat real years as valid
                 if ($carbon->year >= 1900 && $carbon->year <= 2100) {
                     return $carbon->format('d M Y, h:i A');
                 }
             } catch (\Throwable $e) {
-                return $value;
+                return e($value);
             }
         }
 
-        return $value;
+        /* ---------------------------------------------
+         * 5) Status detection
+         * --------------------------------------------- */
+        if ($key == 'status') {
+            return (new StatusBadge($value))->render();
+        }
+
+        /* ---------------------------------------------
+         * 6) Default → safe escaped value
+         * --------------------------------------------- */
+        return e($value);
     }
 }

@@ -86,8 +86,8 @@
 
                                 @forelse ($allKeys as $key)
                                     @php
-                                        $oldFormatted = resolve_related_value($key, $oldValues[$key] ?? '-');
-                                        $newFormatted = resolve_related_value($key, $newValues[$key] ?? '-');
+                                        $oldFormatted = resolve_related_value($key, $oldValues[$key] ?? '-', $activityLog->model_type);
+                                        $newFormatted = resolve_related_value($key, $newValues[$key] ?? '-', $activityLog->model_type);
                                     @endphp
                                     <tr>
                                         <td class="fw-semibold">{{ ucfirst(str_replace('_', ' ', $key)) }}</td>
