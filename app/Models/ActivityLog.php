@@ -4,11 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ActivityLog extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -45,7 +44,7 @@ class ActivityLog extends Model
 
     public function subject()
     {
-        return $this->morphTo(__FUNCTION__, 'model_type', 'model_id');
+        return $this->morphTo()->withTrashed();
     }
 
     public function scopeEvent($query, $event)

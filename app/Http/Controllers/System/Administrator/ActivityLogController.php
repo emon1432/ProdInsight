@@ -5,6 +5,7 @@ namespace App\Http\Controllers\System\Administrator;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
 use App\View\Components\Actions;
+use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
 use App\View\Components\UserInfo;
 use Illuminate\Http\Request;
@@ -42,6 +43,15 @@ class ActivityLogController extends Controller
             $activityLog->userInfo = (new UserInfo($activityLog->user))->render()->render() ?? 'System';
             $activityLog->event = (new StatusBadge(ucfirst($activityLog->event)))->render()->render();
             $activityLog->model = class_basename($activityLog->model_type);
+            $item = $activityLog->subject;
+            if (!$item) {
+                $item = (object) $activityLog->properties['old'] ?? (object) $activityLog->properties['new'] ?? null;
+            }
+            if ($activityLog->model == 'User') {
+                $activityLog->itemInfo = (new UserInfo($item))->render()->render();
+            } else {
+                $activityLog->itemInfo = (new ItemInfo($item->name ?? '', $item->image ?? null, $item->code ?? '', $item->barcode ?? ''))->render()->render();
+            }
             $activityLog->description = $activityLog->description;
             $activityLog->ip = $activityLog->ip_address;
             $activityLog->time = $activityLog->created_at->diffForHumans();
