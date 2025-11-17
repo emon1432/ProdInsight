@@ -109,9 +109,6 @@ class RawMaterialController extends Controller
     public function destroy(RawMaterial $rawMaterial)
     {
         try {
-            if ($rawMaterial->image) {
-                imageDeleteManager($rawMaterial->image);
-            }
             $rawMaterial->delete();
             return response()->json([
                 'status' => 200,

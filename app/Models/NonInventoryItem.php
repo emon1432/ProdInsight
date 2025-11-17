@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class NonInventoryItem extends Model
 {
-    use SoftDeletes,Loggable;
+    use SoftDeletes, Loggable;
 
     protected $fillable = [
         'name',
@@ -17,10 +17,16 @@ class NonInventoryItem extends Model
         'status',
         'description',
         'created_by',
+        'deleted_by',
     ];
 
     public function createdBy()
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

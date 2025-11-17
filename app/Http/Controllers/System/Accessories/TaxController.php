@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TaxRequest;
 use App\Models\Tax;
 use App\View\Components\Actions;
-use App\View\Components\CreatedBy;
+use App\View\Components\ActionBy;
 use App\View\Components\Description;
 use App\View\Components\StatusBadge;
 use Illuminate\Http\Request;
@@ -99,7 +99,7 @@ class TaxController extends Controller
             $tax->rate_display = $tax->calculation_method === 'Percentage' ? $tax->rate . '%' : format_amount($tax->rate);
             $tax->status = (new StatusBadge($tax->status))->render()->render();
             $tax->description = (new Description($tax->description))->render()->render();
-            $tax->createdBy = (new CreatedBy($tax->createdBy))->render()->render();
+            $tax->createdBy = (new ActionBy($tax->createdBy))->render()->render();
             return $tax;
         })->toArray();
     }

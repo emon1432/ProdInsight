@@ -8,12 +8,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RoleGroup extends Model
 {
-    use SoftDeletes,Loggable;
+    use SoftDeletes, Loggable;
 
     protected $fillable = [
         'name',
         'slug',
         'status',
+        'description',
+        'created_by',
+        'deleted_by',
     ];
 
     public function roles()
@@ -24,5 +27,15 @@ class RoleGroup extends Model
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

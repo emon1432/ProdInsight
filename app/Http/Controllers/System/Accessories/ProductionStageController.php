@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductionStageRequest;
 use App\Models\ProductionStage;
 use App\View\Components\Actions;
-use App\View\Components\CreatedBy;
+use App\View\Components\ActionBy;
 use App\View\Components\Description;
 use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
@@ -100,7 +100,7 @@ class ProductionStageController extends Controller
             $productionStage->itemInfo = (new ItemInfo($productionStage->name, null, $productionStage->code, null))->render()->render();
             $productionStage->status = (new StatusBadge($productionStage->status))->render()->render();
             $productionStage->description = (new Description($productionStage->description))->render()->render();
-            $productionStage->createdBy = (new CreatedBy($productionStage->createdBy))->render()->render();
+            $productionStage->createdBy = (new ActionBy($productionStage->createdBy))->render()->render();
             return $productionStage;
         })->toArray();
     }

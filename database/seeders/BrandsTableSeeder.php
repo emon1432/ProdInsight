@@ -14,12 +14,12 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-
+        
 
         \DB::table('brands')->delete();
-
+        
         \DB::table('brands')->insert(array (
-            0 =>
+            0 => 
             array (
                 'id' => 1,
                 'name' => 'Acme Foods',
@@ -33,10 +33,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'Acme Foods is a leading supplier of high-quality food ingredients for the commercial market.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:53',
                 'updated_at' => '2025-10-24 19:20:53',
             ),
-            1 =>
+            1 => 
             array (
                 'id' => 2,
                 'name' => 'PureCraft',
@@ -50,10 +51,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'PureCraft focuses on handcrafted products using sustainable practices.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:54',
                 'updated_at' => '2025-10-24 19:20:54',
             ),
-            2 =>
+            2 => 
             array (
                 'id' => 3,
                 'name' => 'GreenFields',
@@ -67,10 +69,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'GreenFields is committed to organic farming and traceable supply chains.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:54',
                 'updated_at' => '2025-10-24 19:20:54',
             ),
-            3 =>
+            3 => 
             array (
                 'id' => 4,
                 'name' => 'ProBake Supplies',
@@ -84,10 +87,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'ProBake is a trusted partner for commercial bakeries and pastry chefs.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:54',
                 'updated_at' => '2025-10-24 19:20:54',
             ),
-            4 =>
+            4 => 
             array (
                 'id' => 5,
                 'name' => 'Omega Oils',
@@ -101,10 +105,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'Omega Oils supplies a wide range of edible and industrial oils.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:54',
                 'updated_at' => '2025-10-24 19:20:54',
             ),
-            5 =>
+            5 => 
             array (
                 'id' => 6,
                 'name' => 'Legacy Spices Co',
@@ -118,10 +123,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'Legacy Spices sources rare and high-quality spices from around the world.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-24 19:20:54',
                 'updated_at' => '2025-10-24 19:20:54',
             ),
-            6 =>
+            6 => 
             array (
                 'id' => 7,
                 'name' => 'SunHarvest',
@@ -135,10 +141,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'SunHarvest is known for farm-to-factory produce sourcing and quality control.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-25 10:00:00',
                 'updated_at' => '2025-10-25 10:00:00',
             ),
-            7 =>
+            7 => 
             array (
                 'id' => 8,
                 'name' => 'BlueHaven Dairy',
@@ -152,10 +159,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'BlueHaven specializes in dairy powders, whey, and concentrated dairy ingredients.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-25 10:00:00',
                 'updated_at' => '2025-10-25 10:00:00',
             ),
-            8 =>
+            8 => 
             array (
                 'id' => 9,
                 'name' => 'NutriMax',
@@ -169,10 +177,11 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'NutriMax provides fortified ingredients and premixes for health-focused products.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-25 10:00:00',
                 'updated_at' => '2025-10-25 10:00:00',
             ),
-            9 =>
+            9 => 
             array (
                 'id' => 10,
                 'name' => 'Crystal Sugars',
@@ -186,11 +195,12 @@ class BrandsTableSeeder extends Seeder
                 'description' => 'Crystal Sugars provides refined, invert, and specialty sugar products.',
                 'created_by' => 1,
                 'deleted_at' => NULL,
+                'deleted_by' => NULL,
                 'created_at' => '2025-10-25 10:00:00',
                 'updated_at' => '2025-10-25 10:00:00',
             ),
         ));
-
-
+        
+        
     }
 }

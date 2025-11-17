@@ -84,7 +84,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            imageDeleteManager($user->image);
             $user->delete();
 
             return response()->json([

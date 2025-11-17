@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Services\ActivityLogService;
+use Illuminate\Support\Facades\Auth;
 
 trait Loggable
 {
@@ -31,6 +32,11 @@ trait Loggable
             ActivityLogService::record('deleted', $model, [
                 'properties' => ['old' => $model->getOriginal()],
             ]);
+
+            if (method_exists($model, 'runSoftDelete')) {
+                $model->deleted_by = Auth::id();
+                $model->saveQuietly();
+            }
         });
     }
 }

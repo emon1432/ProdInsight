@@ -12,9 +12,16 @@
                 @endphp
                 @foreach ($customButtons as $button => $details)
                     @if (check_permission($details['route']))
-                        <a href="{{ $details['route'] }}" class="dropdown-item d-flex align-items-center">
+                        <a href="{{ $details['route'] }}"
+                            class="dropdown-item d-flex align-items-center {{ $details['class'] }}">
                             <i class="icon-base ti tabler-{{ $details['icon'] }} me-2"></i>
-                            {{ $button }}
+                            @if (isset($details['form']))
+                                <form action="{{ $details['form']['action'] }}" method="{{ $details['form']['method'] }}"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            @endif
+                            {{ $details['label'] }}
                         </a>
                     @endif
                 @endforeach
