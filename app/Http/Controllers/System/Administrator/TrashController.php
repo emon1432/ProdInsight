@@ -34,11 +34,12 @@ class TrashController extends Controller
         ];
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return response()->json($this->data());
         }
+
         return view('pages.trash.index');
     }
 

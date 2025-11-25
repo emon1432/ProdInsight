@@ -45,7 +45,7 @@ class ActivityLogController extends Controller
             $activityLog->model = class_basename($activityLog->model_type);
             $item = $activityLog->subject;
             if (!$item) {
-                $item = (object) $activityLog->properties['old'] ?? (object) $activityLog->properties['new'] ?? null;
+                $item = (object) ($activityLog->properties['old'] ?? $activityLog->properties['new'] ?? []);
             }
             if ($activityLog->model == 'User') {
                 $activityLog->itemInfo = (new UserInfo($item))->render()->render();

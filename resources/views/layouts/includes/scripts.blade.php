@@ -471,7 +471,6 @@
             const form = $(this).find("form");
             const actionUrl = form.attr("action");
             const method = form.attr("method") || "POST";
-            console.log(form, actionUrl, method);
 
             Swal.fire({
                 title: "Are you sure?",
@@ -599,8 +598,6 @@
                                     },
                                 });
                             } else {
-                                console.log();
-
                                 Swal.fire({
                                     icon: "error",
                                     title: "Error!",
