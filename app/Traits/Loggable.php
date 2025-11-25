@@ -4,6 +4,7 @@ namespace App\Traits;
 
 use App\Services\ActivityLogService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 trait Loggable
 {
@@ -18,11 +19,11 @@ trait Loggable
         });
 
         static::updated(function ($model) {
+
             $changedKeys = collect($model->getChanges())->keys();
-            if ($changedKeys->isNotEmpty()) {
-                if ($changedKeys->every(fn($k) => in_array($k, ['deleted_at', 'updated_at']))) {
-                    return;
-                }
+
+            if ($changedKeys->isNotEmpty() && $changedKeys->every(fn($k) => in_array($k, ['deleted_at', 'updated_at']))) {
+                return;
             }
 
             if ($model->wasChanged()) {
@@ -35,32 +36,42 @@ trait Loggable
             }
         });
 
-        static::deleted(function ($model) {
-            $model->deleted_by = Auth::id();
-            $model->saveQuietly();
-            if (method_exists($model, 'isForceDeleting') && $model->isForceDeleting()) {
-                ActivityLogService::record('permanently_deleted', $model, [
-                    'properties' => ['old' => $model->getOriginal()],
-                    'description' => 'Record permanently deleted'
-                ]);
-            } else {
-                ActivityLogService::record('deleted', $model, [
-                    'properties' => ['old' => $model->getOriginal()],
-                    'description' => 'Record moved to trash'
-                ]);
-            }
-        });
+        if (in_array(SoftDeletes::class, class_uses_recursive(static::class))) {
 
-        static::restored(function ($model) {
-            $model->deleted_by = null;
-            $model->saveQuietly();
-            ActivityLogService::record('restored', $model, [
-                'properties' => [
-                    'old' => $model->getOriginal(),
-                    'new' => $model->getChanges(),
-                ],
-                'description' => 'Record restored from trash'
-            ]);
-        });
+            static::deleted(function ($model) {
+                if ($model->isFillable('deleted_by')) {
+                    $model->deleted_by = Auth::id();
+                    $model->saveQuietly();
+                }
+
+                if (method_exists($model, 'isForceDeleting') && $model->isForceDeleting()) {
+                    ActivityLogService::record('permanently_deleted', $model, [
+                        'properties' => ['old' => $model->getOriginal()],
+                        'description' => 'Record permanently deleted'
+                    ]);
+                } else {
+                    ActivityLogService::record('deleted', $model, [
+                        'properties' => ['old' => $model->getOriginal()],
+                        'description' => 'Record moved to trash'
+                    ]);
+                }
+            });
+
+            static::restored(function ($model) {
+
+                if ($model->isFillable('deleted_by')) {
+                    $model->deleted_by = null;
+                    $model->saveQuietly();
+                }
+
+                ActivityLogService::record('restored', $model, [
+                    'properties' => [
+                        'old' => $model->getOriginal(),
+                        'new' => $model->getChanges(),
+                    ],
+                    'description' => 'Record restored from trash'
+                ]);
+            });
+        }
     }
 }
