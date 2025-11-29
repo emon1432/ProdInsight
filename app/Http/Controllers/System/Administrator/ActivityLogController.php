@@ -4,6 +4,7 @@ namespace App\Http\Controllers\System\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLog;
+use App\Models\User;
 use App\View\Components\Actions;
 use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
@@ -48,7 +49,7 @@ class ActivityLogController extends Controller
                 $item = (object) ($activityLog->properties['old'] ?? $activityLog->properties['new'] ?? []);
             }
             if ($activityLog->model == 'User') {
-                $activityLog->itemInfo = (new UserInfo($item))->render()->render();
+                $activityLog->itemInfo = (new UserInfo(User::find($item->id)))->render()->render();
             } else {
                 $activityLog->itemInfo = (new ItemInfo($item->name ?? '', $item->image ?? null, $item->code ?? '', $item->barcode ?? ''))->render()->render();
             }
