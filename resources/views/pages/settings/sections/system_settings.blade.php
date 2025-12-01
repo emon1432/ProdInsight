@@ -70,6 +70,16 @@
                 </select>
             </div>
             <div class="col-md-6 form-control-validation">
+                <label class="form-label" for="time_format">{{ __('Time Format') }}<span
+                        class="text-danger">*</span></label>
+                <select name="time_format" id="time_format" class="form-select" required>
+                    <option value="H:i" {{ ($values['time_format'] ?? '') === 'H:i' ? 'selected' : '' }}>24 Hour ({{ date('H:i') }})
+                    </option>
+                    <option value="h:i A" {{ ($values['time_format'] ?? '') === 'h:i A' ? 'selected' : '' }}>12 Hour ({{ date('h:i A') }})
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="currency_id">{{ __('Currency') }}</label>
                 <select name="currency_id" id="currency_id" class="form-select">
                     @foreach ($currencies as $currency)
@@ -81,7 +91,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-md-4 form-control-validation">
+            <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="decimal_separator">{{ __('Decimal Separator') }}</label>
                 <select name="decimal_separator" id="decimal_separator" class="form-select">
                     <option value="." {{ ($values['decimal_separator'] ?? '') === '.' ? 'selected' : '' }}>Dot (.)
@@ -92,7 +102,7 @@
                         ( )</option>
                 </select>
             </div>
-            <div class="col-md-4 form-control-validation">
+            <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="thousand_separator">{{ __('Thousand Separator') }}</label>
                 <select name="thousand_separator" id="thousand_separator" class="form-select">
                     <option value="." {{ ($values['thousand_separator'] ?? '') === '.' ? 'selected' : '' }}>Dot
@@ -104,7 +114,7 @@
                         ( )</option>
                 </select>
             </div>
-            <div class="col-md-4 form-control-validation">
+            <div class="col-md-6 form-control-validation">
                 <label class="form-label" for="decimal_precision">{{ __('Decimal Precision') }}</label>
                 <select name="decimal_precision" id="decimal_precision" class="form-select">
                     <option value="2" {{ ($values['decimal_precision'] ?? '') == 2 ? 'selected' : '' }}>2

@@ -50,6 +50,20 @@ if (!function_exists('format_date')) {
     }
 }
 
+if (!function_exists('format_time')) {
+    function format_time($time)
+    {
+        return \Carbon\Carbon::parse($time)->format(config('app.time_format'));
+    }
+}
+
+if (!function_exists('format_date_time')) {
+    function format_date_time($dateTime)
+    {
+        return \Carbon\Carbon::parse($dateTime)->format(config('app.date_format') . ', ' . config('app.time_format'));
+    }
+}
+
 if (!function_exists('format_number')) {
     function format_number($number)
     {
@@ -115,18 +129,15 @@ if (!function_exists('get_fk_table')) {
             return null;
         }
 
-        $table = Str::snake(Str::pluralStudly(class_basename($modelClass)));
-
+        $table = (new $modelClass)->getTable();
         $db = env('DB_DATABASE');
 
-        $relation = DB::table('information_schema.KEY_COLUMN_USAGE')
+        return DB::table('information_schema.KEY_COLUMN_USAGE')
             ->where('TABLE_SCHEMA', $db)
             ->where('TABLE_NAME', $table)
             ->where('COLUMN_NAME', $foreignKey)
             ->whereNotNull('REFERENCED_TABLE_NAME')
-            ->first();
-
-        return $relation?->REFERENCED_TABLE_NAME ?? null;
+            ->value('REFERENCED_TABLE_NAME');
     }
 }
 
@@ -163,7 +174,6 @@ if (!function_exists('resolve_related_value')) {
 
             if ($fkTable) {
                 $record = DB::table($fkTable)->find($value);
-
                 if ($record) {
                     return $record->name
                         ?? $record->title
@@ -172,9 +182,8 @@ if (!function_exists('resolve_related_value')) {
                 }
             }
 
-            // Try model-class mapping fallback
-            $relation = Str::studly(Str::beforeLast($key, '_id'));
-            $relatedModelClass = "App\\Models\\{$relation}";
+            // fallback: try model class Auto-detect
+            $relatedModelClass = "App\\Models\\" . Str::studly(Str::beforeLast($key, '_id'));
 
             if (class_exists($relatedModelClass)) {
                 $record = $relatedModelClass::find($value);
@@ -190,32 +199,37 @@ if (!function_exists('resolve_related_value')) {
         }
 
         /* ---------------------------------------------
-         * 4) Date detection (safe, no phone confusion)
+         * 4) JSON detection (clean output)
          * --------------------------------------------- */
-        $looksLikeDate = preg_match('/(\d{4}-\d{2}-\d{2}|T\d|:\d{2})/', $value);
-
-        if ($looksLikeDate) {
-            try {
-                $carbon = Carbon::parse($value);
-
-                // Only treat real years as valid
-                if ($carbon->year >= 1900 && $carbon->year <= 2100) {
-                    return $carbon->format('d M Y, h:i A');
-                }
-            } catch (\Throwable $e) {
-                return e($value);
+        if (Str::startsWith($value, '{') || Str::startsWith($value, '[')) {
+            $decoded = json_decode($value, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                return '<pre style="white-space: pre-wrap;">' .
+                    json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
+                    . '</pre>';
             }
         }
 
         /* ---------------------------------------------
-         * 5) Status detection
+         * 5) Date detection (avoid phone)
          * --------------------------------------------- */
-        if ($key == 'status') {
+        if (is_string($value) && preg_match('/\d{4}-\d{2}-\d{2}/', $value)) {
+            try {
+                return format_date_time(Carbon::parse($value)); 
+            } catch (\Throwable) {
+                // return raw
+            }
+        }
+
+        /* ---------------------------------------------
+         * 6) Status detection
+         * --------------------------------------------- */
+        if ($key === 'status') {
             return (new StatusBadge($value))->render();
         }
 
         /* ---------------------------------------------
-         * 6) Default → safe escaped value
+         * 7) Default: escape safely
          * --------------------------------------------- */
         return e($value);
     }

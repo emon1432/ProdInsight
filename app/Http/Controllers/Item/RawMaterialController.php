@@ -138,7 +138,7 @@ class RawMaterialController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $rawMaterial->itemInfo = (new ItemInfo($rawMaterial->name, $rawMaterial->image, $rawMaterial->code, $rawMaterial->barcode))->render()->render();
+            $rawMaterial->itemInfo = (new ItemInfo($rawMaterial))->render()->render();
             $rawMaterial->category = $rawMaterial->rawMaterialCategory->name ?? 'N/A';
             $rawMaterial->purchasePricePerUnit = format_amount($rawMaterial->purchase_price) . '/' . $rawMaterial->purchaseUnit->name;
             $rawMaterial->consumptionPricePerUnit = format_amount($rawMaterial->consumption_price) . '/' . $rawMaterial->consumptionUnit->name;

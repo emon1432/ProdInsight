@@ -14,12 +14,12 @@ class ItemInfo extends Component
     public $barcode;
     public $initials;
 
-    public function __construct($name, $image = null, $code = null, $barcode = null)
+    public function __construct($item)
     {
-        $this->name = $name;
-        $this->image = $image;
-        $this->code = $code;
-        $this->barcode = $barcode;
+        $this->name = $item->name ?? $item->title ?? ucwords(str_replace('_', ' ', $item->key ?? '')) ?? 'N/A';
+        $this->image = $item->image ?? null;
+        $this->code = $item->code ?? null;
+        $this->barcode = $item->barcode ?? null;
 
         if ($this->image) {
             if (file_exists(public_path($this->image))) {
@@ -27,7 +27,14 @@ class ItemInfo extends Component
             }
         }
         if (empty($this->initials)) {
-            $this->initials = strtoupper(substr($this->name, 0, 1) . substr($this->name, strpos($this->name, ' ') + 1, 1));
+            $words = preg_split('/\s+/', trim($this->name)); // split by spaces
+            $initials = '';
+
+            foreach ($words as $word) {
+                $initials .= strtoupper(substr(preg_replace('/[^A-Za-z]/', '', $word), 0, 1));
+            }
+
+            $this->initials = substr($initials, 0, 2);
             $this->image = null;
         }
     }

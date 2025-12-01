@@ -51,7 +51,7 @@ class ActivityLogController extends Controller
             if ($activityLog->model == 'User') {
                 $activityLog->itemInfo = (new UserInfo(User::find($item->id)))->render()->render();
             } else {
-                $activityLog->itemInfo = (new ItemInfo($item->name ?? '', $item->image ?? null, $item->code ?? '', $item->barcode ?? ''))->render()->render();
+                $activityLog->itemInfo = (new ItemInfo($item))->render()->render();
             }
             $activityLog->description = $activityLog->description;
             $activityLog->ip = $activityLog->ip_address;

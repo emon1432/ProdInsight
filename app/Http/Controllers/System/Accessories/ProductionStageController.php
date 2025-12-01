@@ -97,7 +97,7 @@ class ProductionStageController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $productionStage->itemInfo = (new ItemInfo($productionStage->name, null, $productionStage->code, null))->render()->render();
+            $productionStage->itemInfo = (new ItemInfo($productionStage))->render()->render();
             $productionStage->status = (new StatusBadge($productionStage->status))->render()->render();
             $productionStage->description = (new Description($productionStage->description))->render()->render();
             $productionStage->createdBy = (new ActionBy($productionStage->createdBy))->render()->render();

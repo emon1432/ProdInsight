@@ -8,6 +8,7 @@ use App\Models\RawMaterialCategory;
 use App\View\Components\Actions;
 use App\View\Components\ActionBy;
 use App\View\Components\Description;
+use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
 use Illuminate\Http\Request;
 
@@ -94,6 +95,7 @@ class RawMaterialCategoryController extends Controller
                     ],
                 ],
             ]))->render()->render();
+            $rawMaterialCategory->itemInfo = (new ItemInfo($rawMaterialCategory))->render()->render();
             $rawMaterialCategory->status = (new StatusBadge($rawMaterialCategory->status))->render()->render();
             $rawMaterialCategory->description = (new Description($rawMaterialCategory->description))->render()->render();
             $rawMaterialCategory->createdBy = (new ActionBy($rawMaterialCategory->createdBy))->render()->render();

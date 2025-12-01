@@ -17,7 +17,7 @@
         <div class="card-datatable">
             <table class="common-datatable table d-table" data-url="{{ route('raw-material-categories.index') }}"
                 data-columns='[
-                { "data": "name" },
+                { "data": "itemInfo" },
                 { "data": "description" },
                 { "data": "status" },
                 { "data": "createdBy" },

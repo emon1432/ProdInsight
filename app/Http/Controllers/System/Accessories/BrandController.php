@@ -113,7 +113,7 @@ class BrandController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $brand->itemInfo = (new ItemInfo($brand->name, $brand->image, $brand->code, $brand->barcode))->render()->render();
+            $brand->itemInfo = (new ItemInfo($brand))->render()->render();
             $brand->status = (new StatusBadge($brand->status))->render()->render();
             return $brand;
         })->toArray();

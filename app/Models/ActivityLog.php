@@ -44,7 +44,7 @@ class ActivityLog extends Model
 
     public function subject()
     {
-        return $this->morphTo()->withTrashed();
+        return $this->morphTo('model', 'model_type', 'model_id')->withTrashed();
     }
 
     public function scopeEvent($query, $event)

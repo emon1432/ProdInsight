@@ -171,7 +171,7 @@ class TrashController extends Controller
             if ($trash->model == 'User') {
                 $trash->info = (new UserInfo($trash->record))->render()->render();
             } else {
-                $trash->info = (new ItemInfo($trash->record->name ?? '', $trash->record->image ?? null, $trash->record->code ?? '', $trash->record->barcode ?? ''))->render()->render();
+                $trash->info = (new ItemInfo($trash->record))->render()->render();
             }
             $trash->model = $trash->model;
             $trash->deleted_by = (new ActionBy($trash->record->deletedBy))->render()->render();
