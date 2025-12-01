@@ -97,7 +97,7 @@ class NonInventoryItemController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $nonInventoryItem->itemInfo = (new ItemInfo($nonInventoryItem->name, null, $nonInventoryItem->code, null))->render()->render();
+            $nonInventoryItem->itemInfo = (new ItemInfo($nonInventoryItem))->render()->render();
             $nonInventoryItem->status = (new StatusBadge($nonInventoryItem->status))->render()->render();
             $nonInventoryItem->description = (new Description($nonInventoryItem->description))->render()->render();
             $nonInventoryItem->createdBy = (new ActionBy($nonInventoryItem->createdBy))->render()->render();

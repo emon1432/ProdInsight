@@ -120,7 +120,7 @@ class CategoryController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $category->itemInfo = (new ItemInfo($category->name, $category->image, $category->code, $category->barcode))->render()->render();
+            $category->itemInfo = (new ItemInfo($category))->render()->render();
             $category->parentCategory = Category::find($category->parent_id)?->name ?? __('N/A');
             $category->status = (new StatusBadge($category->status))->render()->render();
             return $category;

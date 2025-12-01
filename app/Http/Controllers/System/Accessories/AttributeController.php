@@ -151,7 +151,7 @@ class AttributeController extends Controller
                     ],
                 ],
             ]))->render()->render();
-            $attribute->itemInfo = (new ItemInfo($attribute->name, $attribute->image, $attribute->code, $attribute->barcode))->render()->render();
+            $attribute->itemInfo = (new ItemInfo($attribute))->render()->render();
             $attribute->values = '' . $attribute->values()->pluck('name')->join(', ') . '';
             $attribute->status = (new StatusBadge($attribute->status))->render()->render();
             return $attribute;
