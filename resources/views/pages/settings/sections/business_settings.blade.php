@@ -1,5 +1,5 @@
 <div class="content-header mb-4">
-    <h6 class="mb-0">{{ __('Business Settings') }}</h6>
+    <h6 class="mb-0">{{ __(ucwords(str_replace('_', ' ', $setting->key))) }}</h6>
     <small>{{ __('Update your company details here.') }}</small>
 </div>
 <div class="row g-6">

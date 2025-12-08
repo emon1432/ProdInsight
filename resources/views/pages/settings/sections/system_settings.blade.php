@@ -1,5 +1,5 @@
 <div class="content-header mb-4">
-    <h6 class="mb-0">{{ __('System Settings') }}</h6>
+    <h6 class="mb-0">{{ __(ucwords(str_replace('_', ' ', $setting->key))) }}</h6>
     <small>{{ __('Configure core application behavior.') }}</small>
 </div>
 

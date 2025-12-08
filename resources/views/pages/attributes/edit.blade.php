@@ -56,7 +56,7 @@
                                 placeholder="{{ __('Enter Values (comma separated)') }}" />
                         </div>
                         <div class="col-md-12 form-control-validation">
-                            <label class="form-label" for="existing_values">{{ __('Existing Values') }}</label>
+                            <label class="form-label" for="existing_values">{{ __('Existing Values') }} ({{ __('You can edit or remove existing values') }})</label>
                             <div id="deleted-values"></div>
                             <div class="row">
                                 @foreach ($attribute->values as $value)

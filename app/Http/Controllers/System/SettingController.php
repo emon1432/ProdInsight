@@ -35,8 +35,6 @@ class SettingController extends Controller
                     }
                 }
                 $data['logo'] = imageUpdateManager($image, $slug, $path, $oldLogo);
-            } else {
-                $data['logo'] = json_decode($setting->value, true)['logo'] ?? null;
             }
             if (isset($data['favicon']) && $data['favicon']) {
                 $image = $data['favicon'];
@@ -51,8 +49,6 @@ class SettingController extends Controller
                     }
                 }
                 $data['favicon'] = imageUpdateManager($image, $slug, $path, $oldFavicon);
-            } else {
-                $data['favicon'] = json_decode($setting->value, true)['favicon'] ?? null;
             }
 
             $setting->value = json_encode($data);

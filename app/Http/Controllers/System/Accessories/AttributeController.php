@@ -8,6 +8,7 @@ use App\Models\Attribute;
 use App\View\Components\Actions;
 use App\View\Components\ItemInfo;
 use App\View\Components\StatusBadge;
+use App\View\Components\Tags;
 use Illuminate\Http\Request;
 
 class AttributeController extends Controller
@@ -152,7 +153,7 @@ class AttributeController extends Controller
                 ],
             ]))->render()->render();
             $attribute->itemInfo = (new ItemInfo($attribute))->render()->render();
-            $attribute->values = '' . $attribute->values()->pluck('name')->join(', ') . '';
+            $attribute->values = (new Tags($attribute->values()->pluck('name')->join(', ')))->render()->render();
             $attribute->status = (new StatusBadge($attribute->status))->render()->render();
             return $attribute;
         })->toArray();
