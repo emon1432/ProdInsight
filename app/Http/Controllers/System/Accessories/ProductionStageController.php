@@ -19,9 +19,8 @@ class ProductionStageController extends Controller
         if ($request->ajax()) {
             return response()->json($this->data());
         }
-        $lastProductionStage = ProductionStage::orderBy('id', 'desc')->where('code', 'like', 'PS-%')->first()->code ?? 'PS-0000';
-        $nextProductionStageCode = 'PS-' . str_pad((int) substr($lastProductionStage, 3) + 1, 4, '0', STR_PAD_LEFT);
-        return view('pages.production-stages.index', compact('nextProductionStageCode'));
+
+        return view('pages.production-stages.index');
     }
 
     public function store(ProductionStageRequest $request)

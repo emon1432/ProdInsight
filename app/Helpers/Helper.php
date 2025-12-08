@@ -215,7 +215,7 @@ if (!function_exists('resolve_related_value')) {
          * --------------------------------------------- */
         if (is_string($value) && preg_match('/\d{4}-\d{2}-\d{2}/', $value)) {
             try {
-                return format_date_time(Carbon::parse($value)); 
+                return format_date_time(Carbon::parse($value));
             } catch (\Throwable) {
                 // return raw
             }
@@ -232,5 +232,19 @@ if (!function_exists('resolve_related_value')) {
          * 7) Default: escape safely
          * --------------------------------------------- */
         return e($value);
+    }
+}
+
+if (!function_exists('next_code_generator')) {
+    function next_code_generator($modelClass, $codeField, $prefix = '')
+    {
+        $lastRecord = $modelClass::orderBy('id', 'desc')
+            ->where($codeField, 'like', $prefix . '%')
+            ->first();
+
+        $lastCode = $lastRecord ? $lastRecord->$codeField : $prefix . '000';
+        $numberPart = (int) substr($lastCode, strlen($prefix));
+        $nextNumberPart = str_pad($numberPart + 1, 3, '0', STR_PAD_LEFT);
+        return $prefix . $nextNumberPart;
     }
 }

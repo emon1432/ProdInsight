@@ -33,7 +33,8 @@
                             <label class="form-label" for="code">{{ __('Code') }}<span
                                     class="text-danger">*</span></label>
                             <input type="text" name="code" id="code" class="form-control"
-                                placeholder="{{ __('Enter code') }}" required value="{{ $nextAttributeCode }}" />
+                                placeholder="{{ __('Enter code') }}" required
+                                value="{{ next_code_generator(App\Models\Attribute::class, 'code', 'AT-') }}" />
                         </div>
                         <div class="col-md-6 form-control-validation">
                             <label class="form-label" for="status">{{ __('Status') }}<span

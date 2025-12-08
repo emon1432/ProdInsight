@@ -26,9 +26,7 @@ class RawMaterialController extends Controller
     {
         $rawMaterialCategories = RawMaterialCategory::orderBy('name')->where('status', 'Active')->get();
         $units = Unit::orderBy('name')->where('status', 'Active')->get();
-        $lastRawMaterial = RawMaterial::orderBy('id', 'desc')->where('code', 'like', 'RM-%')->first()->code ?? 'RM-000';
-        $nextRawMaterialCode = 'RM-' . str_pad((int) substr($lastRawMaterial, 3) + 1, 3, '0', STR_PAD_LEFT);
-        return view('pages.raw-materials.create', compact('rawMaterialCategories', 'units', 'nextRawMaterialCode'));
+        return view('pages.raw-materials.create', compact('rawMaterialCategories', 'units'));
     }
 
     public function store(RawMaterialRequest $request)

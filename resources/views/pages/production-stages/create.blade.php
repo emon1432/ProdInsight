@@ -23,7 +23,7 @@
                             <span class="text-danger">*</span>
                         </label>
                         <input type="text" name="code" class="form-control" placeholder="{{ __('Enter code') }}"
-                            required value="{{ $nextProductionStageCode ?? 'PS-0001' }}" />
+                            required value="{{ next_code_generator(App\Models\ProductionStage::class, 'code', 'PS-') }}" />
                     </div>
                     <div class="col-md-12 form-control-validation mb-5">
                         <label class="form-label" for="description">{{ __('Description') }}</label>

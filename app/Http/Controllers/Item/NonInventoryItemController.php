@@ -19,9 +19,8 @@ class NonInventoryItemController extends Controller
         if ($request->ajax()) {
             return response()->json($this->data());
         }
-        $lastNonInventoryItem = NonInventoryItem::orderBy('id', 'desc')->where('code', 'like', 'NI-%')->first()->code ?? 'NI-000';
-        $nextNonInventoryItemCode = 'NI-' . str_pad((int) substr($lastNonInventoryItem, 3) + 1, 5, '0', STR_PAD_LEFT);
-        return view('pages.non-inventory-items.index', compact('nextNonInventoryItemCode'));
+
+        return view('pages.non-inventory-items.index');
     }
 
     public function store(NonInventoryItemRequest $request)

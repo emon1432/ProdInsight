@@ -27,10 +27,8 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $lastCategory = Category::orderBy('id', 'desc')->where('code', 'like', 'CAT-%')->first()->code ?? 'CAT-000';
-        $nextCategoryCode = 'CAT-' . str_pad((int) substr($lastCategory, 4) + 1, 3, '0', STR_PAD_LEFT);
         $categories = Category::orderBy('name')->where('status', 'Active')->get();
-        return view('pages.categories.create', compact('nextCategoryCode', 'categories'));
+        return view('pages.categories.create', compact('categories'));
     }
 
     public function store(CategoryRequest $request)

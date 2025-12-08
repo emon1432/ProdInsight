@@ -33,7 +33,8 @@
                             <label class="form-label" for="code">{{ __('Code') }}<span
                                     class="text-danger">*</span></label>
                             <input type="text" name="code" id="code" class="form-control"
-                                placeholder="{{ __('Enter code') }}" required value="{{ $nextRawMaterialCode }}" />
+                                placeholder="{{ __('Enter code') }}" required
+                                value="{{ next_code_generator(App\Models\RawMaterial::class, 'code', 'RM-') }}" />
                         </div>
                         <div class="col-md-4 form-control-validation">
                             <label class="form-label" for="barcode">{{ __('Barcode') }}</label>
@@ -57,7 +58,8 @@
                             <select name="purchase_unit_id" id="purchase_unit_id" class="form-select" required>
                                 <option value="">{{ __('Select purchase unit') }}</option>
                                 @foreach ($units as $unit)
-                                    <option value="{{ $unit->id }}">{{ $unit->name . ' (' . $unit->symbol . ')' }}</option>
+                                    <option value="{{ $unit->id }}">{{ $unit->name . ' (' . $unit->symbol . ')' }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -99,7 +101,8 @@
                                 <select name="consumption_unit_id" id="consumption_unit_id" class="form-select">
                                     <option value="">{{ __('Select consumption unit') }}</option>
                                     @foreach ($units as $unit)
-                                        <option value="{{ $unit->id }}">{{ $unit->name . ' (' . $unit->symbol . ')' }}</option>
+                                        <option value="{{ $unit->id }}">
+                                            {{ $unit->name . ' (' . $unit->symbol . ')' }}</option>
                                     @endforeach
                                 </select>
                             </div>
