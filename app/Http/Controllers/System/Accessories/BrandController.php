@@ -22,9 +22,7 @@ class BrandController extends Controller
 
     public function create()
     {
-        $lastBrand = Brand::orderBy('id', 'desc')->where('code', 'like', 'BR-%')->first()->code ?? 'BR-000';
-        $nextBrandCode = 'BR-' . str_pad((int) substr($lastBrand, 3) + 1, 3, '0', STR_PAD_LEFT);
-        return view('pages.brands.create', compact('nextBrandCode'));
+        return view('pages.brands.create');
     }
 
     public function store(BrandRequest $request)

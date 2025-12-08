@@ -24,9 +24,7 @@ class AttributeController extends Controller
 
     public function create()
     {
-        $lastAttribute = Attribute::orderBy('id', 'desc')->where('code', 'like', 'AT-%')->first()->code ?? 'AT-000';
-        $nextAttributeCode = 'AT-' . str_pad((int) substr($lastAttribute, 3) + 1, 3, '0', STR_PAD_LEFT);
-        return view('pages.attributes.create', compact('nextAttributeCode'));
+        return view('pages.attributes.create');
     }
 
     public function store(AttributeRequest $request)
