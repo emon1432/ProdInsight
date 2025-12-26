@@ -10,6 +10,9 @@ class Category extends Model
 {
     use SoftDeletes, Loggable;
 
+    public const STATUS_ACTIVE = 'Active';
+    public const STATUS_INACTIVE = 'Inactive';
+
     protected $fillable = [
         'name',
         'slug',
@@ -25,14 +28,23 @@ class Category extends Model
         'deleted_by',
     ];
 
+    protected $casts = [
+        'parent_id' => 'integer',
+    ];
+
     public function parent()
     {
-        return $this->belongsTo(Category::class, 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id')->with('children');
+        return $this->hasMany(self::class, 'parent_id');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
     }
 
     public function createdBy()
@@ -44,4 +56,25 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'deleted_by');
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::STATUS_ACTIVE);
+    }
+
+    public function scopeRoot($query)
+    {
+        return $query->whereNull('parent_id');
+    }
+
+    public function isRoot(): bool
+    {
+        return is_null($this->parent_id);
+    }
+
+    public function hasChildren(): bool
+    {
+        return $this->children()->exists();
+    }
 }
+

@@ -48,9 +48,15 @@
                     plugins: ["types", "state"],
                     types: {
                         default: {
-                            icon: "icon-base ti tabler-folder icon-xs"
+                            icon: "icon-base ti tabler-folder"
                         },
-                    },
+                        folder: {
+                            icon: "icon-base ti tabler-folder"
+                        },
+                        leaf: {
+                            icon: "icon-base ti tabler-file"
+                        }
+                    }
                 });
         });
     </script>

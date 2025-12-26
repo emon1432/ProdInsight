@@ -27,7 +27,7 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::orderBy('name')->where('status', 'Active')->get();
+        $categories = Category::active()->orderBy('name')->select('id', 'name', 'parent_id')->get();
         return view('pages.categories.create', compact('categories'));
     }
 
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $categories = Category::orderBy('name')->where('status', 'Active')->get();
+        $categories = Category::active()->orderBy('name')->select('id', 'name', 'parent_id')->get();
         return view('pages.categories.edit', compact('category', 'categories'));
     }
 
@@ -127,13 +127,24 @@ class CategoryController extends Controller
 
     private function treeData()
     {
-        $categories = Category::all();
+        $categories = Category::query()
+            ->select('id', 'name', 'parent_id')
+            ->active()
+            ->orderBy('parent_id')
+            ->orderBy('name')
+            ->get();
+
+        $childrenCount = $categories
+            ->groupBy('parent_id')
+            ->map(fn($items) => $items->count());
 
         $map = [];
         foreach ($categories as $cat) {
+            $hasChildren = isset($childrenCount[$cat->id]);
             $map[$cat->id] = [
                 'id' => $cat->id,
                 'text' => $cat->name,
+                'type' => $hasChildren ? 'folder' : 'leaf',
                 'children' => [],
             ];
         }
